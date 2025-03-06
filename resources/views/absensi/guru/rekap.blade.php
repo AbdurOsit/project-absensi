@@ -1,5 +1,6 @@
 @extends('absensi.guru.layout')
 @section('guru')
+
 <div class="p-6">
     <!-- Header Controls -->
     <div class="flex items-center gap-4 mb-6">

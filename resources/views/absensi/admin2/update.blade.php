@@ -9,7 +9,7 @@
 
             <!-- Form Content -->
             <div class="p-4">
-                <form action="{{ route('admin.update_process', $data->uid) }}" method="POST" class="space-y-6">
+                <form action="{{ route('admin.update_process', $data->uid) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
                     <!-- Card Number Input -->
@@ -17,7 +17,7 @@
                         <input type="hidden" name="uid" id="uid" value="{{ $data->uid }}">
                     </div>
 
-                    <!-- Name Input -->
+                    <!-- Name update -->
                     <div class="space-y-2">
                         <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Username
@@ -30,6 +30,15 @@
                         @enderror
                     </div>
 
+                    {{-- Photo profile update --}}
+                    <div class="space-y-2">
+                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Photo Profile
+                        </label>
+                        <input type="file" name="image" id="image" value="{{ $data->image }}" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
+                    </div>
+
+                    {{-- Role update --}}
                     <div class="space-y-2">
                         <label for="jurusan" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Role
@@ -46,26 +55,7 @@
                             @enderror
                     </div>
 
-                    <!-- Role Input -->
-                    {{-- <div class="space-y-2">
-                        <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                            Role
-                        </label>
-
-                        <select name="role" id="role"
-                            class="w-24 p-2 rounded-lg dark:text-white dark:bg-gray-600 border border-none">
-                            @foreach ($role as $item)
-                                <option value="{{ $item->id }}" {{ old('role_id') == $item->id ? 'selected' : '' }}>
-                                    {{ $item->name }}</option>
-                            @endforeach
-                        </select>
-
-                        @error('role')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
-
-                    <!-- Class Input -->
+                    <!-- Class update -->
                     <div class="space-y-2">
                         <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Class
@@ -77,7 +67,7 @@
                         @enderror
                     </div>
 
-                    {{-- Jurusan Input --}}
+                    {{-- Jurusan update --}}
                     <div class="space-y-2">
                         <label for="jurusan" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Jurusan
@@ -85,6 +75,18 @@
                         <input type="text" name="jurusan" id="jurusan" value="{{ $data->jurusan }}"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('jurusan') border-red-500 @enderror">
                         @error('jurusan')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Password update --}}
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Password
+                        </label>
+                        <input type="text" name="password" id="password"  value="{{ $data->password }}" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('name') border-red-500 @enderror">
+                        <button type="button" onclick="generatePassword()" class="bg-purple-500 text-white p-2 rounded-lg">Generate Password</button>
+                        @error('password')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>

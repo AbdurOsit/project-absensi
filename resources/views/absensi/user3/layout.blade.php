@@ -32,7 +32,7 @@
     </style>
 </head>
 
-<body class="bg-white dark:bg-zinc-900">
+<body class="bg-white dark:bg-zinc-900 w-full">
     <nav class="w-full bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 fixed top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14">
@@ -78,9 +78,14 @@
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                         </svg>
                     </button>
-                    <!-- Avatar -->
+                    <!-- Username and Image-->
                     <div class="flex" style="align-items: center">
-                        <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                        {{-- Image --}}
+                        <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700">
+                            <img src="{{ asset('image/' . Auth::user()->image) }}" alt="Profile"
+                            class="w-8 h-8 rounded-full" />
+                        </div>
+                        {{-- Username --}}
                         <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>
                     </div>
                 </div>
@@ -177,8 +182,7 @@
                 </form>
             </div>
         </div>
-        <div class="flex-6 ml-16 p-3">
-            <!-- Margin left untuk sidebar -->
+        <div class="flex-6 p-3 w-full justify-center items-center">
             <!-- Content -->
             @yield('user3')
         </div>

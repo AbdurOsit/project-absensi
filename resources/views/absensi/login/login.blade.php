@@ -24,10 +24,19 @@
                                 class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                 name="username">
                         </div>
-                        <div class="relative">
+                        <div class="relative flex items-center">
                             <input type="password" placeholder="Password"
                                 class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                 name="password">
+                            <!-- Eye icon -->
+                            <svg class="absolute right-3 w-6 h-6 text-gray-400 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>    
+                            <!-- Eye slash icon (initially hidden) -->
+                            <svg class="absolute right-3 w-6 h-6 text-gray-400 cursor-pointer hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                            </svg>
                         </div>
                     </div>
 
@@ -58,5 +67,28 @@
         </div>
     </div>
 </body>
+<script>
+    // Get the password input element and both icon elements
+const passwordInput = document.querySelector('input[name="password"]');
+const eyeIcon = document.querySelector('svg:nth-of-type(1)');
+const eyeSlashIcon = document.querySelector('svg:nth-of-type(2)');
 
+// Initially hide the eye-slash icon
+eyeSlashIcon.classList.add('hidden');
+
+// Function to toggle password visibility
+function togglePasswordVisibility() {
+    // Toggle the type attribute of the password input
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Toggle visibility of the icons
+    eyeIcon.classList.toggle('hidden');
+    eyeSlashIcon.classList.toggle('hidden');
+}
+
+// Add click event listeners to both icons
+eyeIcon.addEventListener('click', togglePasswordVisibility);
+eyeSlashIcon.addEventListener('click', togglePasswordVisibility);
+</script>
 </html>

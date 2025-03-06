@@ -17,7 +17,7 @@
 
             <!-- Form Content -->
             <div class="p-4">
-                <form action="{{ route('admin.store') }}" method="POST" class="space-y-6">
+                <form action="{{ route('admin.store') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
                     @csrf
                     <!-- Card Number Input -->
                     <div class="space-y-2">
@@ -45,6 +45,14 @@
                         @enderror
                     </div>
 
+                    {{-- Photo profile input --}}
+                    <div class="space-y-2">
+                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Photo Profile
+                        </label>
+                        <input type="file" name="image" id="image" value="{{ old('image') }}" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
+                    </div>
+                
                     <!-- Role Input -->
                     <div class="space-y-2">
                         <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
@@ -100,6 +108,7 @@
                         @enderror
                     </div>
 
+                    {{-- Password Input --}}
                     <div class="space-y-2">
                         <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Password

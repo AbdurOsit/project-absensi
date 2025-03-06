@@ -88,7 +88,7 @@
                 class="mobile-nav md:relative md:block pt-5 pb-5 rounded-lg h-full transition-all duration-300"
                 style="width: 256px;">
                 <!-- Expanded Sidebar -->
-                <div id="expandedSidebar" class="h-auto w-64 bg-purple-600 rounded-3xl">
+                <div id="expandedSidebar" class="h-auto w-72 bg-purple-600 rounded-3xl">
                     <div class="flex items-center justify-between p-4 border-purple-500">
                         <div class="flex items-center gap-20">
                             <div class="text-white text-3xl font-semibold"><span class="text-yellow-300">A</span>bsensi
@@ -162,6 +162,16 @@
                             </div>
                         </a>
 
+                        {{-- Waktu Navigation --}}
+                        <a href="/admin/waktu">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                </svg>  
+                                <span>Waktu Datang dan Pulang</span>
+                            </div>
+                        </a>
+
                         {{-- Scan Card --}}
                         <a href="/admin/scan">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
@@ -190,7 +200,7 @@
 
                         {{-- Setting Navigation --}}
                         <a href="#">
-                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-40">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-28">
                                 <svg viewBox="0 0 1024 1024" class="w-6 h-6 text-white font-bold"
                                     xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -295,6 +305,15 @@
                             </div>
                         </a>
 
+                        {{-- Waktu --}}
+                        <a href="/admin/waktu">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                  </svg>                                  
+                            </div>
+                        </a>
+
                         {{-- Scan Card --}}
                         <a href="/admin/scan">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
@@ -358,7 +377,7 @@
             </div>
         </div>
         {{-- Navbar --}}
-        <div class="flex-1 p-4 md:p-6 rounded-lg w-full">
+        <div class="flex-1 p-4 md:p-6 ml-5 rounded-lg w-full">
             <nav
                 class="bg-gray-300 dark:bg-gray-800 px-2 md:px-4 py-2 flex flex-col md:flex-row items-center justify-end mb-6 rounded-lg gap-4">
 

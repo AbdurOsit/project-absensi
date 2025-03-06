@@ -6,9 +6,12 @@ use App\Models\AbsensiHadir;
 use App\Models\AbsensiTidakHadir;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class AbsensiController extends Controller
 {
@@ -56,18 +59,28 @@ class AbsensiController extends Controller
         $role = Role::all();
         return view('absensi.admin2.input_proses', compact('title', 'role'));
     }
-    public function store(Request $request)
-    {
+
+
+    public function store(Request $request){
         $request->validate([
             'uid' => 'required|unique:users',
             'username' => 'required|unique:users',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'jurusan' => 'required',
             'kelas' => 'required',
             'role' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
-
+    
+        $imageName = null;
+    
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('image'), $imageName);
+        }
+    
         User::create([
             'uid' => $request->uid,
             'username' => $request->username,
@@ -75,41 +88,73 @@ class AbsensiController extends Controller
             'kelas' => $request->kelas,
             'jurusan' => $request->jurusan,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => bcrypt($request->password),
+            'image' => $imageName, // Simpan nama file ke database
         ]);
-
-        return redirect()->intended(route('admin.input'))->with('sukses', 'Data siswa berhasil disimpan!');
+    
+        return redirect()->route('admin.input')->with('sukses', 'Data siswa berhasil disimpan!');
     }
+    
 
-    public function update(string $uid)
-    {
+    public function update(string $uid){
         $data = User::where('uid', $uid)->first();
         $role = Role::all();
         return view('absensi.admin2.update', compact('data', 'role'));
     }
-    public function update_process(Request $request, string $uid)
-    {
+    public function update_process(Request $request, string $uid){
         $request->validate([
             'username' => 'required',
             'jurusan' => 'required',
             'kelas' => 'required',
             'role' => 'required',
-        ]);
+            'password' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        User::where('uid', $uid)->update([
+        $user = User::where('uid', $uid)->first();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+
+            // Hapus foto lama jika ada
+            if ($user->image && File::exists(public_path('image/' . $user->image))) {
+                File::delete(public_path('image/' . $user->image));
+            }
+
+            // Simpan foto baru
+            $file->move(public_path('image'), $imageName);
+            $user->image = $imageName;
+        }
+
+            // Update password jika ada input baru
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+
+        $user->update([
             'username' => $request->username,
             'kelas' => $request->kelas,
             'jurusan' => $request->jurusan,
             'role_id' => $request->role,
+            'image' => $user->image,
         ]);
-        $user = User::where('uid', $uid)->first();
-        return redirect()->intended(route('admin.input'))->with('sukses', 'Data dengan No. Card ' . $user->uid . ' berhasil diupdate!');
+
+        return redirect()->route('admin.input')->with('sukses', 'Data berhasil diupdate!');
     }
 
-    public function delete(string $uid)
-    {
-        User::where('uid', $uid)->delete();
-        return redirect()->intended(route('admin.input'))->with('sukses', 'Data berhasil dihapus!');
+    public function delete(string $uid){
+        $user = User::where('uid', $uid)->first();
+
+        // Hapus foto jika ada
+        if ($user->image && File::exists(public_path('image/' . $user->image))) {
+            File::delete(public_path('image/' . $user->image));
+        }
+
+        // Hapus user dari database
+        $user->delete();
+
+        return redirect()->route('admin.input')->with('sukses', 'Data berhasil dihapus!');
     }
 
     public function updateStatus(Request $request, $uid)
@@ -161,6 +206,32 @@ class AbsensiController extends Controller
 
         return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort'));
     }
+
+    function waktu(Request $request)
+    {
+        $title = 'waktu';
+        $query = $request->query('query');
+        $sort = $request->query('sort', 'asc'); // default sort asc
+
+        // Query dasar
+        $dataQuery = Waktu::query();
+
+        // Jika ada query pencarian
+        if ($query) {
+            $dataQuery->where('hari', 'like', "%$query%")
+                      ->orWhere('jam_masuk','like', "%$query%")
+                      ->orWhere('jam_pulang','like', "%$query%");
+        }
+
+        // Terapkan sorting
+        $dataQuery->orderBy('hari', $sort);
+
+        // Ambil data dengan pagination
+        $data = $dataQuery->paginate(10);
+
+        return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort'));
+    }
+
     function scan()
     {
         $title = 'scan';
@@ -170,33 +241,87 @@ class AbsensiController extends Controller
     public function scan_input(Request $request)
     {
         $request->validate([
-            'card_id' => 'required|string'
+            'uid' => 'required|string'
         ]);
-    
-        // Cari user berdasarkan card_id
-        $user = User::where('no_card', $request->card_id)->first();
-    
+
+        // Cari user berdasarkan UID
+        $user = User::where('uid', $request->uid)->first();
+
         if (!$user) {
-            return response()->json(['success' => false, 'message' => 'Kartu tidak terdaftar'], 404);
+            return response()->json([
+                'success' => false,
+                'message' => 'Kartu tidak terdaftar'
+            ], 404);
         }
-    
-        // Catat absensi
-        AbsensiHadir::create([
-            'user_id' => $user->id,
-            'tanggal' => Carbon::now()->toDateString(),
-            'waktu_masuk' => Carbon::now()->toTimeString(),
-            'status' => 'Hadir',
-        ]);
-    
-        return response()->json([
-            'success' => true,
-            'message' => 'Absensi berhasil dicatat',
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'timestamp' => Carbon::now()->toDateTimeString()
-            ]
-        ]);
+
+        $today = Carbon::now()->toDateString();
+        $currentTime = Carbon::now()->toTimeString();
+        $dayName = Carbon::now()->format('l'); // Nama hari (Monday, Tuesday, etc.)
+
+        // Ambil jadwal jam masuk dan jam pulang berdasarkan hari dan role_id user
+        $waktu = Waktu::where('hari', $dayName)
+            ->where('role_id', $user->role_id)
+            ->first();
+
+        if (!$waktu) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Jadwal tidak ditemukan untuk hari ini'
+            ], 404);
+        }
+
+        // Cek apakah user sudah absen masuk hari ini
+        $absensi = AbsensiHadir::where('uid', $user->uid)
+            ->whereDate('hari_tanggal', $today)
+            ->first();
+
+        if (!$absensi) {
+            // Scan pertama kali -> catat waktu datang
+            AbsensiHadir::create([
+                'uid' => $user->uid,
+                'username' => $user->username,
+                'role_id' => $user->role_id,
+                'kelas' => $user->kelas,
+                'jurusan' => $user->jurusan,
+                'status' => 0,
+                'hari_tanggal' => $today,
+                'waktu_datang' => $currentTime,
+                'waktu_pulang' => null,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Absensi masuk berhasil dicatat',
+                'user' => [
+                    'uid' => $user->uid,
+                    'username' => $user->username,
+                    'waktu_datang' => $currentTime
+                ]
+            ]);
+        } else {
+            // Scan kedua kali -> cek apakah sudah waktunya pulang
+            if ($currentTime < $waktu->jam_pulang) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Belum waktunya pulang'
+                ], 400);
+            }
+
+            // Catat waktu pulang
+            $absensi->update([
+                'waktu_pulang' => $currentTime
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Absensi pulang berhasil dicatat',
+                'user' => [
+                    'uid' => $user->uid,
+                    'username' => $user->username,
+                    'waktu_pulang' => $currentTime
+                ]
+            ]);
+        }
     }
 
     public function getLatestScan()
@@ -241,20 +366,5 @@ class AbsensiController extends Controller
         return view('absensi.guru.rekap', compact('title'));
     }
 
-    public function siswa_layout()
-    {
-        $data = Auth::user();
-        return view('absensi.user3.layout', compact('data'));
-    }
 
-    public function siswa_index()
-    {
-        $data = Auth::user();
-        return view('absensi.user3.index', compact('data'));
-    }
-    public function siswa_rekap()
-    {
-        $data = Auth::user();
-        return view('absensi.user3.profile', compact('data'));
-    }
 }
