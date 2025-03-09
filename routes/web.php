@@ -44,6 +44,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/waktu/update/{id}', [WaktuController::class, 'update'])->name('waktu.update');
         Route::put('/waktu/update/{id}', [WaktuController::class, 'update_proccess'])->name('waktu.update.proccess');
         Route::delete('/waktu/delete/{id}', [WaktuController::class, 'delete'])->name('waktu.delete');
+        // Jadwal
+        Route::get('/admin/jadwal', [AbsensiController::class, 'jadwal'])->name('admin.jadwal');
+        Route::get('/jadwal/create', [AbsensiController::class, 'jadwal_input'])->name('jadwal.input');
+        Route::post('/jadwal/create', [AbsensiController::class, 'jadwal_create'])->name('jadwal.create');
+        Route::get('/jadwal/update/{id}', [AbsensiController::class, 'jadwal_update'])->name('jadwal.update');
+        Route::put('/jadwal/update/{id}', [AbsensiController::class, 'jadwal_update_proccess'])->name('jadwal.update_proccess');
+        Route::delete('/jadwal/delete/{id}', [AbsensiController::class, 'jadwal_delete'])->name('jadwal.delete');
         // Scan
         Route::get('/admin/scan', [AbsensiController::class, 'scan'])->name('admin.scan');
         Route::post('/scan/input', [AbsensiController::class, 'scan_input'])->name('scan.input');
@@ -59,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     // Siswa
         Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
         Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');
-        Route::get('/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
+        Route::get('/user/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
         Route::get('/profile/update/{uid}', [SiswaController::class, 'profile_update'])->name('profile.update');
         Route::put('/profile/update/{uid}', [SiswaController::class, 'profile_update_proccess'])->name('profile.update_proccess');
     // Search (bisa diakses oleh semua role yang login)

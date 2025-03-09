@@ -10,6 +10,7 @@ use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +25,36 @@ class SiswaController extends Controller
     public function siswa_index()
     {
         $data = Auth::user();
-        return view('absensi.user3.index', compact('data'));
+
+        // Ambil hari Senin minggu ini
+        $startDate = Carbon::now()->startOfWeek(); // Senin minggu ini
+        $endDate = $startDate->copy()->addDays(4); // Jumat minggu ini
+    
+        // Ambil data dari tabel berdasarkan tanggal
+        // $jadwal = DB::table('tugas ')->whereBetween('tanggal', [$startDate, $endDate])->get();
+        $tugas = DB::table('tugas')
+        ->whereBetween('tanggal', [$startDate, $endDate])
+        ->whereNotNull('tugas')
+        ->select('tanggal', 'tugas as judul', 'hari') // Pastikan 'tugas' dikembalikan sebagai 'judul'
+        ->get();
+
+        // Ambil data praktek dengan pagination
+        $praktek = DB::table('tugas')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereNotNull('praktek')
+            ->select('tanggal', 'praktek', 'hari')
+            ->paginate(3);
+
+        // Ambil data kegiatan dengan pagination
+        $kegiatan = DB::table('tugas')
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereNotNull('kegiatan')
+            ->select('tanggal', 'kegiatan', 'hari')
+            ->paginate(3);
+
+        $absensi = AbsensiHadir::where('username',Auth::user()->username)->first();
+
+        return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan','absensi'));
     }
     public function siswa_rekap()
     {

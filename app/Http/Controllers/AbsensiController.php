@@ -10,8 +10,10 @@ use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AbsensiController extends Controller
 {
@@ -23,9 +25,9 @@ class AbsensiController extends Controller
         $date = Carbon::now()->format('Y-m-d');
         $time = Carbon::now()->locale('id')->translatedFormat('l');
 
-        $users = $query ? User::where('username', 'like', "%$query%")->paginate(10) : User::paginate(10);
-        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(10) : AbsensiHadir::paginate(10);
-        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(10) : AbsensiTidakHadir::paginate(10);
+        $users = $query ? User::where('username', 'like', "%$query%")->paginate(10) : User::paginate(11);
+        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(11) : AbsensiHadir::paginate(11);
+        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(11) : AbsensiTidakHadir::paginate(11);
 
         return view('absensi.admin2.index', [
             'users' => $users,
@@ -230,6 +232,80 @@ class AbsensiController extends Controller
         $data = $dataQuery->paginate(10);
 
         return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort'));
+    }
+
+    function jadwal(){
+        $data = DB::table('tugas')->orderBy('id','desc')->paginate('5');
+        return view('absensi.admin2.jadwal',compact('data'));
+    }
+
+    function jadwal_input(){
+        return view('absensi.admin2.jadwal_input');
+    }
+
+    function jadwal_create(Request $request){
+        Session::flash('hari',$request->hari);
+        Session::flash('tanggal',$request->tanggal);
+        Session::flash('tugas',$request->tugas);
+        Session::flash('praktek',$request->praktek);
+        Session::flash('kegiatan',$request->kegiatan);
+        Session::flash('deadline_hari',$request->deadline_hari);
+        Session::flash('deadline_tanggal',$request->deadline_tanggal);
+        $request->validate([
+            'hari' => 'required',
+            'tanggal' => 'required',
+            'tugas' => 'nullable|string',
+            'praktek' => 'nullable|string',
+            'kegiatan' => 'nullable|string',
+            'deadline_hari' => 'required',
+            'deadline_tanggal' => 'required',
+        ]);
+        $data = [
+            'hari' => $request->hari,
+            'tanggal' => $request->tanggal,
+            'tugas' => $request->tugas,
+            'praktek' => $request->praktek,
+            'kegiatan' => $request->kegiatan,
+            'deadline_hari' => $request->deadline_hari,
+            'deadline_tanggal' => $request->deadline_tanggal,
+        ];
+
+        DB::table('tugas')->insert($data);
+        return redirect()->to('admin/jadwal')->with('sukses','jadwal berhasil ditambahkan');
+    }
+
+    function jadwal_update($id){
+        $data = DB::table('tugas')->where('id',$id)->first();
+        return view('absensi.admin2.jadwal_update',compact('data'));
+    }
+
+    function jadwal_update_proccess(Request $request,$id){
+        $request->validate([
+            'hari' => 'required',
+            'tanggal' => 'required',
+            'tugas' => 'nullable|string',
+            'praktek' => 'nullable|string',
+            'kegiatan' => 'nullable|string',
+            'deadline_hari' => 'required',
+            'deadline_tanggal' => 'required',
+        ]);
+        $data = [
+            'hari' => $request->hari,
+            'tanggal' => $request->tanggal,
+            'tugas' => $request->tugas,
+            'praktek' => $request->praktek,
+            'kegiatan' => $request->kegiatan,
+            'deadline_hari' => $request->deadline_hari,
+            'deadline_tanggal' => $request->deadline_tanggal,
+        ];
+
+        DB::table('tugas')->where('id',$id)->update($data);
+        return redirect()->to('admin/jadwal')->with('sukses','jadwal berhasil ditambahkan');
+    }
+
+    function jadwal_delete($id){
+        DB::table('tugas')->where('id',$id)->delete();
+        return redirect()->to('/admin/jadwal')->with('sukses','jadwal berhasil dihapus');
     }
 
     function scan()

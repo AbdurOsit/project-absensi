@@ -48,6 +48,7 @@
           </tbody>
         </table>
       </div>
+      {{ $absensihadir->links('pagination::tailwind') }}
     </div>
 
     <!-- Tabel kedua -->

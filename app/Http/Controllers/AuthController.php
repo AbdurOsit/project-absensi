@@ -47,9 +47,9 @@ class AuthController extends Controller
             }
             
             $user = Auth::user();
-            if ($user->role == 'admin') {
+            if ($user->role->name == 'admin') {
                 return redirect()->intended(route('admin.index'))->with('sukses', ' Hallo Admin ');
-            } elseif ($user->role == 'guru') {
+            } elseif ($user->role->name == 'guru') {
                 return redirect()->intended(route('guru.index'))->with('sukses', 'Guru ' . $user->username . ' berhasil login');
             } else {
                 return redirect()->intended(route('siswa.index'))->with('sukses', 'Siswa ' . $user->username . ' berhasil login');

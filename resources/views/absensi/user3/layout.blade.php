@@ -244,62 +244,45 @@
         openBtn.addEventListener("click", expandSidebar);
         closeBtn.addEventListener("click", collapseSidebar);
 
-        // Card Slider Functionality
-        const tasks = [{
-                color: 'bg-blue-500',
-                title: 'Tugas 1'
-            },
-            {
-                color: 'bg-green-500',
-                title: 'Tugas 2'
-            },
-            {
-                color: 'bg-yellow-500',
-                title: 'Tugas 3'
-            }
-        ];
+        // Ambil data tugas dari Laravel dan konversi ke JSON
+        const tasks = @json($tugas);
 
-        let currentIndex = 1; // Start with middle card active
+        // Warna untuk setiap tugas
+        const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
+
+        let currentIndex = 0; // Mulai dari tugas pertama
+
+        function generateTaskSlides() {
+            const carousel = document.getElementById('carousel');
+            carousel.innerHTML = ''; // Bersihkan isi carousel sebelum mengisi ulang
+
+            // Pastikan selalu 3 tugas ditampilkan
+            for (let i = 0; i < 3; i++) {
+                const taskIndex = (currentIndex + i) % tasks.length; // Loop jika sudah mencapai akhir
+                const task = tasks[taskIndex];
+
+                const card = document.createElement('div');
+                card.className = `task-card w-40 h-20 md:w-48 md:h-24 ${colors[taskIndex % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
+                card.innerHTML = `<span class="text-white text-lg font-bold">${task.judul}</span>`;
+
+                carousel.appendChild(card);
+            }
+        }
 
         function moveCarousel(direction) {
-            const carousel = document.getElementById('carousel');
-            const cards = carousel.children;
-
+            if (tasks.length <= 3) return; // Tidak perlu geser jika tugas kurang dari atau sama dengan 3
+        
             if (direction === 'right') {
-                // Rotate tasks array for right movement
-                const lastTask = tasks.pop();
-                tasks.unshift(lastTask);
+                currentIndex = (currentIndex + 1) % tasks.length;
             } else {
-                // Rotate tasks array for left movement
-                const firstTask = tasks.shift();
-                tasks.push(firstTask);
+                currentIndex = (currentIndex - 1 + tasks.length) % tasks.length;
             }
-
-            // Remove active class from all cards
-            Array.from(cards).forEach(card => {
-                card.classList.remove('active');
-            });
-
-            // Add active class to middle card
-            cards[1].classList.add('active');
-
-            // Update all cards with new content and colors
-            Array.from(cards).forEach((card, index) => {
-                // Update color
-                card.className = card.className.replace(/bg-\w+-500/, tasks[index].color);
-
-                // Update content
-                const span = card.querySelector('span');
-                span.textContent = tasks[index].title;
-            });
+        
+            generateTaskSlides();
         }
-        // Optional: Add click handlers for the cards
-        document.querySelectorAll('.task-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.task-card').forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-            });
-        });
+        
+        // Inisialisasi carousel
+        generateTaskSlides();
     </script>
 </body>
 
