@@ -170,7 +170,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => $tidakHadirUsers[0]->kelas,
                 'jurusan' => $tidakHadirUsers[0]->jurusan,
                 'hari_tanggal' => Carbon::now()->toDateString(),
-                'alasan_id' => 1,
+                'alasan_id' => 'izin',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -182,7 +182,7 @@ class DatabaseSeeder extends Seeder
                 'kelas' => $tidakHadirUsers[1]->kelas,
                 'jurusan' => $tidakHadirUsers[1]->jurusan,
                 'hari_tanggal' => Carbon::now()->toDateString(),
-                'alasan_id' => 2,
+                'alasan_id' => 'sakit',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

@@ -100,14 +100,14 @@
                 <tbody>
                     @if ($absensi->isEmpty())
                         <tr>
-                            <td colspan="3" class="text-center py-2">Tidak ada data absensi tidak hadir.</td>
+                            <td colspan="3" class="text-center py-2">Tidak  ada data absensi tidak hadir.</td>
                         </tr>
                     @else
                         @foreach ($absensi as $item)
                             <tr class="bg-gray-300 dark:bg-zinc-800">
                                 <td class="border border-gray-500 px-4 py-2">{{ $item->tanggal }}</td>
                                 <td class="border border-gray-500 px-4 py-2">{{ $item->hari }}</td>
-                                <td class="border border-gray-500 px-4 py-2">{{ $item->alasan->alasan }}</td>
+                                <td class="border border-gray-500 px-4 py-2">{{ $item->alasan }}</td>
                             </tr>
                         @endforeach
                     @endif

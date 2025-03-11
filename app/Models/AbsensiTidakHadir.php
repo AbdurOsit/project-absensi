@@ -15,8 +15,4 @@ class AbsensiTidakHadir extends Model
     {
         return $this->belongsTo(Role::class);
     }
-
-    public function alasan() : BelongsTo {
-        return $this->belongsTo(Alasan::class);
-    }
 }

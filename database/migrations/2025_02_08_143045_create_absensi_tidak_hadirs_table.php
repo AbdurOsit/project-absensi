@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('role_id');
             $table->text('jurusan');
             $table->date('hari_tanggal');
-            $table->foreignId('alasan_id');
+            $table->string('alasan');
             $table->timestamps();
         });
     }
