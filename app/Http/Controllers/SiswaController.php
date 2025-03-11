@@ -29,37 +29,46 @@ class SiswaController extends Controller
         // Ambil hari Senin minggu ini
         $startDate = Carbon::now()->startOfWeek(); // Senin minggu ini
         $endDate = $startDate->copy()->addDays(4); // Jumat minggu ini
-    
+
+        // Tambahkan batas H+1 berdasarkan deadline_tanggal
+        $maxDeadline = DB::table('tugas')->max('deadline_tanggal'); // Ambil deadline terakhir
+        $adjustedEndDate = $maxDeadline ? Carbon::parse($maxDeadline)->addDay() : $endDate;
+
         // Ambil data dari tabel berdasarkan tanggal
-        // $jadwal = DB::table('tugas ')->whereBetween('tanggal', [$startDate, $endDate])->get();
         $tugas = DB::table('tugas')
-        ->whereBetween('tanggal', [$startDate, $endDate])
-        ->whereNotNull('tugas')
-        ->select('tanggal', 'tugas as judul', 'hari') // Pastikan 'tugas' dikembalikan sebagai 'judul'
-        ->get();
+            ->whereBetween('tanggal', [$startDate, $adjustedEndDate]) // Perpanjang hingga H+1 dari deadline
+            ->whereNotNull('tugas')
+            ->select('tanggal', 'tugas as judul', 'hari')
+            ->get();
 
         // Ambil data praktek dengan pagination
         $praktek = DB::table('tugas')
-            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('praktek')
             ->select('tanggal', 'praktek', 'hari')
             ->paginate(3);
 
         // Ambil data kegiatan dengan pagination
         $kegiatan = DB::table('tugas')
-            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('kegiatan')
             ->select('tanggal', 'kegiatan', 'hari')
             ->paginate(3);
 
-        $absensi = AbsensiHadir::where('username',Auth::user()->username)->first();
+        $absensi = AbsensiHadir::where('username', Auth::user()->username)->first();
 
-        return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan','absensi'));
+        return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan', 'absensi'));
     }
+
     public function siswa_rekap()
     {
         $data = Auth::user();
-        return view('absensi.user3.rekap', compact('data'));
+
+        $absensi = AbsensiTidakHadir::where('username', $data->username)
+            ->orderBy('tanggal', 'asc')
+            ->paginate(2);
+
+        return view('absensi.user3.rekap', compact('data', 'absensi'));
     }
 
     public function profile_update(string $uid){

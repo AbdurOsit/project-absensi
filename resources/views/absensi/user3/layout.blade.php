@@ -244,45 +244,7 @@
         openBtn.addEventListener("click", expandSidebar);
         closeBtn.addEventListener("click", collapseSidebar);
 
-        // Ambil data tugas dari Laravel dan konversi ke JSON
-        const tasks = @json($tugas);
-
-        // Warna untuk setiap tugas
-        const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
-
-        let currentIndex = 0; // Mulai dari tugas pertama
-
-        function generateTaskSlides() {
-            const carousel = document.getElementById('carousel');
-            carousel.innerHTML = ''; // Bersihkan isi carousel sebelum mengisi ulang
-
-            // Pastikan selalu 3 tugas ditampilkan
-            for (let i = 0; i < 3; i++) {
-                const taskIndex = (currentIndex + i) % tasks.length; // Loop jika sudah mencapai akhir
-                const task = tasks[taskIndex];
-
-                const card = document.createElement('div');
-                card.className = `task-card w-40 h-20 md:w-48 md:h-24 ${colors[taskIndex % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
-                card.innerHTML = `<span class="text-white text-lg font-bold">${task.judul}</span>`;
-
-                carousel.appendChild(card);
-            }
-        }
-
-        function moveCarousel(direction) {
-            if (tasks.length <= 3) return; // Tidak perlu geser jika tugas kurang dari atau sama dengan 3
         
-            if (direction === 'right') {
-                currentIndex = (currentIndex + 1) % tasks.length;
-            } else {
-                currentIndex = (currentIndex - 1 + tasks.length) % tasks.length;
-            }
-        
-            generateTaskSlides();
-        }
-        
-        // Inisialisasi carousel
-        generateTaskSlides();
     </script>
 </body>
 

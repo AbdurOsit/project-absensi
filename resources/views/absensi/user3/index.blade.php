@@ -39,10 +39,14 @@
                 <div class="space-y-2 h-auto">
                     <div class="space-y-2 h-auto pb-2">
                         @foreach ($praktek as $item)
-                            <div class="flex items-center text-black dark:text-white ml-2 pt-3">
-                                <span class="w-2 h-2 bg-black dark:bg-white rounded-full mr-2"></span>
-                                <span>{{ $item->hari }} - {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
-                            </div>
+                        <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full">
+                                <svg class="bg-blue-500 w-10 h-auto rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                  </svg>                            
+                            </button>
+                            <span class="text-gray-900 dark:text-white font-medium">{{ $item->hari }} - {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
+                        </li>
                         @endforeach
                         <div class="flex justify-center text-center">
                         {{ $praktek->links('pagination::tailwind') }}
@@ -58,10 +62,14 @@
             <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
                 <div class="space-y-2 h-auto pb-2">
                     @foreach ($kegiatan as $item)
-                    <div class="flex items-center text-black dark:text-white ml-2 pt-3">
-                        <span class="w-2 h-2 bg-black dark:bg-white rounded-full mr-2"></span>
-                        <span>{{ $item->hari }} - {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
-                    </div>
+                    <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full">
+                            <svg class="bg-blue-500 w-10 h-auto rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                              </svg>                            
+                        </button>
+                        <span class="text-gray-900 dark:text-white font-medium">{{ $item->hari }} - {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
+                    </li>
                     @endforeach
                     <div class="flex justify-center text-center">
                         {{ $kegiatan->links('pagination::tailwind') }}
@@ -71,29 +79,73 @@
         </div>
 
         <!-- Absensi Section -->
-        <div class="bg-gray-300 w-full dark:bg-zinc-800 rounded-lg mt-4 ml-5">
-            <h3 class="text-black dark:text-white font-medium mb-4 ml-2 mt-2" >Absensi Hari Ini</h3>
-            <table class="w-full text-black dark:text-white">
-                <thead>
-                    <tr class="text-left">
-                        <th class="pb-2 pl-2 pr-3">No.Card</th>
-                        <th class="pb-2 pl-14">Nama</th>
-                        <th class="pb-2 pl-14">Status</th>
-                        <th class="pb-2 pl-14">Waktu Kedatangan</th>
-                        <th class="pb-2 pl-14 pr-10">Waktu Pulang</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-center">
-                        <td class="pb-2 pl-2 pr-3">{{ $absensi->uid }}</td>
-                        <td class="pb-2 pl-14">{{ $absensi->username }}</td>
-                        <td class="pb-2 pl-14">{{ $absensi->status }}</td>
-                        <td class="pb-2 pl-14">{{ $absensi->waktu_datang }}</td>
-                        <td class="pb-2 pl-14 pr-10">{{ $absensi->waktu_pulang }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Absensi Section -->
+        <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 ml-5 p-4 shadow-md">
+            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-4">Absensi Hari Ini</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-gray-900 dark:text-white border-collapse">
+                    <thead>
+                        <tr class="bg-blue-500 text-white text-left">
+                            <th class="py-3 px-4 rounded-tl-lg">No. Card</th>
+                            <th class="py-3 px-4">Nama</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Waktu Kedatangan</th>
+                            <th class="py-3 px-4 rounded-tr-lg">Waktu Pulang</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                            <td class="py-3 px-4">{{ $absensi->uid }}</td>
+                            <td class="py-3 px-4">{{ $absensi->username }}</td>
+                            <td class="py-3 px-4">{{ $absensi->status }}</td>
+                            <td class="py-3 px-4">{{ $absensi->waktu_datang }}</td>
+                            <td class="py-3 px-4">{{ $absensi->waktu_pulang }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </div>
-    <script src="/resourrces/views/absensi/user3/layout"></script>
+    <script>
+        // Ambil data tugas dari Laravel dan konversi ke JSON
+        const tasks = @json($tugas);
+
+        // Warna untuk setiap tugas
+        const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
+
+        let currentIndex = 0; // Mulai dari tugas pertama
+
+        function generateTaskSlides() {
+            const carousel = document.getElementById('carousel');
+            carousel.innerHTML = ''; // Bersihkan isi carousel sebelum mengisi ulang
+
+            // Pastikan selalu 3 tugas ditampilkan
+            for (let i = 0; i < 3; i++) {
+                const taskIndex = (currentIndex + i) % tasks.length; // Loop jika sudah mencapai akhir
+                const task = tasks[taskIndex];
+
+                const card = document.createElement('div');
+                card.className = `task-card w-40 h-20 md:w-48 md:h-24 ${colors[taskIndex % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
+                card.innerHTML = `<span class="text-white text-lg font-bold">${task.judul}</span>`;
+
+                carousel.appendChild(card);
+            }
+        }
+
+        function moveCarousel(direction) {
+            if (tasks.length <= 3) return; // Tidak perlu geser jika tugas kurang dari atau sama dengan 3
+        
+            if (direction === 'right') {
+                currentIndex = (currentIndex + 1) % tasks.length;
+            } else {
+                currentIndex = (currentIndex - 1 + tasks.length) % tasks.length;
+            }
+        
+            generateTaskSlides();
+        }
+        
+        // Inisialisasi carousel
+        generateTaskSlides();
+    </script>
 @endsection
