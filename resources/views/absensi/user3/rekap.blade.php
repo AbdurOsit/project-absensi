@@ -83,6 +83,28 @@
                     </select>
                 </div>
             </div>
+
+            {{-- Jumlah Sakit,Izin,Alpha --}}
+            <div class="flex space-x-4">
+                <div class="flex items-center">
+                    <span class="dark:text-white">Sakit:</span>
+                    <span class="flex justify-center items-center w-10 h-10 dark:bg-gray-600 bg-gray-300 ml-3 text-white font-bold rounded-xl">{{ $sakit }}</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <div class="flex items-center">
+                    <span class="dark:text-white">Izin:</span>
+                    <span class="flex justify-center items-center w-10 h-10 dark:bg-gray-600 bg-gray-300 ml-3 text-white font-bold rounded-xl">{{ $izin }}</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <div class="flex items-center">
+                    <span class="dark:text-white">Alpha:</span>
+                    <span class="flex justify-center items-center w-10 h-10 dark:bg-gray-600 bg-gray-300 ml-3 text-white font-bold rounded-xl">{{ $alpha }}</span>
+                </div>
+            </div>
         </div>
 
         <!-- Attendance Data Container -->

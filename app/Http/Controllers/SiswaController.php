@@ -67,21 +67,28 @@ class SiswaController extends Controller
         $absensi = AbsensiTidakHadir::where('username', $data->username)
             ->orderBy('tanggal', 'asc')
             ->paginate(2);
+        // Menghitung jumlah alasan sakit, izin, dan alpha
+        $sakit = AbsensiTidakHadir::where('username', $data->username)->where('alasan', 'sakit')->count();
+        $izin = AbsensiTidakHadir::where('username', $data->username)->where('alasan', 'izin')->count();
+        $alpha = AbsensiTidakHadir::where('username', $data->username)->where('alasan', 'alpha')->count();
 
-        return view('absensi.user3.rekap', compact('data', 'absensi'));
+        // Menampilkan hasil (contoh dalam Blade)
+        return view('absensi.user3.rekap', compact('absensi','data' ,'sakit', 'izin', 'alpha'));
     }
 
-    public function profile_update(string $uid){
+    public function profile_update(string $uid)
+    {
         $data = User::where('uid', $uid)->first();
         // $role = Role::all();
         return view('absensi.user3.profile_update', compact('data'));
     }
 
-    public function profile_update_proccess(Request $request,string $uid){
+    public function profile_update_proccess(Request $request, string $uid)
+    {
         $request->validate([
             'password' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+        ]);
 
         $user = User::where('uid', $uid)->first();
 
@@ -99,12 +106,12 @@ class SiswaController extends Controller
             $user->image = $imageName;
         }
 
-            // Update password jika ada input baru
-            if ($request->password) {
-                $user->password = Hash::make($request->password);
-            }
+        // Update password jika ada input baru
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
 
-            $user->save();  
+        $user->save();
 
         return redirect()->route('siswa.rekap')->with('sukses', 'Profil berhasil diupdate!');
     }

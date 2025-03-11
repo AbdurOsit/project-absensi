@@ -69,14 +69,16 @@
             @foreach ($tidakhadir as $item)
             <tr>
               <td class="border border-gray-700 px-4 py-2">{{ $no }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->hari_tanggal }}</td>
+              <td class="border border-gray-700 px-4 py-2">{{ $item->hari }} /{{ $item->tanggal }}</td>
               <td class="border border-gray-700 px-4 py-2">{{ $item->username }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->keterangan }}</td>
+              <td class="border border-gray-700 px-4 py-2">{{ $item->alasan }}</td>
             </tr>
             <?php $no++; ?>
             @endforeach
           </tbody>
         </table>
+        <br>
+      {{ $tidakhadir->links('pagination::tailwind') }}
       </div>
     </div>
   </div>

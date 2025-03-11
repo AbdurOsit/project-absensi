@@ -25,9 +25,9 @@ class AbsensiController extends Controller
         $date = Carbon::now()->format('Y-m-d');
         $time = Carbon::now()->locale('id')->translatedFormat('l');
 
-        $users = $query ? User::where('username', 'like', "%$query%")->paginate(10) : User::paginate(11);
-        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(11) : AbsensiHadir::paginate(11);
-        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(11) : AbsensiTidakHadir::paginate(11);
+        $users = $query ? User::where('username', 'like', "%$query%")->paginate(3) : User::paginate(3);
+        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiHadir::paginate(3);
+        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiTidakHadir::paginate(3);
 
         return view('absensi.admin2.index', [
             'users' => $users,
