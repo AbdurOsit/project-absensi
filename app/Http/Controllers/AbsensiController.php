@@ -193,22 +193,23 @@ class AbsensiController extends Controller
         $title = 'rekap';
         $query = $request->query('query');
         $sort = $request->query('sort', 'asc'); // default sort asc
-
+        $sortColumn = $request->query('sortColumn', 'username'); // default sort by username
+    
         // Query dasar
         $dataQuery = AbsensiHadir::query();
-
+    
         // Jika ada query pencarian
         if ($query) {
             $dataQuery->where('username', 'like', "%$query%");
         }
-
+    
         // Terapkan sorting
-        $dataQuery->orderBy('username', $sort);
-
+        $dataQuery->orderBy($sortColumn, $sort);
+    
         // Ambil data dengan pagination
         $data = $dataQuery->paginate(10);
-
-        return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort'));
+    
+        return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
 
     function waktu(Request $request)
