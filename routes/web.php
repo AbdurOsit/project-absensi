@@ -24,15 +24,15 @@ Route::post('login', [AuthController::class, 'auth'])->name('auth');
 Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    // Admin
+        // Admin
         Route::get('/admin', [AbsensiController::class, 'index'])->name('admin.index');
         // Admin CRUD
         Route::get('/admin/input', [AbsensiController::class, 'input'])->name('admin.input');
-        Route::get('/input/layout', [AbsensiController::class, 'input_layout'])->name('admin.input_layout');
+        Route::get('/input/form', [AbsensiController::class, 'input_form'])->name('admin.input_form');
         Route::post('/input', [AbsensiController::class, 'store'])->name('admin.store');
-        Route::get('/admin/update/{uid}', [AbsensiController::class, 'update'])->name('admin.update');
-        Route::put('/update/{uid}', [AbsensiController::class, 'update_process'])->name('admin.update_process');
-        Route::delete('/admin/delete/{uid}', [AbsensiController::class, 'delete'])->name('admin.delete');
+        Route::get('/admin/update/{id}', [AbsensiController::class, 'update'])->name('admin.update');
+        Route::put('/update/{id}', [AbsensiController::class, 'update_process'])->name('admin.update_process');
+        Route::delete('/admin/delete/{id}', [AbsensiController::class, 'delete'])->name('admin.delete');
         // Data
         Route::get('/admin/data', [AbsensiController::class, 'data'])->name('admin.data');
         // Rekap
@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get-latest-scan', [AbsensiController::class, 'getLatestScan'])->name('get.latest.scan');
         // Surat
         Route::get('/admin/surat', [AbsensiController::class, 'surat'])->name('admin.surat');
+        Route::post('/admin/surat', [AbsensiController::class,'surat_proccess'])->name('surat.proccess');
+        // Status
         Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
     // Guru
         Route::get('/', [AbsensiController::class, 'guru_index'])->name('guru.index');

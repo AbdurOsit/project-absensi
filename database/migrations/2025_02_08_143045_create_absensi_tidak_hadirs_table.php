@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('jurusan');
             $table->date('hari_tanggal');
             $table->string('alasan');
+            $table->string('surat');
             $table->timestamps();
         });
     }

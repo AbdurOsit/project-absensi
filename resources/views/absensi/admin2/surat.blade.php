@@ -2,35 +2,43 @@
 @section('admin2')
 <body class="min-h-screen bg-gray-800">
     <div class="w-full max-w-md">
-        <h1 class="text-2xl font-semibold text-black-900 dark:text-white mb-6">Input Surat</h1>
+        <h1 class="text-2xl font-semibold text-black-900 dark:text-white mb-2">Input Surat</h1>
         
         <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg form">
-            <form class="space-y-4">
-                <!-- Nama Input -->
+            <form action="{{ route('surat.proccess') }}" method="POST" class="space-y-4">
+                @csrf
+                <!-- Username Input -->
                 <div class="border-b border-zinc-600">
+                    <label for="username" class="dark:text-white font-bold">Username :</label>
                     <input type="text" 
-                           placeholder="Nama" 
+                           placeholder="example: brody" 
+                           class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2"
+                           name="username">
+                </div>
+
+                <!-- Uid Input -->
+                <div class="border-b border-zinc-600">
+                    <label for="Uid" class="dark:text-white font-bold">Uid :</label>
+                    <input type="text"
+                           placeholder="example: 12r5ft" 
+                           name="uid"
                            class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2">
                 </div>
 
-                <!-- Absen Input -->
+                <!-- Alasan Input -->
                 <div class="border-b border-zinc-600">
+                    <label for="Alasan" class="dark:text-white font-bold">Alasan(sakit,izin,alpha) :</label>
                     <input type="text" 
-                           placeholder="Absen" 
-                           class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2">
-                </div>
-
-                <!-- Keterangan Input -->
-                <div class="border-b border-zinc-600">
-                    <input type="text" 
-                           placeholder="Keterangan" 
-                           class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2">
+                           placeholder="example: izin"
+                           class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2 lowercase">
                 </div>
 
                 <!-- Tanggal Input -->
                 <div class="border-b border-zinc-600">
+                    <label for="username" class="dark:text-white font-bold">Tanggal :</label>
                     <input type="date" 
-                           placeholder="Tanggal" 
+                            id="tanggal"
+                            placeholder="Tanggal"        
                            class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2">
                 </div>
 
@@ -38,6 +46,7 @@
                 <div class="mt-6">
                     <div class="relative border-2 border-dashed border-zinc-600 rounded-lg p-8 text-center hover:border-zinc-400 transition-colors">
                         <input type="file" 
+                               name="surat"
                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                accept="image/*">
                         
@@ -61,7 +70,7 @@
                 <!-- Submit Button -->
                 <button type="submit" 
                         class="w-full mt-6 bg-blue-500 dark:text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
-                    Submit
+                  Submit
                 </button>
             </form>
         </div>
@@ -82,6 +91,10 @@
                 }
                 reader.readAsDataURL(file);
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("tanggal").valueAsDate = new Date();
         });
     </script>
 </body>

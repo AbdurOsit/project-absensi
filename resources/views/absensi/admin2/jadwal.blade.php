@@ -33,12 +33,12 @@
                     <tr>
                         <td class="border border-gray-600 px-4 py-2">{{ $no }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->hari }}</td>
-                        <td class="border border-gray-600 px-4 py-2">{{ $item->tanggal }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->tugas }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->praktek }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->kegiatan }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->deadline_hari }}</td>
-                        <td class="border border-gray-600 px-4 py-2">{{ $item->deadline_tanggal }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ \Carbon\Carbon::parse($item->deadline_tanggal)->format('d M Y') }}</td>
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}

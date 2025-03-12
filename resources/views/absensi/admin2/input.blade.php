@@ -8,7 +8,7 @@
     
     <!-- Main Title -->
     <h1 class="text-2xl font-semibold mb-8 dark:text-white">Input Data</h1>
-    <a href="{{ route('admin.input_layout') }}" class="bg-purple-600 p-3 rounded-xl text-white font-bold button"><button>Create</button ></a>
+    <a href="{{ route('admin.input_form') }}" class="bg-purple-600 p-3 rounded-xl text-white font-bold button"><button>Create</button ></a>
     <!-- Data Grid -->
     <div class="w-3/4 mt-6">
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
@@ -35,10 +35,10 @@
                         <td class="border border-gray-600 px-4 py-2">{{ $item->kelas }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->jurusan }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->role->name }}</td>
-                        <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
+                        <td class="border border-gray-600 px-4 py-2 text-center flex justify-center gap-3">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="{{ route('admin.update', ['uid' => $item->uid]) }}">
+                            <a class="font-bold text-lg text-white" href="{{ route('admin.update', $item->id) }}">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="{{ route('admin.delete', $item->uid) }}" method="POST" class="font-bold text-lg text-white">
+                            <form action="{{ route('admin.delete', $item->id) }}" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">

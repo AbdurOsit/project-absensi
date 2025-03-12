@@ -55,11 +55,11 @@ class AbsensiController extends Controller
         
         return view('absensi.admin2.input', compact('title', 'data'));
     }
-    function input_layout()
+    function input_form()
     {
         $title = 'input';
         $role = Role::all();
-        return view('absensi.admin2.input_proses', compact('title', 'role'));
+        return view('absensi.admin2.input_form', compact('title', 'role'));
     }
 
 
@@ -98,13 +98,15 @@ class AbsensiController extends Controller
     }
     
 
-    public function update(string $uid){
-        $data = User::where('uid', $uid)->first();
+    public function update($id){
+        $data = User::where('id', $id)->first();
         $role = Role::all();
         return view('absensi.admin2.update', compact('data', 'role'));
     }
-    public function update_process(Request $request, string $uid){
+    public function update_process(Request $request, $id){
+        $user = User::where('id', $id)->first();
         $request->validate([
+            'uid' => 'required|unique:users,uid,' . $user->id . ',id', 
             'username' => 'required',
             'jurusan' => 'required',
             'kelas' => 'required',
@@ -113,7 +115,6 @@ class AbsensiController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-        $user = User::where('uid', $uid)->first();
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -135,6 +136,7 @@ class AbsensiController extends Controller
             }
 
         $user->update([
+            'uid' => $request->uid,
             'username' => $request->username,
             'kelas' => $request->kelas,
             'jurusan' => $request->jurusan,
@@ -145,8 +147,8 @@ class AbsensiController extends Controller
         return redirect()->route('admin.input')->with('sukses', 'Data berhasil diupdate!');
     }
 
-    public function delete(string $uid){
-        $user = User::where('uid', $uid)->first();
+    public function delete(string $id){
+        $user = User::where('id', $id)->first();
 
         // Hapus foto jika ada
         if ($user->image && File::exists(public_path('image/' . $user->image))) {
@@ -234,8 +236,9 @@ class AbsensiController extends Controller
         return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort'));
     }
 
-    function jadwal(){
-        $data = DB::table('tugas')->orderBy('id','desc')->paginate('5');
+    function jadwal(Request $request){
+        $query = $request->query('query');
+        $data = $query ? DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('praktek', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(5) : DB::table('tugas')->orderBy('id','desc')->paginate(5);
         return view('absensi.admin2.jadwal',compact('data'));
     }
 
@@ -419,6 +422,10 @@ class AbsensiController extends Controller
     {
         $title = 'surat';
         return view('absensi.admin2.surat', compact('title'));
+    }
+
+    function surat_proccess(){
+        
     }
 
     // Guru

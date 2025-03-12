@@ -24,20 +24,20 @@ class User extends Authenticatable
     //     'email',
     //     'password',
     // ];
-    // protected $guarded = 'id';
-    protected $fillable = [
-        'uid', // Tambahkan ini
-        'username',
-        'jurusan',
-        'kelas',
-        'role_id',
-        'email',
-        'password',
-    ];
-    // 
-    protected $primaryKey = 'uid';  // Menggunakan uid sebagai primary key
-    public $incrementing = false;   // Jika uid bukan auto-increment
-    protected $keyType = 'string';  // Jika uid berupa string
+    protected $guarded = ['id'];
+    // protected $fillable = [
+    //     'uid', // Tambahkan ini
+    //     'username',
+    //     'jurusan',
+    //     'kelas',
+    //     'role_id',
+    //     'email',
+    //     'password',
+    // ];
+    // // 
+    // protected $primaryKey = 'id'; // Pastikan tetap menggunakan 'id'
+    // public $incrementing = true;  // Biarkan default jika 'id' adalah integer
+    // protected $keyType = 'int';   // Pastikan 'id' bertipe integer
 
 
     /**

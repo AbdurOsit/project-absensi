@@ -22,7 +22,12 @@
                     <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                         Photo Profile
                     </label>
-                    <input type="file" name="image" id="image" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
+                    @if ($data->image)
+                            <img src="{{ asset('image/' . $data->image) }}" alt="Photo Profile"
+                                class="w-24 h-24 object-cover rounded-md mb-2">
+                        @endif
+                        <input type="file" name="image" id="image"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white">
                 </div>
 
                 {{-- Password update --}}
