@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `absensi_hadirs` (
 
 -- Dumping data for table project-absensi.absensi_hadirs: ~3 rows (approximately)
 INSERT INTO `absensi_hadirs` (`uid`, `hari_tanggal`, `username`, `role_id`, `kelas`, `jurusan`, `status`, `waktu_datang`, `waktu_pulang`, `created_at`, `updated_at`) VALUES
-	('U003', '2025-03-07', 'siswa1', 3, 11, 'Teknik Elektro', 1, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-08 18:20:11'),
+	('U003', '2025-03-07', 'siswa1', 3, 11, 'Teknik Elektro', 0, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-12 04:40:12'),
 	('U004', '2025-03-07', 'siswa2', 3, 11, 'Teknik Mesin', 1, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-08 18:20:13'),
-	('U005', '2025-03-07', 'siswa3', 3, 12, 'Teknik Sipil', 0, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-07 05:34:21');
+	('U005', '2025-03-07', 'siswa3', 3, 12, 'Teknik Sipil', 1, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-12 04:40:09');
 
 -- Dumping structure for table project-absensi.absensi_tidak_hadirs
 CREATE TABLE IF NOT EXISTS `absensi_tidak_hadirs` (
@@ -47,21 +47,22 @@ CREATE TABLE IF NOT EXISTS `absensi_tidak_hadirs` (
   `kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` bigint unsigned NOT NULL,
   `jurusan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hari` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `tanggal` date NOT NULL,
-  `alasan_id` bigint unsigned NOT NULL,
+  `alasan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `surat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `hari` text COLLATE utf8mb4_unicode_ci
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.absensi_tidak_hadirs: ~6 rows (approximately)
-INSERT INTO `absensi_tidak_hadirs` (`uid`, `username`, `kelas`, `role_id`, `jurusan`, `tanggal`, `alasan_id`, `created_at`, `updated_at`, `hari`) VALUES
-	('U003\r\n', 'siswa1', '12', 3, 'Teknik Elektro', '2025-03-11', 2, '2025-03-11 04:04:49', '2025-03-11 04:04:50', 'Senin'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', '2025-03-12', 1, '2025-03-11 04:06:14', '2025-03-11 04:06:15', 'Selasa'),
-	('U005', 'siswa3', '12', 3, 'Teknik Sipil', '2025-03-07', 2, '2025-03-07 05:34:21', '2025-03-07 05:34:21', 'Rabu'),
-	('U006', 'siswa4', '10', 3, 'Teknik Listrik', '2025-03-07', 1, '2025-03-07 05:34:21', '2025-03-07 05:34:21', 'Kamis'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', '2025-03-13', 3, '2025-03-11 04:07:01', '2025-03-11 04:07:02', 'Jum\'at'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', '2025-03-11', 3, '2025-03-11 04:08:11', '2025-03-11 04:08:12', 'Sabtu');
+INSERT INTO `absensi_tidak_hadirs` (`uid`, `username`, `kelas`, `role_id`, `jurusan`, `hari`, `tanggal`, `alasan`, `surat`, `created_at`, `updated_at`) VALUES
+	('U003\r\n', 'siswa1', '12', 3, 'Teknik Elektro', 'Senin', '2025-03-11', 'sakit', NULL, '2025-03-11 04:04:49', '2025-03-11 04:04:50'),
+	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Selasa', '2025-03-12', 'izin', NULL, '2025-03-11 04:06:14', '2025-03-11 04:06:15'),
+	('U005', 'siswa3', '12', 3, 'Teknik Sipil', 'Rabu', '2025-03-07', 'alpha', NULL, '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
+	('U006', 'siswa4', '10', 3, 'Teknik Listrik', 'Kamis', '2025-03-07', 'sakit', NULL, '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
+	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Jum\'at', '2025-03-13', 'izin', NULL, '2025-03-11 04:07:01', '2025-03-11 04:07:02'),
+	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Sabtu', '2025-03-11', 'alpha', NULL, '2025-03-11 04:08:11', '2025-03-11 04:08:12');
 
 -- Dumping structure for table project-absensi.alasan
 CREATE TABLE IF NOT EXISTS `alasan` (
@@ -238,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.tugas: ~7 rows (approximately)
 INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `praktek`, `kegiatan`, `deadline_hari`, `deadline_tanggal`, `created_at`, `updated_at`) VALUES
@@ -249,10 +250,12 @@ INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `praktek`, `kegiatan`, `d
 	(5, 'Jumat', '2025-03-15', 'Tugas untuk Jumat', 'Praktikum Jumat', 'Kegiatan Jumat', 'Senin', '2025-03-10', '2025-03-07 05:35:01', '2025-03-07 05:35:01'),
 	(6, 'Sabtu', '2025-03-16', 'Tugas untuk Sabtu', 'Praktikum Sabtu', 'Kegiatan Sabtu', 'kamis', '2025-03-11', '2025-03-07 05:35:01', '2025-03-07 05:35:01'),
 	(7, 'Minggu', '2025-03-17', 'Tugas untuk Minggu', 'Praktikum Minggu', 'Kegiatan Minggu', 'Rabu', '2025-03-12', '2025-03-07 05:35:01', '2025-03-07 05:35:01'),
-	(10, 'senin 2', '2025-03-18', 'tugas senin 2', 'praktek senin 2', 'kegiatan senin 2', 'kamis', '2025-03-27', NULL, NULL);
+	(10, 'senin 2', '2025-03-18', 'tugas senin 2', 'praktek senin 2', 'kegiatan senin 2', 'kamis', '2025-03-27', NULL, NULL),
+	(11, 'Jum\'at', '2025-03-13', NULL, 'Praktek Cisco', NULL, 'Rabu', '2025-03-18', NULL, NULL);
 
 -- Dumping structure for table project-absensi.users
 CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -265,18 +268,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `image` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `users_uid_unique` (`uid`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.users: ~6 rows (approximately)
-INSERT INTO `users` (`uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-	('U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$.uLqXkuxQ6LS9SlZRqDeY.wQcrKlQCc.hvc1EjlnpcN52.CNSXrm2', 'px1kPTCmArI6rpp3C8pUU4aZYQqaTGtx00T2n43Dm6o2C4MPNMUcKpFJAGCX', '2025-03-07 05:34:19', '2025-03-10 20:11:50', NULL),
-	('U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$TKSPmp7dlrh7YjZQ3n5ZJer/yDJKSDlji7SyxTUF3oE0LikgHOaXe', NULL, '2025-03-07 05:34:19', '2025-03-07 05:34:19', NULL),
-	('U003', 'siswa1', 'Teknik Elektro', 12, 3, 'siswa@gmail.com', NULL, '$2y$12$l88zoGQAdpGY8SzyE/zURuJL35YBfYzXUfVBsj7dMb8nrEkyoyXf.', 'oyIf4bHcS0gT5wxWZ2Sk1S4et5CNcxJ3TRCj63Y4AuVxRVtDXf3NVqn9qBzY', '2025-03-07 05:34:20', '2025-03-10 20:12:34', '1741486937.png'),
-	('U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$x4ayvfIa83HO9IdqNFJZI.pSgxv8I3gf7WamSNxe7UuFydfVA/9Gy', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL),
-	('U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$wwJQFRHVD4A3Z2L.GggJ3uLBmefJOj00LMkWe9t.xSp9KRE/pm22W', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL),
-	('U006', 'siswa4', 'Teknik Listrik', 10, 3, 'siswa4@gmail.com', NULL, '$2y$12$AE/qieYIFaAscBui9OrnFuesxzrD00R2.m.u6o.Pw5YtU1uZcAgfe', NULL, '2025-03-07 05:34:21', '2025-03-07 05:34:21', NULL);
+INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
+	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$10iPxfrucE58Qh95ZBgCyOsjPYk6LWCR7wTRLjfCXtxU8hIv/LSbS', 'px1kPTCmArI6rpp3C8pUU4aZYQqaTGtx00T2n43Dm6o2C4MPNMUcKpFJAGCX', '2025-03-07 05:34:19', '2025-03-12 05:35:12', NULL),
+	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$TKSPmp7dlrh7YjZQ3n5ZJer/yDJKSDlji7SyxTUF3oE0LikgHOaXe', NULL, '2025-03-07 05:34:19', '2025-03-07 05:34:19', NULL),
+	(3, 'U003', 'siswa1', 'Teknik Komputer', 12, 3, 'siswa@gmail.com', NULL, '$2y$12$NV9V51JoMXo.dLT86XSJ4uQSZIlgJLv1dlGkJy8W2QZIjJs0SMHFW', 'oyIf4bHcS0gT5wxWZ2Sk1S4et5CNcxJ3TRCj63Y4AuVxRVtDXf3NVqn9qBzY', '2025-03-07 05:34:20', '2025-03-12 05:37:05', '1741486937.png'),
+	(4, 'U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$x4ayvfIa83HO9IdqNFJZI.pSgxv8I3gf7WamSNxe7UuFydfVA/9Gy', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL),
+	(5, 'U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$wwJQFRHVD4A3Z2L.GggJ3uLBmefJOj00LMkWe9t.xSp9KRE/pm22W', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL);
 
 -- Dumping structure for table project-absensi.waktus
 CREATE TABLE IF NOT EXISTS `waktus` (
