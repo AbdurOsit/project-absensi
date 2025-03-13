@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absensi_tidak_hadirs', function (Blueprint $table) {
-            $table->string('uid')->unique();
+            $table->id();
             $table->string('username');
             $table->string('kelas');
-            $table->foreignId('role_id');
             $table->text('jurusan');
-            $table->date('hari_tanggal');
+            $table->string('hari');
+            $table->date('tanggal');
             $table->string('alasan');
             $table->string('surat');
             $table->timestamps();

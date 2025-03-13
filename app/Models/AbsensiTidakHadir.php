@@ -8,20 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class AbsensiTidakHadir extends Model
 {
     //
-    protected $fillable = [
-        'uid', // Tambahkan ini
-        'username',
-        'jurusan',
-        'kelas',
-        'role_id',
-        'email',
-        'password',
-    ];
-    // 
-    protected $primaryKey = 'uid';  // Menggunakan uid sebagai primary key
-    public $incrementing = false;   // Jika uid bukan auto-increment
-    protected $keyType = 'string';  // Jika uid berupa string
-
+    protected $guarded = ['id'];
 
     public $timestamps = true;
 

@@ -66,7 +66,7 @@ class SearchController extends Controller
 
     private function searchRekap($query)
     {
-        $absensiHadirs = User::where('username', 'like', "%$query%")->paginate(10);
+        $absensiHadirs = AbsensiHadir::where('username', 'like', "%$query%")->paginate(10);
         return redirect()->route('admin.rekap', ['query' => $query])->with([
             'data' => $absensiHadirs,
             'search_query' => $query

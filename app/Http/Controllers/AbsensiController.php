@@ -422,11 +422,40 @@ class AbsensiController extends Controller
     function surat()
     {
         $title = 'surat';
-        return view('absensi.admin2.surat', compact('title'));
+        $user = User::where('role_id',3)->paginate(11);
+        return view('absensi.admin2.surat', compact('title','user'));
     }
 
-    function surat_proccess(){
-        
+    function surat_proccess(Request $request){
+        $request->validate([
+            'username' => 'required|unique:users',
+            'jurusan' => 'required',
+            'kelas' => 'required',
+            'tanggal' => 'required',
+            'hari' => 'required',
+            'alasan' => 'required',
+            'surat' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $suratName = null;
+    
+        if ($request->hasFile('surat')) {
+            $file = $request->file('surat');
+            $suratName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('image'), $suratName);
+        }
+    
+        AbsensiTidakHadir::create([
+            'username' => $request->username,
+            'kelas' => $request->kelas,
+            'jurusan' => $request->jurusan,
+            'hari' => $request->hari,
+            'tanggal' => $request->tanggal,
+            'alasan' => $request->alasan,
+            'surat' => $suratName, // Simpan nama file ke database
+        ]);
+    
+        return redirect()->route('admin.surat')->with('sukses', 'Absen tidak hadir siswa berhasil disimpan!');
     }
 
     // Guru

@@ -17,8 +17,8 @@
             <option value="{{ route('admin.rekap', ['sortColumn' => 'username', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'username' && request('sort') == 'desc' ? 'selected' : '' }}>Nama Siswa Z-A</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_datang', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_datang' && request('sort') == 'asc' ? 'selected' : '' }}>Waktu Datang Paling Awal</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_datang', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_datang' && request('sort') == 'desc' ? 'selected' : '' }}>Waktu Datang Paling Telat</option>
-            <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'asc' ? 'selected' : '' }}>Waktu Pulang Terlama</option>
-            <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'desc' ? 'selected' : '' }}>Waktu Pulang Terbaru</option>
+            <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'asc' ? 'selected' : '' }}>Waktu Pulang Paling Awal</option>
+            <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'desc' ? 'selected' : '' }}>Waktu Pulang Paling Telat</option>
         </select>
     </div>
 
