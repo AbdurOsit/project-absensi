@@ -428,23 +428,35 @@ class AbsensiController extends Controller
 
     function surat_proccess(Request $request){
         $request->validate([
-            'username' => 'required|unique:users',
+            'username' => 'required|exists:users,username', // Cek apakah username ada di tabel users
             'jurusan' => 'required',
             'kelas' => 'required',
             'tanggal' => 'required',
             'hari' => 'required',
             'alasan' => 'required',
             'surat' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'username' => 'Username tidak ada di database'
         ]);
-    
+        
+        // Cek apakah username ada di tabel users
+        // $userExists = User::where('username', $request->username)->exists();
+        // if (!$userExists) {
+        //     return redirect()->back()->withInput()->with('error', 'Username tidak ditemukan di sistem.');
+        // }
+
+        // Proses Upload surat
         $suratName = null;
-    
+        
         if ($request->hasFile('surat')) {
             $file = $request->file('surat');
             $suratName = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('image'), $suratName);
         }
-    
+        
+        
+        
+        // Simpan data ke AbsensiTidakHadir jika username valid
         AbsensiTidakHadir::create([
             'username' => $request->username,
             'kelas' => $request->kelas,
@@ -452,9 +464,9 @@ class AbsensiController extends Controller
             'hari' => $request->hari,
             'tanggal' => $request->tanggal,
             'alasan' => $request->alasan,
-            'surat' => $suratName, // Simpan nama file ke database
+            'surat' => $suratName,
         ]);
-    
+        
         return redirect()->route('admin.surat')->with('sukses', 'Absen tidak hadir siswa berhasil disimpan!');
     }
 
