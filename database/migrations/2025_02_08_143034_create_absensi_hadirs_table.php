@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absensi_hadirs', function (Blueprint $table) {
-            $table->string('uid');
+            $table->string('uid')->unique();
             $table->date('hari_tanggal');
             $table->string('username');
             $table->foreignId('role_id');
