@@ -36,33 +36,35 @@ CREATE TABLE IF NOT EXISTS `absensi_hadirs` (
 
 -- Dumping data for table project-absensi.absensi_hadirs: ~3 rows (approximately)
 INSERT INTO `absensi_hadirs` (`uid`, `hari_tanggal`, `username`, `role_id`, `kelas`, `jurusan`, `status`, `waktu_datang`, `waktu_pulang`, `created_at`, `updated_at`) VALUES
-	('U003', '2025-03-07', 'siswa1', 3, 11, 'Teknik Elektro', 0, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-12 04:40:12'),
-	('U004', '2025-03-07', 'siswa2', 3, 11, 'Teknik Mesin', 1, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-08 18:20:13'),
-	('U005', '2025-03-07', 'siswa3', 3, 12, 'Teknik Sipil', 1, '07:00:00', '15:00:00', '2025-03-07 05:34:21', '2025-03-12 04:40:09');
+	('U003', '2025-03-07', 'siswa1', 3, 11, 'Teknik Elektro', 0, '07:10:00', '15:30:00', '2025-03-07 05:34:21', '2025-03-12 04:40:12'),
+	('U004', '2025-03-07', 'siswa2', 3, 11, 'Teknik Mesin', 1, '07:20:00', '15:20:00', '2025-03-07 05:34:21', '2025-03-08 18:20:13'),
+	('U005', '2025-03-07', 'siswa3', 3, 12, 'Teknik Sipil', 1, '07:30:00', '15:10:00', '2025-03-07 05:34:21', '2025-03-12 04:40:09');
 
 -- Dumping structure for table project-absensi.absensi_tidak_hadirs
 CREATE TABLE IF NOT EXISTS `absensi_tidak_hadirs` (
-  `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role_id` bigint unsigned NOT NULL,
   `jurusan` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `hari` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `tanggal` date NOT NULL,
   `alasan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `surat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `surat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.absensi_tidak_hadirs: ~6 rows (approximately)
-INSERT INTO `absensi_tidak_hadirs` (`uid`, `username`, `kelas`, `role_id`, `jurusan`, `hari`, `tanggal`, `alasan`, `surat`, `created_at`, `updated_at`) VALUES
-	('U003\r\n', 'siswa1', '12', 3, 'Teknik Elektro', 'Senin', '2025-03-11', 'sakit', NULL, '2025-03-11 04:04:49', '2025-03-11 04:04:50'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Selasa', '2025-03-12', 'izin', NULL, '2025-03-11 04:06:14', '2025-03-11 04:06:15'),
-	('U005', 'siswa3', '12', 3, 'Teknik Sipil', 'Rabu', '2025-03-07', 'alpha', NULL, '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	('U006', 'siswa4', '10', 3, 'Teknik Listrik', 'Kamis', '2025-03-07', 'sakit', NULL, '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Jum\'at', '2025-03-13', 'izin', NULL, '2025-03-11 04:07:01', '2025-03-11 04:07:02'),
-	('U003', 'siswa1', '12', 3, 'Teknik Elektro', 'Sabtu', '2025-03-11', 'alpha', NULL, '2025-03-11 04:08:11', '2025-03-11 04:08:12');
+INSERT INTO `absensi_tidak_hadirs` (`id`, `username`, `kelas`, `jurusan`, `hari`, `tanggal`, `alasan`, `surat`, `created_at`, `updated_at`) VALUES
+	(1, 'siswa1', '12', 'Teknik Elektro', 'Senin', '2025-03-11', 'sakit', 'png', '2025-03-11 04:04:49', '2025-03-11 04:04:50'),
+	(2, 'siswa1', '12', 'Teknik Elektro', 'Selasa', '2025-03-12', 'izin', 'png', '2025-03-11 04:06:14', '2025-03-11 04:06:15'),
+	(3, 'siswa3', '12', 'Teknik Sipil', 'Rabu', '2025-03-07', 'alpha', 'png', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
+	(4, 'siswa4', '10', 'Teknik Listrik', 'Kamis', '2025-03-07', 'sakit', 'png', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
+	(5, 'siswa1', '12', 'Teknik Elektro', 'Jum\'at', '2025-03-13', 'izin', 'png', '2025-03-11 04:07:01', '2025-03-11 04:07:02'),
+	(6, 'siswa1', '12', 'Teknik Elektro', 'Sabtu', '2025-03-11', 'alpha', 'png', '2025-03-11 04:08:11', '2025-03-11 04:08:12'),
+	(7, 'siswa20', '12', 'sija', 'senin', '2025-03-13', 'izin', '1741872545.png', '2025-03-13 06:29:06', '2025-03-13 06:29:06'),
+	(8, 'siswa30', '12', 'sija', 'selasa', '2025-03-29', 'sakit', '1741873983.png', '2025-03-13 06:53:03', '2025-03-13 06:53:03');
 
 -- Dumping structure for table project-absensi.alasan
 CREATE TABLE IF NOT EXISTS `alasan` (
@@ -146,13 +148,26 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
 
 -- Dumping data for table project-absensi.job_batches: ~0 rows (approximately)
 
+-- Dumping structure for table project-absensi.log
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `waktu_absen` timestamp NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table project-absensi.log: ~0 rows (approximately)
+
 -- Dumping structure for table project-absensi.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.migrations: ~0 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -165,7 +180,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(7, '2025_02_28_131704_create_personal_access_tokens_table', 1),
 	(8, '2025_03_01_131536_create_alasans_table', 1),
 	(9, '2025_03_02_092533_create_waktus_table', 1),
-	(10, '2025_03_07_121535_create_jadwal_table', 1);
+	(10, '2025_03_07_121535_create_jadwal_table', 1),
+	(11, '2025_03_14_033349_create_log_table', 2);
 
 -- Dumping structure for table project-absensi.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
