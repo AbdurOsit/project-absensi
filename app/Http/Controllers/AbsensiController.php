@@ -419,10 +419,12 @@ class AbsensiController extends Controller
     }
 
 
-    function surat()
+    function surat(Request $request)
     {
         $title = 'surat';
-        $user = User::where('role_id',3)->paginate(11);
+        $query = $request->query('query');
+        $user = $query ? User::where('username', 'like', "%$query%")->paginate(3) : User::paginate(3);
+        // $siswa = User::where('role_id',3)->paginate(11);
         return view('absensi.admin2.surat', compact('title','user'));
     }
 

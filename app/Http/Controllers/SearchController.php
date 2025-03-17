@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\AbsensiHadir;
 use App\Models\AbsensiTidakHadir;
+use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,8 @@ class SearchController extends Controller
                 return $this->searchJadwal($query);
             case 'admin.waktu':
                 return $this->searchWaktu($query);
+            case 'admin.surat':
+                return $this->searchSurat($query);
             default:
                 return $this->searchIndex($query);
         }
@@ -96,9 +99,19 @@ class SearchController extends Controller
     private function searchWaktu($query)
     {
         // Sesuaikan dengan kebutuhan halaman input Anda
-        $users = User::where('username', 'like', "%$query%")->paginate(10);
+        $data = Waktu::where('hari', 'like', "%$query%")->orWhere('jam_masuk', 'like', "%$query%")->orWhere('jam_pulang', 'like', "%$query%")->paginate(10);
         return redirect()->route('admin.waktu', ['query' => $query])->with([
-            'data' => $users,
+            'data' => $data,
+            'search_query' => $query
+        ]);
+    }
+
+    private function searchSurat($query)
+    {
+        // Sesuaikan dengan kebutuhan halaman input Anda
+        $user = User::where('username', 'like', "%$query%")->paginate(10);
+        return redirect()->route('admin.surat', ['query' => $query])->with([
+            'user' => $user,
             'search_query' => $query
         ]);
     }
