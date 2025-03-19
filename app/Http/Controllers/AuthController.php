@@ -24,7 +24,7 @@ class AuthController extends Controller
         Session::flash('password', $request->password);
         // $credentials = $request->validate([
         $request->validate([
-            'username' => 'required',
+            'username' => 'required|',
             'password' => 'required'
         ], [
             'username.required' => 'username harus diisi',
@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             if ($remember) {
                 // Set cookie dengan durasi 3 bulan (60 * 24 * 90 menit)
-                Cookie::queue('remember_web', Auth::user()->uid, 129600);
+                Cookie::queue('remember_web', Auth::user()->username, 129600);
             }
             
             $user = Auth::user();
