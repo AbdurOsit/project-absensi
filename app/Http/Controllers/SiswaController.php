@@ -42,14 +42,14 @@ class SiswaController extends Controller
             ->get();
 
         // Ambil data praktek dengan pagination
-        $praktek = DB::table('tugas')
+        $praktek = DB::table('praktek')
             ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('praktek')
             ->select('tanggal', 'praktek', 'hari')
             ->paginate(3);
 
         // Ambil data kegiatan dengan pagination
-        $kegiatan = DB::table('tugas')
+        $kegiatan = DB::table('kegiatan')
             ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('kegiatan')
             ->select('tanggal', 'kegiatan', 'hari')
