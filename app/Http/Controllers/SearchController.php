@@ -89,9 +89,14 @@ class SearchController extends Controller
     private function searchJadwal($query)
     {
         // Sesuaikan dengan kebutuhan halaman input Anda
-        $data = DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('praktek', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(5);
+        $tugas = DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(5);
+        $praktek = DB::table('praktek')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('praktek', 'like', "%$query%")->paginate(5);
+        $kegiatan = DB::table('kegiatan')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->paginate(5);
+
         return redirect()->route('admin.jadwal', ['query' => $query])->with([
-            'data' => $data,
+            'tugas' => $tugas,
+            'praktek' => $praktek,
+            'kegiatan' => $kegiatan,
             'search_query' => $query
         ]);
     }
