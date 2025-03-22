@@ -62,7 +62,7 @@
             <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
                 <div class="space-y-2 h-auto pb-2">
                     @foreach ($kegiatan as $item)
-                    <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
+                    <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                         <button class="w-8 h-8 flex items-center justify-center rounded-full">
                             <svg class="bg-blue-500 w-10 h-auto rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -93,6 +93,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($absensi)
                         <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
                             <td class="py-3 px-4">{{ $absensi->uid }}</td>
                             <td class="py-3 px-4">{{ $absensi->username }}</td>
@@ -100,6 +101,11 @@
                             <td class="py-3 px-4">{{ $absensi->waktu_datang }}</td>
                             <td class="py-3 px-4">{{ $absensi->waktu_pulang }}</td>
                         </tr>
+                        @else
+                        <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                            <td colspan="5" class="py-3 px-4 text-gray-500 italic">Belum ada absensi</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
