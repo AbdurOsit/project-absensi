@@ -31,56 +31,35 @@ CREATE TABLE IF NOT EXISTS `absensi_hadirs` (
   `waktu_datang` time NOT NULL,
   `waktu_pulang` time NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  UNIQUE KEY `absensi_hadirs_uid_unique` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.absensi_hadirs: ~3 rows (approximately)
 INSERT INTO `absensi_hadirs` (`uid`, `hari_tanggal`, `username`, `role_id`, `kelas`, `jurusan`, `status`, `waktu_datang`, `waktu_pulang`, `created_at`, `updated_at`) VALUES
-	('U003', '2025-03-07', 'siswa1', 3, 11, 'Teknik Elektro', 0, '07:10:00', '15:30:00', '2025-03-07 05:34:21', '2025-03-12 04:40:12'),
-	('U004', '2025-03-07', 'siswa2', 3, 11, 'Teknik Mesin', 1, '07:20:00', '15:20:00', '2025-03-07 05:34:21', '2025-03-08 18:20:13'),
-	('U005', '2025-03-07', 'siswa3', 3, 12, 'Teknik Sipil', 1, '07:30:00', '15:10:00', '2025-03-07 05:34:21', '2025-03-12 04:40:09');
+	('U003', '2025-03-22', 'siswa1', 3, 11, 'Teknik Elektro', 0, '07:00:00', '15:00:00', '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	('U004', '2025-03-22', 'siswa2', 3, 11, 'Teknik Mesin', 0, '07:00:00', '15:00:00', '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	('U005', '2025-03-22', 'siswa3', 3, 12, 'Teknik Sipil', 0, '07:00:00', '15:00:00', '2025-03-22 06:36:48', '2025-03-22 06:36:48');
 
 -- Dumping structure for table project-absensi.absensi_tidak_hadirs
 CREATE TABLE IF NOT EXISTS `absensi_tidak_hadirs` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role_id` bigint unsigned NOT NULL,
   `kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hari` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `tanggal` date NOT NULL,
-  `alasan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `surat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table project-absensi.absensi_tidak_hadirs: ~8 rows (approximately)
-INSERT INTO `absensi_tidak_hadirs` (`id`, `username`, `kelas`, `jurusan`, `hari`, `tanggal`, `alasan`, `surat`, `created_at`, `updated_at`) VALUES
-	(1, 'siswa1', '12', 'Teknik Elektro', 'Senin', '2025-03-11', 'sakit', 'png', '2025-03-11 04:04:49', '2025-03-11 04:04:50'),
-	(2, 'siswa1', '12', 'Teknik Elektro', 'Selasa', '2025-03-12', 'izin', 'png', '2025-03-11 04:06:14', '2025-03-11 04:06:15'),
-	(3, 'siswa3', '12', 'Teknik Sipil', 'Rabu', '2025-03-07', 'alpha', 'png', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	(4, 'siswa4', '10', 'Teknik Listrik', 'Kamis', '2025-03-07', 'sakit', 'png', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	(5, 'siswa1', '12', 'Teknik Elektro', 'Jum\'at', '2025-03-13', 'izin', 'png', '2025-03-11 04:07:01', '2025-03-11 04:07:02'),
-	(6, 'siswa1', '12', 'Teknik Elektro', 'Sabtu', '2025-03-11', 'alpha', 'png', '2025-03-11 04:08:11', '2025-03-11 04:08:12'),
-	(7, 'siswa20', '12', 'sija', 'senin', '2025-03-13', 'izin', '1741872545.png', '2025-03-13 06:29:06', '2025-03-13 06:29:06'),
-	(8, 'siswa30', '12', 'sija', 'selasa', '2025-03-29', 'sakit', '1741873983.png', '2025-03-13 06:53:03', '2025-03-13 06:53:03'),
-	(9, 'Rosyid', '12', 'Sija', 'Sabtu', '2025-03-22', 'izin', '1742649946.jpg', '2025-03-22 06:25:46', '2025-03-22 06:25:46');
-
--- Dumping structure for table project-absensi.alasan
-CREATE TABLE IF NOT EXISTS `alasan` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `hari_tanggal` date NOT NULL,
   `alasan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.alasan: ~3 rows (approximately)
-INSERT INTO `alasan` (`id`, `alasan`, `created_at`, `updated_at`) VALUES
-	(1, 'sakit', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	(2, 'izin', '2025-03-07 05:34:21', '2025-03-07 05:34:21'),
-	(3, 'alpha', '2025-03-07 05:34:21', '2025-03-07 05:34:21');
+-- Dumping data for table project-absensi.absensi_tidak_hadirs: ~2 rows (approximately)
+INSERT INTO `absensi_tidak_hadirs` (`id`, `uid`, `username`, `role_id`, `kelas`, `jurusan`, `hari_tanggal`, `alasan`, `created_at`, `updated_at`) VALUES
+	(1, 'U006', 'siswa4', 3, '10', 'Teknik Listrik', '2025-03-22', 'izin', '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	(2, 'U005', 'siswa3', 3, '12', 'Teknik Sipil', '2025-03-22', 'sakit', '2025-03-22 06:36:48', '2025-03-22 06:36:48');
 
 -- Dumping structure for table project-absensi.cache
 CREATE TABLE IF NOT EXISTS `cache` (
@@ -116,6 +95,23 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.failed_jobs: ~0 rows (approximately)
+
+-- Dumping structure for table project-absensi.jadwal
+CREATE TABLE IF NOT EXISTS `jadwal` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `hari` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal` date NOT NULL,
+  `tugas` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `praktek` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kegiatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deadline_hari` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deadline_tanggal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table project-absensi.jadwal: ~0 rows (approximately)
 
 -- Dumping structure for table project-absensi.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
@@ -158,24 +154,16 @@ CREATE TABLE IF NOT EXISTS `kegiatan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.kegiatan: ~7 rows (approximately)
-INSERT INTO `kegiatan` (`id`, `hari`, `tanggal`, `kegiatan`, `created_at`, `updated_at`) VALUES
-	(1, 'Senin', '2025-03-17', 'Kegiatan untuk Senin', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(2, 'Selasa', '2025-03-18', 'Kegiatan untuk Selasa', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(3, 'Rabu', '2025-03-19', 'Kegiatan untuk Rabu', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(4, 'Kamis', '2025-03-20', 'Kegiatan untuk Kamis', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(5, 'Jumat', '2025-03-21', 'Kegiatan untuk Jumat', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(6, 'Sabtu', '2025-03-22', 'Kegiatan untuk Sabtu', '2025-03-22 05:58:31', '2025-03-22 05:58:31'),
-	(7, 'Minggu', '2025-03-23', 'Kegiatan untuk Minggu', '2025-03-22 05:58:31', '2025-03-22 05:58:31');
+-- Dumping data for table project-absensi.kegiatan: ~0 rows (approximately)
 
 -- Dumping structure for table project-absensi.log
 CREATE TABLE IF NOT EXISTS `log` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `waktu_absen` timestamp NOT NULL,
+  `pesan` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -189,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.migrations: ~0 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -200,13 +188,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(5, '2025_02_08_143045_create_absensi_tidak_hadirs_table', 1),
 	(6, '2025_02_10_235544_create_roles_table', 1),
 	(7, '2025_02_28_131704_create_personal_access_tokens_table', 1),
-	(8, '2025_03_01_131536_create_alasans_table', 1),
-	(9, '2025_03_02_092533_create_waktus_table', 1),
-	(10, '2025_03_07_121535_create_jadwal_table', 1),
-	(11, '2025_03_14_033349_create_log_table', 2),
-	(12, '2025_03_22_122945_create_tugas_table', 3),
-	(13, '2025_03_22_124826_create_praktek_table', 4),
-	(14, '2025_03_22_125605_create_kegiatan_table', 5);
+	(8, '2025_03_02_092533_create_waktus_table', 1),
+	(9, '2025_03_07_121535_create_jadwal_table', 1),
+	(10, '2025_03_14_033349_create_log_table', 1),
+	(11, '2025_03_22_122945_create_tugas_table', 1),
+	(12, '2025_03_22_124826_create_praktek_table', 1),
+	(13, '2025_03_22_125605_create_kegiatan_table', 1);
 
 -- Dumping structure for table project-absensi.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
@@ -242,21 +229,13 @@ CREATE TABLE IF NOT EXISTS `praktek` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` date NOT NULL,
-  `praktek` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `praktek` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.praktek: ~0 rows (approximately)
-INSERT INTO `praktek` (`id`, `hari`, `tanggal`, `praktek`, `created_at`, `updated_at`) VALUES
-	(8, 'Senin', '2025-03-17', 'Praktek untuk Senin depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(9, 'Selasa', '2025-03-18', 'Praktek untuk Selasa depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(10, 'Rabu', '2025-03-19', 'Praktek untuk Rabu depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(11, 'Kamis', '2025-03-20', 'Praktek untuk Kamis depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(12, 'Jumat', '2025-03-21', 'Praktek untuk Jumat depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(13, 'Sabtu', '2025-03-22', 'Praktek untuk Sabtu depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26'),
-	(14, 'Minggu', '2025-03-23', 'Praktek untuk Minggu depan', '2025-03-22 05:54:26', '2025-03-22 05:54:26');
 
 -- Dumping structure for table project-absensi.roles
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -269,9 +248,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 -- Dumping data for table project-absensi.roles: ~3 rows (approximately)
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '2025-03-07 05:34:18', '2025-03-07 05:34:18'),
-	(2, 'guru', '2025-03-07 05:34:18', '2025-03-07 05:34:18'),
-	(3, 'siswa', '2025-03-07 05:34:18', '2025-03-07 05:34:18');
+	(1, 'admin', '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
+	(2, 'guru', '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
+	(3, 'siswa', '2025-03-22 06:36:47', '2025-03-22 06:36:47');
 
 -- Dumping structure for table project-absensi.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
@@ -299,46 +278,37 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.tugas: ~7 rows (approximately)
-INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `deadline_hari`, `deadline_tanggal`, `created_at`, `updated_at`) VALUES
-	(1, 'Senin', '2025-03-17', 'Tugas untuk Senin', 'Kamis', '2025-03-20', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(2, 'Selasa', '2025-03-18', 'Tugas untuk Selasa', 'Jumat', '2025-03-21', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(3, 'Rabu', '2025-03-19', 'Tugas untuk Rabu', 'Sabtu', '2025-03-22', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(4, 'Kamis', '2025-03-20', 'Tugas untuk Kamis', 'Minggu', '2025-03-23', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(5, 'Jumat', '2025-03-21', 'Tugas untuk Jumat', 'Senin', '2025-03-24', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(6, 'Sabtu', '2025-03-22', 'Tugas untuk Sabtu', 'Selasa', '2025-03-25', '2025-03-22 05:43:46', '2025-03-22 05:43:46'),
-	(7, 'Minggu', '2025-03-23', 'Tugas untuk Minggu', 'Rabu', '2025-03-26', '2025-03-22 05:43:46', '2025-03-22 05:43:46');
+-- Dumping data for table project-absensi.tugas: ~0 rows (approximately)
 
 -- Dumping structure for table project-absensi.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `uid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kelas` bigint NOT NULL,
   `role_id` bigint unsigned NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_uid_unique` (`uid`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.users: ~6 rows (approximately)
-INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$10iPxfrucE58Qh95ZBgCyOsjPYk6LWCR7wTRLjfCXtxU8hIv/LSbS', 'px1kPTCmArI6rpp3C8pUU4aZYQqaTGtx00T2n43Dm6o2C4MPNMUcKpFJAGCX', '2025-03-07 05:34:19', '2025-03-12 05:35:12', NULL),
-	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$TKSPmp7dlrh7YjZQ3n5ZJer/yDJKSDlji7SyxTUF3oE0LikgHOaXe', NULL, '2025-03-07 05:34:19', '2025-03-07 05:34:19', NULL),
-	(3, 'U003', 'siswa1', 'Teknik Komputer', 12, 3, 'siswa@gmail.com', NULL, '$2y$12$NV9V51JoMXo.dLT86XSJ4uQSZIlgJLv1dlGkJy8W2QZIjJs0SMHFW', 'oyIf4bHcS0gT5wxWZ2Sk1S4et5CNcxJ3TRCj63Y4AuVxRVtDXf3NVqn9qBzY', '2025-03-07 05:34:20', '2025-03-12 05:37:05', '1741486937.png'),
-	(4, 'U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$x4ayvfIa83HO9IdqNFJZI.pSgxv8I3gf7WamSNxe7UuFydfVA/9Gy', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL),
-	(5, 'U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$wwJQFRHVD4A3Z2L.GggJ3uLBmefJOj00LMkWe9t.xSp9KRE/pm22W', NULL, '2025-03-07 05:34:20', '2025-03-07 05:34:20', NULL),
-	(7, '1908', 'Rosyid', 'SIJA', 12, 3, 'abdurrosyid@gmail.com', NULL, '$2y$12$aN2LmlW1UqgTWr4T8TN5JOOu0JVK89x7omCe0sbRExoTX8JUxm7R6', 'qBGZJHvBItjHihSX90xhmdtMWfMccqySoLsGyqtE9MfYSyTAn8loSYSwic6O', '2025-03-22 06:03:13', '2025-03-22 06:03:13', '1742648592.png');
+INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$.JN/5XsxMVWJZNq4H3P/COwhAYFC2/3WiZkEEdh21cAPfvU10qMRy', NULL, '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
+	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$JkCAyy63WpPH5FjJOMHFz.kzRTbgtxFr1uFBQ3dFrqLNu9mNEDeTO', NULL, '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
+	(3, 'U003', 'siswa1', 'Teknik Elektro', 11, 3, 'siswa@gmail.com', NULL, '$2y$12$xCEK7xP9L06ULXz9oqreYu0n0u.NbLAS90sDM12T92/3nZ7KAsCHy', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	(4, 'U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$8zHaOSHcFvHHVCHvklFTw.GvkZA6nMXyJeJVtlDUixmCmqke6Cdmu', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	(5, 'U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$cIWCXi4MofN5iff6V.YwjuE//XeCOXbg6aKxmhVwJoq7/q.w1OSk2', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
+	(6, 'U006', 'siswa4', 'Teknik Listrik', 10, 3, 'siswa4@gmail.com', NULL, '$2y$12$Sg2lpR7qAXzJayV/SBdNOONwU8Xz1NMxAnQs0KuAHfQABBuVJ3QpO', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48');
 
 -- Dumping structure for table project-absensi.waktus
 CREATE TABLE IF NOT EXISTS `waktus` (
@@ -349,12 +319,9 @@ CREATE TABLE IF NOT EXISTS `waktus` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.waktus: ~2 rows (approximately)
-INSERT INTO `waktus` (`id`, `hari`, `jam_masuk`, `jam_pulang`, `created_at`, `updated_at`) VALUES
-	(1, 'Senin', '07:00:00', '15:15:00', '2025-03-17 06:58:22', '2025-03-17 06:58:36'),
-	(2, 'Selasa', '07:00:00', '15:00:00', '2025-03-17 06:59:43', '2025-03-17 06:59:43');
+-- Dumping data for table project-absensi.waktus: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
