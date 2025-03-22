@@ -79,7 +79,6 @@
         </div>
 
         <!-- Absensi Section -->
-        <!-- Absensi Section -->
         <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 ml-5 p-4 shadow-md">
             <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-4">Absensi Hari Ini</h3>
             <div class="overflow-x-auto">
