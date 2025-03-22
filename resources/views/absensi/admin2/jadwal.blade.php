@@ -75,7 +75,7 @@
         </table>
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $tugas->links('pagination::tailwind') }}
+            {{ $tugas->appends(['praktek_page' => request('praktek_page'), 'kegiatan_page' => request('kegiatan_page')])->links('pagination::tailwind') }}
         </div>
     </div>
 
@@ -142,7 +142,7 @@
         </table>
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $praktek->links('pagination::tailwind') }}
+            {{ $praktek->appends(['praktek_page' => request('praktek_page'), 'kegiatan_page' => request('kegiatan_page')])->links('pagination::tailwind') }}
         </div>
     </div>
 
@@ -209,7 +209,7 @@
         </table>
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $kegiatan->links('pagination::tailwind') }}
+            {{ $kegiatan->appends(['praktek_page' => request('praktek_page'), 'kegiatan_page' => request('kegiatan_page')])->links('pagination::tailwind') }}
         </div>
     </div>
 @endsection

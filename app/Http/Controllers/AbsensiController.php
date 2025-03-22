@@ -239,11 +239,11 @@ class AbsensiController extends Controller
 
     function jadwal(Request $request){
         $query = $request->query('query');
-        $tugas = $query ? DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(3) : DB::table('tugas')->orderBy('id','desc')->paginate(3);
+        $tugas = $query ? DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(3, ['*'], 'tugas_page') : DB::table('tugas')->orderBy('id','desc')->paginate(3, ['*'], 'tugas_page');
 
-        $praktek = $query ? DB::table('praktek')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('praktek', 'like', "%$query%")->paginate(3) : DB::table('praktek')->orderBy('id','desc')->paginate(3);
+        $praktek = $query ? DB::table('praktek')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('praktek', 'like', "%$query%")->paginate(3, ['*'], 'praktek_page') : DB::table('praktek')->orderBy('id','desc')->paginate(3, ['*'], 'praktek_page');
 
-        $kegiatan = $query ? DB::table('kegiatan')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->paginate(3) : DB::table('kegiatan')->orderBy('id','desc')->paginate(3);
+        $kegiatan = $query ? DB::table('kegiatan')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->paginate(3, ['*'], 'kegiatan_page') : DB::table('kegiatan')->orderBy('id','desc')->paginate(3, ['*'], 'kegiatan_page');
 
         return view('absensi.admin2.jadwal',compact('tugas','praktek','kegiatan'));
     }
