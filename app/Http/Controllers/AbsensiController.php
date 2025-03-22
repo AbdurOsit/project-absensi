@@ -71,7 +71,7 @@ class AbsensiController extends Controller
             'jurusan' => 'required',
             'kelas' => 'required',
             'role' => 'required',
-            'email' => 'required',
+            'email' => 'required|nullable',
             'password' => 'required',
         ]);
     
