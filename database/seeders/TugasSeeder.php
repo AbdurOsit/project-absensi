@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class JadwalSeeder extends Seeder
+class TugasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,8 +27,6 @@ class JadwalSeeder extends Seeder
                 'hari' => $hari,
                 'tanggal' => $tanggal,
                 'tugas' => 'Tugas untuk ' . $hari,
-                'praktek' => 'Praktikum ' . $hari,
-                'kegiatan' => 'Kegiatan ' . $hari,
                 'deadline_hari' => $hariList[($index + 3) % 7], // Hari deadline (loop ke hari berikutnya)
                 'deadline_tanggal' => $deadlineTanggal,
                 'created_at' => now(),
@@ -36,6 +34,6 @@ class JadwalSeeder extends Seeder
             ];
         }
 
-        DB::table('jadwal')->insert($data);
+        DB::table('tugas')->insert($data);
     }
 }
