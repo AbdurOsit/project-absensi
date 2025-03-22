@@ -18,8 +18,6 @@
                     <th class="border border-gray-700 px-4 py-2">Hari</th>
                     <th class="border border-gray-700 px-4 py-2">Tanggal</th>
                     <th class="border border-gray-700 px-4 py-2">Tugas</th>
-                    <th class="border border-gray-700 px-4 py-2">Praktek</th>
-                    <th class="border border-gray-700 px-4 py-2">Kegiatan</th>
                     <th class="border border-gray-700 px-4 py-2">Hari Deadline</th>
                     <th class="border border-gray-700 px-4 py-2">Tanggal Deadline</th>
                     <th class="border border-gray-700 px-4 py-2">Aksi</th>
