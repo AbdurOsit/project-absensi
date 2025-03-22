@@ -47,10 +47,10 @@ class AbsensiController extends Controller
         // Jika ada query pencarian
         if ($query) {
             $data = User::where('username', 'like', "%$query%")
-                ->get();
+                ->paginate(11);
         } else {
             // Jika tidak ada pencarian, tampilkan semua data
-            $data = User::all();
+            $data = User::paginate(11);
         }
         
         return view('absensi.admin2.input', compact('title', 'data'));
