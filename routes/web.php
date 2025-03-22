@@ -8,15 +8,6 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaktuController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/layout2', function(){
-    return view('absensi.admin2.layout',[
-        'title' => 'title'
-    ]);
-})->name('absensi.layout');
-// Route::resource('absensi',AbsensiHadirController::class);
 
 // Login And Register
 Route::get('login',[AuthController::class,'login'])->name('login');
@@ -24,6 +15,15 @@ Route::post('login', [AuthController::class, 'auth'])->name('auth');
 Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/layout2', function(){
+        return view('absensi.admin2.layout',[
+            'title' => 'title'
+        ]);
+    })->name('absensi.layout');
+    // Route::resource('absensi',AbsensiHadirController::class);
         // Admin
         Route::get('/admin', [AbsensiController::class, 'index'])->name('admin.index');
         // Admin CRUD

@@ -320,6 +320,7 @@ class AbsensiController extends Controller
 
     public function scan_input(Request $request)
     {
+        // validasi
         $request->validate([
             'uid' => 'required|string'
         ]);
