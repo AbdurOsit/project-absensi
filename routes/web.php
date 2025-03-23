@@ -6,22 +6,23 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaktuController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
 // Login And Register
-Route::get('login',[AuthController::class,'login'])->name('login');
-Route::post('login', [AuthController::class, 'auth'])->name('auth');
-Route::post('logout',[AuthController::class,'logout'])->name('logout');
+Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::post('/login', [AuthController::class, 'auth'])->name('auth');
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
     Route::get('/layout2', function(){
         return view('absensi.admin2.layout',[
             'title' => 'title'
-        ]);
+    ]);
     })->name('absensi.layout');
     // Route::resource('absensi',AbsensiHadirController::class);
         // Admin

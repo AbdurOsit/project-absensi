@@ -12,6 +12,11 @@
     <div class="min-h-screen flex">
         <div class="w-full md:w-1/2 flex items-center justify-center bg-gray-900 p-8">
             <div class="w-full max-w-md space-y-8">
+                @if (session('error'))
+                <div class="bg-red-500 text-white p-3 rounded">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-purple-500">Login</h2>
                 </div>
