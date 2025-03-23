@@ -9,10 +9,10 @@
     <!-- Main Title -->
     <h1 class="text-2xl font-semibold mb-8 dark:text-white">Input Tugas, Praktek, dan Kegiatan</h1>
     <!-- Data Tugas -->
-    <div class="w-full mt-6">
+    <div class="w-full mt-6 tugas">
         <div class="mb-3">
             <h2 class="dark:text-white text-xl mb-3 font-semibold">Table Tugas</h2>
-            <a href="/jadwal/create" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
+            <a href="/tugas/create" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
         </div>
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
@@ -41,7 +41,7 @@
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="{{ route('jadwal.update',  $item->id) }}">
+                            <a class="font-bold text-lg text-white" href="{{ route('tugas.update',  $item->id) }}">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -52,7 +52,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="{{ route('jadwal.delete', $item->id) }}" method="POST" class="font-bold text-lg text-white">
+                            <form action="{{ route('tugas.delete', $item->id) }}" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
@@ -80,10 +80,10 @@
     </div>
 
     <!-- Data Praktek -->
-    <div class="w-full mt-6">
+    <div class="w-full mt-6 praktek">
         <div class="mb-3">
             <h2 class="dark:text-white text-xl mb-3 font-semibold">Table Praktek</h2>
-            <a href="/jadwal/create" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
+            <a href="#" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
         </div>
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
@@ -108,7 +108,7 @@
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="{{ route('jadwal.update',  $item->id) }}">
+                            <a class="font-bold text-lg text-white" href="#">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -119,7 +119,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="{{ route('jadwal.delete', $item->id) }}" method="POST" class="font-bold text-lg text-white">
+                            <form action="#" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
@@ -147,10 +147,11 @@
     </div>
 
     <!-- Data Kegiatan -->
-    <div class="w-full mt-6">
+    
+    <div class="w-full mt-6 kegiatan">
         <div class="mb-3">
             <h2 class="dark:text-white text-xl mb-3 font-semibold">Table Kegiatan</h2>
-            <a href="/jadwal/create" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
+            <a href="#" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
         </div>
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
@@ -175,7 +176,7 @@
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="{{ route('jadwal.update',  $item->id) }}">
+                            <a class="font-bold text-lg text-white" href="#">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -186,7 +187,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="{{ route('jadwal.delete', $item->id) }}" method="POST" class="font-bold text-lg text-white">
+                            <form action="#" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
@@ -212,4 +213,44 @@
             {{ $kegiatan->appends(['praktek_page' => request('praktek_page'), 'kegiatan_page' => request('kegiatan_page')])->links('pagination::tailwind') }}
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const query = localStorage.getItem("searchQuery") || ""; // Ambil dari LocalStorage
+            const tugasElements = document.querySelectorAll(".tugas");
+            const praktekElements = document.querySelectorAll(".praktek");
+            const kegiatanElements = document.querySelectorAll(".kegiatan");
+    
+            function filterData(query) {
+                if (query.includes("tugas")) {
+                    tugasElements.forEach(el => el.style.display = "table-row");
+                    praktekElements.forEach(el => el.style.display = "none");
+                    kegiatanElements.forEach(el => el.style.display = "none");
+                } else if (query.includes("praktek")) {
+                    tugasElements.forEach(el => el.style.display = "none");
+                    praktekElements.forEach(el => el.style.display = "table-row");
+                    kegiatanElements.forEach(el => el.style.display = "none");
+                } else if (query.includes("kegiatan")) {
+                    tugasElements.forEach(el => el.style.display = "none");
+                    praktekElements.forEach(el => el.style.display = "none");
+                    kegiatanElements.forEach(el => el.style.display = "table-row");
+                } else {
+                    // Jika pencarian kosong, tampilkan semua
+                    tugasElements.forEach(el => el.style.display = "table-row");
+                    praktekElements.forEach(el => el.style.display = "table-row");
+                    kegiatanElements.forEach(el => el.style.display = "table-row");
+                }
+            }
+    
+            filterData(query); // Jalankan filter saat halaman dimuat
+    
+            // Pastikan data reset jika user menghapus pencarian
+            window.addEventListener("storage", function (event) {
+                if (event.key === "searchQuery") {
+                    filterData(event.newValue);
+                }
+            });
+        });
+    </script>
+    
 @endsection

@@ -511,6 +511,15 @@
         // Menyimpan status sidebar ke localStorage
         localStorage.setItem('sidebarExpanded', isExpanded);
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.querySelector("input[name='query']");
+        searchInput.addEventListener("input", function () {
+            localStorage.setItem("searchQuery", this.value.toLowerCase()); // Simpan di LocalStorage
+        });
+    });
+
+
     </script>
 </body>
 

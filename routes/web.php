@@ -45,13 +45,14 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/waktu/update/{id}', [WaktuController::class, 'update'])->name('waktu.update');
         Route::put('/waktu/update/{id}', [WaktuController::class, 'update_proccess'])->name('waktu.update.proccess');
         Route::delete('/waktu/delete/{id}', [WaktuController::class, 'delete'])->name('waktu.delete');
-        // Jadwal
+        // Jadwal(Tugas,Praktek,Kegiatan)
         Route::get('/admin/jadwal', [AbsensiController::class, 'jadwal'])->name('admin.jadwal');
-        Route::get('/jadwal/create', [AbsensiController::class, 'jadwal_input'])->name('jadwal.input');
-        Route::post('/jadwal/create', [AbsensiController::class, 'jadwal_create'])->name('jadwal.create');
-        Route::get('/jadwal/update/{id}', [AbsensiController::class, 'jadwal_update'])->name('jadwal.update');
-        Route::put('/jadwal/update/{id}', [AbsensiController::class, 'jadwal_update_proccess'])->name('jadwal.update_proccess');
-        Route::delete('/jadwal/delete/{id}', [AbsensiController::class, 'jadwal_delete'])->name('jadwal.delete');
+        // Tugas
+        Route::get('/tugas/create', [AbsensiController::class, 'tugas_input'])->name('tugas.input');
+        Route::post('/tugas/create', [AbsensiController::class, 'tugas_create'])->name('tugas.create');
+        Route::get('/tugas/update/{id}', [AbsensiController::class, 'tugas_update'])->name('tugas.update');
+        Route::put('/tugas/update/{id}', [AbsensiController::class, 'tugas_update_proccess'])->name('tugas.update_proccess');
+        Route::delete('/tugas/delete/{id}', [AbsensiController::class, 'tugas_delete'])->name('tugas.delete');
         // Scan
         Route::get('/admin/scan', [AbsensiController::class, 'scan'])->name('admin.scan');
         Route::post('/scan/input', [AbsensiController::class, 'scan_input'])->name('scan.input');
@@ -62,9 +63,9 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         // Status
         Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
     // Guru
-        Route::get('/', [AbsensiController::class, 'guru_index'])->name('guru.index');
-        Route::get('/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
-        Route::get('/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
+        Route::get('/guru', [AbsensiController::class, 'guru_index'])->name('guru.index');
+        Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
+        Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
 
     // Siswa
         Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
