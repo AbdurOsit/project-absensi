@@ -4,7 +4,7 @@
         <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <!-- Card Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 p-6">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Update Jadwal</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Update Tugas</h2>
             </div>
 
             <!-- Form Content -->

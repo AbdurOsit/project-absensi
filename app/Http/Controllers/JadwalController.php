@@ -39,7 +39,7 @@ class JadwalController extends Controller
         ];
 
         DB::table('tugas')->insert($data);
-        return redirect()->to('admin/jadwal')->with('sukses','Tugas berhasil ditambahkan');
+        return redirect()->to('admin/jadwal')->with('sukses','Data tugas berhasil ditambahkan');
     }
     function tugas_update($id){
         $data = DB::table('praktek')->where('id',$id)->first();
@@ -62,11 +62,11 @@ class JadwalController extends Controller
         ];
 
         DB::table('tugas')->where('id',$id)->update($data);
-        return redirect()->to('admin/jadwal')->with('sukses','tugas berhasil diubah');
+        return redirect()->to('admin/jadwal')->with('sukses','Data tugas berhasil diubah');
     }
     function tugas_delete($id){
         DB::table('tugas')->where('id',$id)->delete();
-        return redirect()->to('/admin/jadwal')->with('sukses','jadwal berhasil dihapus');
+        return redirect()->to('/admin/jadwal')->with('sukses','Data Tugas berhasil dihapus');
     }
 
     //Praktek
@@ -94,7 +94,7 @@ class JadwalController extends Controller
         ];
 
         DB::table('praktek')->insert($data);
-        return redirect()->to('admin/jadwal')->with('sukses','praktek berhasil ditambahkan');
+        return redirect()->to('admin/jadwal')->with('sukses','Data Praktek berhasil ditambahkan');
     }
     function praktek_update($id){
         $data = DB::table('praktek')->where('id',$id)->first();
@@ -113,11 +113,11 @@ class JadwalController extends Controller
         ];
 
         DB::table('praktek')->where('id',$id)->update($data);
-        return redirect()->to('admin/jadwal')->with('sukses','praktek berhasil diubah');
+        return redirect()->to('admin/jadwal')->with('sukses','Data praktek berhasil diubah');
     }
     function praktek_delete($id){
         DB::table('praktek')->where('id',$id)->delete();
-        return redirect()->to('/admin/jadwal')->with('sukses','Praktek berhasil dihapus');
+        return redirect()->to('/admin/jadwal')->with('sukses','Data praktek berhasil dihapus');
     }
 
     // Kegiatan
@@ -145,7 +145,7 @@ class JadwalController extends Controller
         ];
 
         DB::table('kegiatan')->insert($data);
-        return redirect()->to('admin/jadwal')->with('sukses','kegiatan berhasil ditambahkan');
+        return redirect()->to('admin/jadwal')->with('sukses','Data kegiatan berhasil ditambahkan');
     }
     function kegiatan_update($id){
         $data = DB::table('kegiatan')->where('id',$id)->first();
@@ -164,11 +164,11 @@ class JadwalController extends Controller
         ];
 
         DB::table('kegiatan')->where('id',$id)->update($data);
-        return redirect()->to('admin/jadwal')->with('sukses','kegiatan berhasil diubah');
+        return redirect()->to('admin/jadwal')->with('sukses','Data kegiatan berhasil diubah');
     }
     function kegiatan_delete($id){
         DB::table('kegiatan')->where('id',$id)->delete();
-        return redirect()->to('/admin/jadwal')->with('sukses','Kegiatan berhasil dihapus');
+        return redirect()->to('/admin/jadwal')->with('sukses','Data kegiatan berhasil dihapus');
     }
 
 }
