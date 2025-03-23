@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `kegiatan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.kegiatan: ~7 rows (approximately)
 INSERT INTO `kegiatan` (`id`, `hari`, `tanggal`, `kegiatan`, `created_at`, `updated_at`) VALUES
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `praktek` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.praktek: ~7 rows (approximately)
 INSERT INTO `praktek` (`id`, `hari`, `tanggal`, `praktek`, `created_at`, `updated_at`) VALUES
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.tugas: ~7 rows (approximately)
 INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `deadline_hari`, `deadline_tanggal`, `created_at`, `updated_at`) VALUES
@@ -305,7 +305,8 @@ INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `deadline_hari`, `deadlin
 	(4, 'Kamis', '2025-03-20', 'Tugas untuk Kamis', 'Minggu', '2025-03-23', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
 	(5, 'Jumat', '2025-03-21', 'Tugas untuk Jumat', 'Senin', '2025-03-24', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
 	(6, 'Sabtu', '2025-03-22', 'Tugas untuk Sabtu', 'Selasa', '2025-03-25', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
-	(7, 'Minggu', '2025-03-23', 'Tugas untuk Minggu', 'Rabu', '2025-03-26', '2025-03-22 06:58:20', '2025-03-22 06:58:20');
+	(7, 'Minggu', '2025-03-23', 'Tugas untuk Minggu', 'Rabu', '2025-03-26', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
+	(9, 'Jumat', '2025-03-23', 'tugas jumat', 'Jumat', '2025-03-14', NULL, NULL);
 
 -- Dumping structure for table project-absensi.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -321,19 +322,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_uid_unique` (`uid`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table project-absensi.users: ~6 rows (approximately)
-INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$.JN/5XsxMVWJZNq4H3P/COwhAYFC2/3WiZkEEdh21cAPfvU10qMRy', '1s37673MpePVMuHQptuFsDHtZXy2F9cdFaAz9ZXwSIkMQl3LBMJliimdULlQ', '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
-	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$JkCAyy63WpPH5FjJOMHFz.kzRTbgtxFr1uFBQ3dFrqLNu9mNEDeTO', NULL, '2025-03-22 06:36:47', '2025-03-22 06:36:47'),
-	(3, 'U003', 'siswa1', 'Teknik Elektro', 11, 3, 'siswa@gmail.com', NULL, '$2y$12$xCEK7xP9L06ULXz9oqreYu0n0u.NbLAS90sDM12T92/3nZ7KAsCHy', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
-	(4, 'U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$8zHaOSHcFvHHVCHvklFTw.GvkZA6nMXyJeJVtlDUixmCmqke6Cdmu', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
-	(5, 'U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$cIWCXi4MofN5iff6V.YwjuE//XeCOXbg6aKxmhVwJoq7/q.w1OSk2', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48'),
-	(6, 'U006', 'siswa4', 'Teknik Listrik', 10, 3, 'siswa4@gmail.com', NULL, '$2y$12$Sg2lpR7qAXzJayV/SBdNOONwU8Xz1NMxAnQs0KuAHfQABBuVJ3QpO', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48');
+INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
+	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$.JN/5XsxMVWJZNq4H3P/COwhAYFC2/3WiZkEEdh21cAPfvU10qMRy', 'YYWnGdAkqs9NxwdfwLJ3tGXatJPUO63TbPoS69hcQAHk84QYBntczMxJTgrs', '2025-03-22 06:36:47', '2025-03-22 06:36:47', NULL),
+	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$JkCAyy63WpPH5FjJOMHFz.kzRTbgtxFr1uFBQ3dFrqLNu9mNEDeTO', NULL, '2025-03-22 06:36:47', '2025-03-22 06:36:47', NULL),
+	(3, 'U003', 'siswa1', 'Teknik Elektro', 11, 3, 'siswa@gmail.com', NULL, '$2y$12$xCEK7xP9L06ULXz9oqreYu0n0u.NbLAS90sDM12T92/3nZ7KAsCHy', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48', NULL),
+	(4, 'U004', 'siswa2', 'Teknik Mesin', 11, 3, 'siswa2@gmail.com', NULL, '$2y$12$8zHaOSHcFvHHVCHvklFTw.GvkZA6nMXyJeJVtlDUixmCmqke6Cdmu', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48', NULL),
+	(5, 'U005', 'siswa3', 'Teknik Sipil', 12, 3, 'siswa3@gmail.com', NULL, '$2y$12$cIWCXi4MofN5iff6V.YwjuE//XeCOXbg6aKxmhVwJoq7/q.w1OSk2', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48', NULL),
+	(6, 'U006', 'siswa4', 'Teknik Listrik', 10, 3, 'siswa4@gmail.com', NULL, '$2y$12$Sg2lpR7qAXzJayV/SBdNOONwU8Xz1NMxAnQs0KuAHfQABBuVJ3QpO', NULL, '2025-03-22 06:36:48', '2025-03-22 06:36:48', NULL),
+	(7, 'UU9999', 'siswa12', 'SIJA', 12, 1, NULL, NULL, '$2y$12$tkJKw3LKx83kcwIzYmCX4uevmTZoXE0Q8g8Nn/HYwUhScFqDnTh2G', NULL, '2025-03-23 07:46:01', '2025-03-23 07:46:01', NULL),
+	(8, 'UU999', 'siswa41', 'SIJA', 12, 3, NULL, NULL, '$2y$12$.0U7s/LvhKn1Qv1G0xZ2H.dx51yR/rUv2m/v1Q9tx5e48OI3HhmSy', '1ZkrN4oGtBkHAxZcGLXSOfrzQzr6YpDvLmU6iwM4jnJzAYyT4sLBcCKRk3nP', '2025-03-23 07:47:08', '2025-03-23 07:49:55', '1742741395.jpg');
 
 -- Dumping structure for table project-absensi.waktus
 CREATE TABLE IF NOT EXISTS `waktus` (
