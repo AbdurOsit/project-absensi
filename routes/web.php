@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AbsenUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaktuController;
@@ -48,11 +49,23 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         // Jadwal(Tugas,Praktek,Kegiatan)
         Route::get('/admin/jadwal', [AbsensiController::class, 'jadwal'])->name('admin.jadwal');
         // Tugas
-        Route::get('/tugas/create', [AbsensiController::class, 'tugas_input'])->name('tugas.input');
-        Route::post('/tugas/create', [AbsensiController::class, 'tugas_create'])->name('tugas.create');
-        Route::get('/tugas/update/{id}', [AbsensiController::class, 'tugas_update'])->name('tugas.update');
-        Route::put('/tugas/update/{id}', [AbsensiController::class, 'tugas_update_proccess'])->name('tugas.update_proccess');
-        Route::delete('/tugas/delete/{id}', [AbsensiController::class, 'tugas_delete'])->name('tugas.delete');
+        Route::get('/tugas/create', [JadwalController::class, 'tugas_input'])->name('tugas.input');
+        Route::post('/tugas/create', [JadwalController::class, 'tugas_create'])->name('tugas.create');
+        Route::get('/tugas/update/{id}', [JadwalController::class, 'tugas_update'])->name('tugas.update');
+        Route::put('/tugas/update/{id}', [JadwalController::class, 'tugas_update_proccess'])->name('tugas.update_proccess');
+        Route::delete('/tugas/delete/{id}', [JadwalController::class, 'tugas_delete'])->name('tugas.delete');
+        // Praktek
+        Route::get('/praktek/create', [JadwalController::class, 'praktek_input'])->name('praktek.input');
+        Route::post('/praktek/create', [JadwalController::class, 'praktek_create'])->name('praktek.create');
+        Route::get('/praktek/update/{id}', [JadwalController::class, 'praktek_update'])->name('praktek.update');
+        Route::put('/praktek/update/{id}', [JadwalController::class, 'praktek_update_proccess'])->name('praktek.update_proccess');
+        Route::delete('/praktek/delete/{id}', [JadwalController::class, 'praktek_delete'])->name('praktek.delete');
+        // Kegiatan
+        Route::get('/kegiatan/create', [JadwalController::class, 'kegiatan_input'])->name('kegiatan.input');
+        Route::post('/kegiatan/create', [JadwalController::class, 'kegiatan_create'])->name('kegiatan.create');
+        Route::get('/kegiatan/update/{id}', [JadwalController::class, 'kegiatan_update'])->name('kegiatan.update');
+        Route::put('/kegiatan/update/{id}', [JadwalController::class, 'kegiatan_update_proccess'])->name('kegiatan.update_proccess');
+        Route::delete('/kegiatan/delete/{id}', [JadwalController::class, 'kegiatan_delete'])->name('kegiatan.delete');
         // Scan
         Route::get('/admin/scan', [AbsensiController::class, 'scan'])->name('admin.scan');
         Route::post('/scan/input', [AbsensiController::class, 'scan_input'])->name('scan.input');

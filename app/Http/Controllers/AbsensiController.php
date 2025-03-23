@@ -67,11 +67,11 @@ class AbsensiController extends Controller
         $request->validate([
             'uid' => 'required|unique:users',
             'username' => 'required|unique:users',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
             'jurusan' => 'required',
             'kelas' => 'required',
             'role' => 'required',
-            'email' => 'required|nullable',
+            'email' => 'nullable',
             'password' => 'required',
         ]);
     

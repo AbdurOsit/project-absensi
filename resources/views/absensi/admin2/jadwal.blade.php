@@ -83,7 +83,7 @@
     <div class="w-full mt-6 praktek">
         <div class="mb-3">
             <h2 class="dark:text-white text-xl mb-3 font-semibold">Table Praktek</h2>
-            <a href="#" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
+            <a href="{{ route('praktek.input') }}" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
         </div>
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
@@ -108,7 +108,7 @@
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="#">
+                            <a class="font-bold text-lg text-white" href="{{ route('praktek.update', $item->id) }}">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -119,7 +119,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="#" method="POST" class="font-bold text-lg text-white">
+                            <form action="{{ route('praktek.delete',$item->id) }}" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">
@@ -146,12 +146,11 @@
         </div>
     </div>
 
-    <!-- Data Kegiatan -->
-    
+    <!-- Data Kegiatan --> 
     <div class="w-full mt-6 kegiatan">
         <div class="mb-3">
             <h2 class="dark:text-white text-xl mb-3 font-semibold">Table Kegiatan</h2>
-            <a href="#" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
+            <a href="{{ route('kegiatan.input') }}" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button"><button>Create</button ></a>
         </div>
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
@@ -176,7 +175,7 @@
                         <td class="border border-gray-600 px-4 py-2 text-center flex justify-center">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="#">
+                            <a class="font-bold text-lg text-white" href="{{ route('kegiatan.update', $item->id) }}">
                                 <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -187,7 +186,7 @@
                             </a>
 
                             {{-- Delete Icon --}}
-                            <form action="#" method="POST" class="font-bold text-lg text-white">
+                            <form action="{{ route('kegiatan.delete',$item->id) }}" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">

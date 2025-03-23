@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('uid')->unique();
             $table->string('username');
+            $table->text('image')->nullable();
             $table->string('jurusan');
             $table->bigInteger('kelas');
             $table->foreignId('role_id');

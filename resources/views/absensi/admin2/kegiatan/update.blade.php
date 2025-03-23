@@ -9,7 +9,7 @@
 
             <!-- Form Content -->
             <div class="p-4">
-                <form action="{{ route('jadwal.update_proccess', $data->id) }}" method="POST" class="space-y-6">
+                <form action="{{ route('praktek.update_proccess', $data->id) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
                     <!-- Id Update -->
@@ -22,9 +22,20 @@
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Hari
                         </label>
-                        <input type="text" name="hari" id="hari" value="{{ $data->hari }}"
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror"
-                            >
+                        @php
+                            $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                            $selected_hari = old('hari', $data->hari ?? ''); // Ambil dari database jika tidak ada old input
+                        @endphp
+                    
+                        <select name="hari" id="hari"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
+                            @foreach($hari_enum as $h)
+                                <option value="{{ $h }}" {{ $selected_hari == $h ? 'selected' : '' }}>{{ $h }}</option>
+                            @endforeach
+                        </select>
+                        @error('hari')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- Tanggal Update --}}
@@ -35,46 +46,12 @@
                         <input type="date" name="tanggal" id="tanggal" value="{{ $data->tanggal }}" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
                     </div>
 
-                    {{-- Tugas Update --}}
-                    <div class="space-y-2">
-                        <label for="tugas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                            Tugas
-                        </label>
-                        <textarea name="tugas" id="tugas" cols="82" rows="5" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">{{ $data->tugas }}</textarea>
-                    </div>
-
                     <!-- Praktek update -->
                     <div class="space-y-2">
                         <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Praktek
                         </label>
-                        <textarea name="praktek" id="praktek" cols="82" rows="5" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">{{ $data->praktek }}</textarea>
-    
-                    </div>
-
-                    <!-- Kegiatan update -->
-                    <div class="space-y-2">
-                        <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                            Kegiatan
-                        </label>
-                        <textarea name="kegiatan" id="kegiatan" cols="82" rows="5" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">{{ $data->kegiatan }}</textarea>
-    
-                    </div>
-
-                    <!-- Deadline hari update -->
-                    <div class="space-y-2">
-                        <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                            Deadline hari
-                        </label>
-                        <input type="text" name="deadline_hari" id="deadline_hari" cols="82" rows="5" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white" value="{{ $data->deadline_hari }}">
-                    </div>
-
-                    <!-- Deadline tanggal update -->
-                    <div class="space-y-2">
-                        <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                            Deadline tanggal
-                        </label>
-                        <input type="date" name="deadline_tanggal" id="deadline_tanggal" cols="82" rows="5" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white" value="{{ $data->deadline_tanggal }}">
+                        <textarea name="praktek" id="praktek" cols="82" rows="5" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">{{ $data->kegiatan }}</textarea>
     
                     </div>
 
