@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.migrations: ~0 rows (approximately)
+-- Dumping data for table project-absensi.migrations: ~14 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '0001_01_01_000000_create_users_table', 1),
 	(2, '0001_01_01_000001_create_cache_table', 1),
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `tugas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.tugas: ~7 rows (approximately)
+-- Dumping data for table project-absensi.tugas: ~8 rows (approximately)
 INSERT INTO `tugas` (`id`, `hari`, `tanggal`, `tugas`, `deadline_hari`, `deadline_tanggal`, `created_at`, `updated_at`) VALUES
 	(1, 'Senin', '2025-03-17', 'Tugas untuk Senin', 'Kamis', '2025-03-20', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
 	(2, 'Selasa', '2025-03-18', 'Tugas untuk Selasa', 'Jumat', '2025-03-21', '2025-03-22 06:58:20', '2025-03-22 06:58:20'),
@@ -328,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table project-absensi.users: ~6 rows (approximately)
+-- Dumping data for table project-absensi.users: ~8 rows (approximately)
 INSERT INTO `users` (`id`, `uid`, `username`, `jurusan`, `kelas`, `role_id`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
 	(1, 'U001', 'admin', 'Teknik Informatika', 12, 1, 'admin@gmail.com', NULL, '$2y$12$.JN/5XsxMVWJZNq4H3P/COwhAYFC2/3WiZkEEdh21cAPfvU10qMRy', 'YYWnGdAkqs9NxwdfwLJ3tGXatJPUO63TbPoS69hcQAHk84QYBntczMxJTgrs', '2025-03-22 06:36:47', '2025-03-22 06:36:47', NULL),
 	(2, 'U002', 'guru1', 'Matematika', 0, 2, 'guru@gmail.com', NULL, '$2y$12$JkCAyy63WpPH5FjJOMHFz.kzRTbgtxFr1uFBQ3dFrqLNu9mNEDeTO', NULL, '2025-03-22 06:36:47', '2025-03-22 06:36:47', NULL),
