@@ -21,13 +21,22 @@
                     @csrf
                     @method('PUT')
                     <!-- Hari Input -->
+                    <!-- Hari update -->
                     <div class="space-y-2">
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Hari
                         </label>
-                        <input type="text" name="hari" id="hari" value="{{ $waktu->hari }}"
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror"
-                            placeholder="Masukkan Hari">
+                        @php
+                            $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                            $selected_hari = old('hari', $data->hari ?? ''); // Ambil dari database jika tidak ada old input
+                        @endphp
+                    
+                        <select name="hari" id="hari"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
+                            @foreach($hari_enum as $h)
+                                <option value="{{ $h }}" {{ $selected_hari == $h ? 'selected' : '' }}>{{ $h }}</option>
+                            @endforeach
+                        </select>
                         @error('hari')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
