@@ -200,7 +200,7 @@ class AbsensiController extends Controller
     
         // Jika ada query pencarian
         if ($query) {
-            $dataQuery->where('username', 'like', "%$query%");
+            $dataQuery->where('username', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('waktu_datang', 'like', "%$query%")->orWhere('waktu_pulang', 'like', "%$query%");
         }
     
         // Terapkan sorting
@@ -247,9 +247,6 @@ class AbsensiController extends Controller
 
         return view('absensi.admin2.jadwal',compact('tugas','praktek','kegiatan'));
     }
-
-    
-
     function scan()
     {
         $title = 'scan';
