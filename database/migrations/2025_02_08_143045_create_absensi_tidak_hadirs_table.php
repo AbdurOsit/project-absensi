@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('absensi_tidak_hadirs', function (Blueprint $table) {
             $table->id();
-            $table->string('uid');
             $table->string('username');
             $table->foreignId('role_id');
             $table->string('kelas');
