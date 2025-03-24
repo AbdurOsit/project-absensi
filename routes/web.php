@@ -8,6 +8,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaktuController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     ]);
     })->name('absensi.layout');
     // Route::resource('absensi',AbsensiHadirController::class);
+
+    Route::middleware(['role:admin'])->group(function(){
         // Admin
         Route::get('/admin', [AbsensiController::class, 'index'])->name('admin.index');
         // Admin CRUD
@@ -75,17 +78,22 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::post('/admin/surat', [AbsensiController::class,'surat_proccess'])->name('surat.proccess');
         // Status
         Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
-    // Guru
-        Route::get('/guru', [AbsensiController::class, 'guru_index'])->name('guru.index');
-        Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
-        Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
-
-    // Siswa
-        Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
-        Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');
-        Route::get('/user/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
-        Route::get('/profile/update/{uid}', [SiswaController::class, 'profile_update'])->name('profile.update');
-        Route::put('/profile/update/{uid}', [SiswaController::class, 'profile_update_proccess'])->name('profile.update_proccess');
+        
+    });
+    Route::middleware(['role:guru'])->group(function(){
+        // Guru
+            Route::get('/guru', [AbsensiController::class, 'guru_index'])->name('guru.index');
+            Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
+            Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
+    });
+    Route::middleware(['role:siswa'])->group(function(){
+        // Siswa
+            Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
+            Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');
+            Route::get('/user/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
+            Route::get('/profile/update/{uid}', [SiswaController::class, 'profile_update'])->name('profile.update');
+            Route::put('/profile/update/{uid}', [SiswaController::class, 'profile_update_proccess'])->name('profile.update_proccess');
+    });
     // Search (bisa diakses oleh semua role yang login)
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
