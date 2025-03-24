@@ -164,7 +164,6 @@ class DatabaseSeeder extends Seeder
         
         if ($tidakHadirUsers->count() >= 2) {
             AbsensiTidakHadir::create([
-                'uid' => $tidakHadirUsers[0]->uid,
                 'username' => $tidakHadirUsers[0]->username,
                 'role_id' => $tidakHadirUsers[0]->role_id,
                 'kelas' => $tidakHadirUsers[0]->kelas,
@@ -176,7 +175,6 @@ class DatabaseSeeder extends Seeder
             ]);
 
             AbsensiTidakHadir::create([
-                'uid' => $tidakHadirUsers[1]->uid,
                 'username' => $tidakHadirUsers[1]->username,
                 'role_id' => $tidakHadirUsers[1]->role_id,
                 'kelas' => $tidakHadirUsers[1]->kelas,
