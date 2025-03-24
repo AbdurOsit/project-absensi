@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('waktus', function (Blueprint $table) {
             $table->id();
-            $table->string('hari');
+            $table->enum('hari',['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']);
             $table->time('jam_masuk');
             $table->time('jam_pulang');
             $table->timestamps();
