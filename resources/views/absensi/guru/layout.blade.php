@@ -163,8 +163,9 @@
                         </a>
 
                         {{-- Log-out Navigation --}}
-                        <a href="#">
-                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -179,8 +180,8 @@
                                     </g>
                                 </svg>
                                 <span>Log-out</span>
-                            </div>
-                        </a>
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -253,8 +254,9 @@
                         </a>
 
                         {{-- Log-out Navigation --}}
-                        <a href="#">
-                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-4">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-4">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -268,8 +270,8 @@
                                         </path>
                                     </g>
                                 </svg>
-                            </div>
-                        </a>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
