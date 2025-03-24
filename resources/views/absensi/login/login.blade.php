@@ -17,6 +17,11 @@
                     {{ session('error') }}
                 </div>
                 @endif
+                @if (session('sukses'))
+                <div class="bg-green-500 text-white p-3 rounded">
+                    {{ session('sukses') }}
+                </div>
+                @endif
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-purple-500">Login</h2>
                 </div>

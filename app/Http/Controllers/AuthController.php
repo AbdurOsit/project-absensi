@@ -65,6 +65,6 @@ class AuthController extends Controller
 
         Cookie::queue(Cookie::forget('remember_web'));
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('sukses','Berhasil Logout');
     }
 }
