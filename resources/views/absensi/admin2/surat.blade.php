@@ -1,8 +1,7 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-
     <body class="min-h-screen bg-gray-800">
-        <div class="w-full w-full">
+        <div class="w-full">
             <h1 class="text-2xl font-semibold text-black-900 dark:text-white mb-2">Input Surat</h1>
             @if (session('sukses'))
                 <div class="bg-green-500 text-white p-2 rounded">
@@ -116,12 +115,12 @@
                     </form>
                 </div>
                 <div class="dark:text-white ml-5">
-                    <table border="1" class="border border-white">
+                    <table border="1" class="border border-white w-full">
                         <thead>
                             <tr>
-                                <th class="border border-white px-28">Username</th>
-                                <th class="border border-white px-28">Kelas</th>
-                                <th class="border border-white px-28">Jurusan</th>
+                                <th class="border border-white px-24">Username</th>
+                                <th class="border border-white px-24">Kelas</th>
+                                <th class="border border-white px-24">Jurusan</th>
                             </tr>
                         </thead>
                         <tbody>

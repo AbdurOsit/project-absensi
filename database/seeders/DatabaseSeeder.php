@@ -161,6 +161,8 @@ class DatabaseSeeder extends Seeder
 
         // Ambil 2 user terakhir dengan role_id = 3
         $tidakHadirUsers = User::where('role_id', 3)->orderBy('uid', 'desc')->take(2)->get();
+
+        Carbon::setLocale('id');
         
         if ($tidakHadirUsers->count() >= 2) {
             AbsensiTidakHadir::create([
@@ -168,7 +170,8 @@ class DatabaseSeeder extends Seeder
                 'role_id' => $tidakHadirUsers[0]->role_id,
                 'kelas' => $tidakHadirUsers[0]->kelas,
                 'jurusan' => $tidakHadirUsers[0]->jurusan,
-                'hari_tanggal' => Carbon::now()->toDateString(),
+                'hari' => Carbon::now()->translatedFormat('l'), 
+                'tanggal' => Carbon::now()->toDateString(),
                 'alasan' => 'izin',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -179,7 +182,8 @@ class DatabaseSeeder extends Seeder
                 'role_id' => $tidakHadirUsers[1]->role_id,
                 'kelas' => $tidakHadirUsers[1]->kelas,
                 'jurusan' => $tidakHadirUsers[1]->jurusan,
-                'hari_tanggal' => Carbon::now()->toDateString(),
+                'hari' => Carbon::now()->translatedFormat('l'), 
+                'tanggal' => Carbon::now()->toDateString(),
                 'alasan' => 'sakit',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

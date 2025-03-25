@@ -398,6 +398,7 @@ class AbsensiController extends Controller
         // Simpan data ke AbsensiTidakHadir jika username valid
         AbsensiTidakHadir::create([
             'username' => $request->username,
+            'role_id' => 3,
             'kelas' => $request->kelas,
             'jurusan' => $request->jurusan,
             'hari' => $request->hari,

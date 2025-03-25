@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('kelas');
             $table->text('jurusan');
             // $table->string('hari');
-            $table->date('hari_tanggal');
+            $table->string('hari');
+            $table->date('tanggal');
             $table->string('alasan');
             // $table->string('surat');
             $table->timestamps();
