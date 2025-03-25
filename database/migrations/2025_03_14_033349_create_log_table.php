@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('log', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->timestamp('waktu_absen');
+            $table->string('uid');
+            $table->string('username')->nullable();
+            $table->time('waktu_absen')->nullable();
             $table->text('pesan');
             $table->timestamps();
         });

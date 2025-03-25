@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('jurusan');
             $table->boolean('status')->default(false);
             $table->time('waktu_datang');
-            $table->time('waktu_pulang');
+            $table->time('waktu_pulang')->nullable();
             $table->timestamps();
         });
     }
