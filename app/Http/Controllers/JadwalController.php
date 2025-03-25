@@ -42,7 +42,7 @@ class JadwalController extends Controller
         return redirect()->to('admin/jadwal')->with('sukses','Data tugas berhasil ditambahkan');
     }
     function tugas_update($id){
-        $data = DB::table('praktek')->where('id',$id)->first();
+        $data = DB::table('tugas')->where('id',$id)->first();
         return view('absensi.admin2.tugas.update',compact('data'));
     }
     function tugas_update_proccess(Request $request,$id){
