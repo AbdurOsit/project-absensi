@@ -18,14 +18,6 @@
             <option>Nama Siswa A-Z</option>
             <option>Nama Siswa Z-A</option>
         </select>
-
-        <!-- Add Student Button -->
-        <button class="flex items-center gap-2 border border-none">
-            <span class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm">
-                +
-            </span>
-            <span class="text-sm dark:text-white">Tambah Siswa</span>
-        </button>
     </div>
 
     <!-- Table -->
