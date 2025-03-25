@@ -17,6 +17,11 @@
                 </svg>
             </button>
             
+            @if ($tugas->empty())
+            <div class="flex justify-center items-center">
+                <p class="text-gray-900 dark:text-white text-3xl font-bold ">Tidak ada tugas</p>
+            </div>
+            @endif
             <div id="carousel" class="flex space-x-4 flex-1 justify-center carousel-container" data-tugas='@json($tugas)'>
                 
             </div>
@@ -38,6 +43,9 @@
             <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
                 <div class="space-y-2 h-auto">
                     <div class="space-y-2 h-auto pb-2">
+                        @if ($kegiatan->isEmpty())
+                        <p class="text-center dark:text-white text-lg font-bold flex justify-center items-center">Tidak ada Praktek</p>
+                        @else
                         @foreach ($praktek as $item)
                         <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
                             <button class="w-8 h-8 flex items-center justify-center rounded-full">
@@ -51,6 +59,7 @@
                         <div class="flex justify-center text-center">
                         {{ $praktek->links('pagination::tailwind') }}
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -61,6 +70,9 @@
             <h3 class="text-gray-900 dark:text-white text-xl font-bold">Kegiatan Minggu Ini</h3>
             <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
                 <div class="space-y-2 h-auto pb-2">
+                    @if ($kegiatan->isEmpty())
+                    <p class="text-center dark:text-white text-lg font-bold flex justify-center items-center">Tidak ada kegiatan</p>
+                    @else
                     @foreach ($kegiatan as $item)
                     <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                         <button class="w-8 h-8 flex items-center justify-center rounded-full">
@@ -74,6 +86,7 @@
                     <div class="flex justify-center text-center">
                         {{ $kegiatan->links('pagination::tailwind') }}
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
