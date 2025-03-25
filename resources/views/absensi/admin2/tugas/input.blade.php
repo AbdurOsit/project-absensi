@@ -18,20 +18,20 @@
 
                     <!-- Hari Input -->
                     <div class="space-y-2">
+                        @php
+                            use Carbon\Carbon;
+                            $hari_ini = Carbon::now()->locale('id')->isoFormat('dddd'); // Mendapatkan nama hari dalam Bahasa Indonesia
+                            $hari_ini = ucfirst($hari_ini); // Mengubah huruf pertama menjadi kapital
+                        @endphp
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Hari
                         </label>
-                        <select type="text" name="hari" id="hari"
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror"
-                            >
-                                <option value="">-- Pilih Hari --</option>
-                                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $hari)
-                                @if (old('hari') == $hari)
-                                <option value="{{ $hari }}" selected>{{ $hari }}</option>
-                                @else
-                                <option value="{{ $hari }}">{{ $hari }}</option>
-                                @endif
-                                @endforeach
+                        <select name="hari" id="hari"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                            <option value="">-- Pilih Hari --</option>
+                            @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $hari)
+                            <option value="{{ $hari }}" {{ $hari_ini == $hari ? 'selected' : '' }}>{{ $hari }}</option>
+                            @endforeach
                         </select>
                             @error('hari')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -64,20 +64,23 @@
                             Deadline hari
                         </label>
                         <select type="text" name="deadline_hari" id="hari"
-                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('deadline_hari') border-red-500 @enderror"
                             >
                             @php
                             $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
                             @endphp
                                 <option value="">-- Pilih Hari --</option>
                                 @foreach($hari_enum as $deadline_hari)
-                                    <option value="{{ $deadline_hari }}" selected>{{ $deadline_hari }}</option>
+                                @if (old('deadline_hari') == $deadline_hari) 
+                                <option value="{{ $deadline_hari }}" selected>{{ $deadline_hari }}</option>
+                                @else
+                                <option value="{{ $deadline_hari }}">{{ $deadline_hari }}</option>
+                                @endif
                                 @endforeach
                         </select>
                             @error('deadline_hari')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
-    
                     </div>
 
                     <!-- Deadline tanggal Input -->
@@ -85,8 +88,10 @@
                         <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Deadline tanggal
                         </label>
-                        <input type="date" name="deadline_tanggal" id="deadline_tanggal" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white"  value="{{ old('deadline_tanggal') }}">
-    
+                        <input type="date" name="deadline_tanggal" id="deadline_tanggal" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('deadline_tanggal') border-red-500 @enderror"  value="{{ old('deadline_tanggal') }}">
+                        @error('deadline_tanggal')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Form Buttons -->
