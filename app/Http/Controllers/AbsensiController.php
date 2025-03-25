@@ -208,7 +208,7 @@ class AbsensiController extends Controller
     
         // Ambil data dengan pagination
         Carbon::setLocale('id');
-        $data = $dataQuery->where('hari',Carbon::now()->translatedFormat('l'))->paginate(10);
+        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('l'))->paginate(10);
     
         return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }

@@ -26,7 +26,11 @@
                             >
                                 <option value="">-- Pilih Hari --</option>
                                 @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $hari)
-                                    <option value="{{ $hari }}">{{ $hari }}</option>
+                                @if (old('hari') == $hari)
+                                <option value="{{ $hari }}" selected>{{ $hari }}</option>
+                                @else
+                                <option value="{{ $hari }}">{{ $hari }}</option>
+                                @endif
                                 @endforeach
                         </select>
                             @error('hari')
@@ -59,7 +63,20 @@
                         <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Deadline hari
                         </label>
-                        <input type="text" name="deadline_hari" id="deadline_hari" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white" value="{{ old('deadline_hari') }}">
+                        <select type="text" name="deadline_hari" id="hari"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror"
+                            >
+                            @php
+                            $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                            @endphp
+                                <option value="">-- Pilih Hari --</option>
+                                @foreach($hari_enum as $deadline_hari)
+                                    <option value="{{ $deadline_hari }}" selected>{{ $deadline_hari }}</option>
+                                @endforeach
+                        </select>
+                            @error('deadline_hari')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
     
                     </div>
 

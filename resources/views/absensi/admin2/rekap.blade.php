@@ -37,6 +37,12 @@
             </thead>
             <tbody class="divide-y">
                 @php $no = 1; @endphp
+                @if($data->isEmpty())
+                <tr class="dark:text-white">
+                    <tr>
+                        <td colspan="6" class="text-center py-2 text-center py-2 dark:text-white">Belum ada siswa yang absen</td>
+                    </tr>
+                @else
                 @foreach ($data as $item)
                 <tr class="dark:text-white">
                     <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $no }}</td>
@@ -48,6 +54,7 @@
                 </tr>
                 @php $no++; @endphp
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>    
