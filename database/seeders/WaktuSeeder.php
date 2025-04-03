@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,16 +12,24 @@ class WaktuSeeder extends Seeder
      */
     public function run(): void
     {
-        $hariList = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+        $hariList = [
+            ['hari' => 'Minggu', 'libur' => true],
+            ['hari' => 'Senin', 'libur' => false],
+            ['hari' => 'Selasa', 'libur' => false],
+            ['hari' => 'Rabu', 'libur' => false],
+            ['hari' => 'Kamis', 'libur' => false],
+            ['hari' => 'Jumat', 'libur' => false],
+            ['hari' => 'Sabtu', 'libur' => true],
+        ];
 
         $data = [];
 
-        foreach ($hariList as $index => $hari) {
-
+        foreach ($hariList as $hariInfo) {
             $data[] = [
-                'hari' => $hari,
-                'jam_masuk' => '07:00:00',
-                'jam_pulang' => '15:00:00',
+                'hari' => $hariInfo['hari'],
+                'jam_masuk' => $hariInfo['libur'] ? null : '07:00:00',
+                'jam_pulang' => $hariInfo['libur'] ? null : '15:00:00',
+                'libur' => $hariInfo['libur'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

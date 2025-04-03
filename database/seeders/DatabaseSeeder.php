@@ -199,5 +199,12 @@ class DatabaseSeeder extends Seeder
         // Alasan::create([
         //     'alasan' => 'alpha'
         // ]);
+
+        $this->call([
+            KegiatanSeeder::class,
+            PraktekSeeder::class,
+            TugasSeeder::class,
+            WaktuSeeder::class,
+        ]);
     }
 }

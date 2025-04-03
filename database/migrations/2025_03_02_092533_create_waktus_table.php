@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('waktus', function (Blueprint $table) {
             $table->id();
             $table->enum('hari',['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu']);
-            $table->time('jam_masuk');
-            $table->time('jam_pulang');
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_pulang')->nullable();
+            $table->boolean('libur');
             $table->timestamps();
         });
     }
