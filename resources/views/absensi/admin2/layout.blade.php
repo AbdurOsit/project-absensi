@@ -88,7 +88,7 @@
                 class="mobile-nav md:relative md:block pt-5 pb-5 rounded-lg h-full transition-all duration-300"
                 style="width: 256px;">
                 <!-- Expanded Sidebar -->
-                <div id="expandedSidebar" class="h-auto w-72 bg-purple-600 rounded-3xl">
+                <div id="expandedSidebar" class="h-auto w-72 bg-purple-600 rounded-3xl hidden">
                     <div class="flex items-center justify-between p-4 border-purple-500">
                         <div class="flex items-center gap-20">
                             <div class="text-white text-3xl font-semibold"><span class="text-yellow-300">A</span>bsensi
@@ -101,7 +101,7 @@
                         </div>
                     </div>
 
-                    <div class="p-4 space-y-4">
+                    <div class="p-4 space-y-2">
                         <!-- Menu Items -->
 
                         {{-- Home Navigation --}}
@@ -450,79 +450,80 @@
         </div>
     </div>
     <script>
-        // Kode tema yang sudah ada tetap sama
-    if (!("theme" in localStorage)) {
-        localStorage.theme = "dark";
-    }
-
-    if (localStorage.theme === "dark") {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
-
-    const themeToggle = document.getElementById("theme-toggle");
-    themeToggle.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-        if (document.documentElement.classList.contains("dark")) {
+        // Kode tema tetap sama
+        if (!("theme" in localStorage)) {
             localStorage.theme = "dark";
-        } else {
-            localStorage.theme = "light";
         }
-    });
-
-    // Kode sidebar yang sudah ada dengan modifikasi
+    
+        if (localStorage.theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    
+        const themeToggle = document.getElementById("theme-toggle");
+        themeToggle?.addEventListener("click", () => {
+            document.documentElement.classList.toggle("dark");
+            localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+        });
+    
+        // Sidebar logic
     const sidebarContainer = document.getElementById('sidebarContainer');
     const expandedSidebar = document.getElementById('expandedSidebar');
     const collapsedSidebar = document.getElementById('collapsedSidebar');
-    
-    // Mengambil status sidebar dari localStorage
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
     let isExpanded = localStorage.getItem('sidebarExpanded') === 'true';
 
-    // Menerapkan status sidebar saat halaman dimuat
-    if (!isExpanded) {
-        sidebarContainer.style.width = '48px';
-        expandedSidebar.classList.add('hidden');
-        collapsedSidebar.classList.remove('hidden');
-    } else {
-        sidebarContainer.style.width = '256px';
-        expandedSidebar.classList.remove('hidden');
-        collapsedSidebar.classList.add('hidden');
-    }
-
-    document.querySelectorAll('#expandedSidebar .cursor-pointer, #collapsedSidebar .cursor-pointer').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    });
-
-    expandedSidebar.querySelector('.flex').addEventListener('click', toggleSidebar);
-    collapsedSidebar.querySelector('.flex').addEventListener('click', toggleSidebar);
-
-    function toggleSidebar() {
+    function applySidebarState() {
         if (isExpanded) {
-            sidebarContainer.style.width = '48px';
-            expandedSidebar.classList.add('hidden');
-            collapsedSidebar.classList.remove('hidden');
-        } else {
             sidebarContainer.style.width = '256px';
             expandedSidebar.classList.remove('hidden');
             collapsedSidebar.classList.add('hidden');
+        } else {
+            sidebarContainer.style.width = '48px';
+            expandedSidebar.classList.add('hidden');
+            collapsedSidebar.classList.remove('hidden');
         }
+    }
+    applySidebarState();
+
+    function toggleSidebar() {
         isExpanded = !isExpanded;
-        // Menyimpan status sidebar ke localStorage
         localStorage.setItem('sidebarExpanded', isExpanded);
+        applySidebarState();
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.querySelector("input[name='query']");
-        searchInput.addEventListener("input", function () {
-            localStorage.setItem("searchQuery", this.value.toLowerCase()); // Simpan di LocalStorage
-        });
+    document.querySelectorAll('#expandedSidebar .cursor-pointer, #collapsedSidebar .cursor-pointer').forEach(item => {
+        item.addEventListener('click', (e) => e.stopPropagation());
     });
 
+    expandedSidebar.querySelector('.flex')?.addEventListener('click', toggleSidebar);
+    collapsedSidebar.querySelector('.flex')?.addEventListener('click', toggleSidebar);
 
+    // Mobile Menu Button Logic
+    mobileMenuBtn?.addEventListener('click', function () {
+        expandedSidebar.classList.remove('hidden');
+        expandedSidebar.classList.add('w-72', 'fixed', 'bg-purple-600', 'shadow-lg');
+        sidebarOverlay.classList.add('fixed', 'inset-0', 'bg-black', 'bg-opacity-50');
+    });
+
+    // Menutup sidebar saat overlay diklik
+    sidebarOverlay?.addEventListener('click', function () {
+        expandedSidebar.classList.add('hidden');
+        sidebarOverlay.classList.remove('fixed', 'inset-0', 'bg-black', 'bg-opacity-50');
+    });
+
+        //Search semua halaman   
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.querySelector("input[name='query']");
+            searchInput?.addEventListener("input", function () {
+                localStorage.setItem("searchQuery", this.value.toLowerCase());
+            });
+        });
     </script>
+    
 </body>
 
 </html>

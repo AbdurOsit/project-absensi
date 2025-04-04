@@ -1,49 +1,45 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-<div class="bg-gray-100 dark:bg-gray-800">
+<div class="bg-gray-100 dark:bg-gray-800 p-4">
   @if (session('sukses'))
-                <div class="bg-green-500 text-white p-3 rounded">
-                    {{ session('sukses') }}
-                </div>
-            @endif
-  <span class="dark:text-white p-5">{{ $time }} {{ $date }}</span>
+    <div class="bg-green-500 text-white p-3 rounded">
+      {{ session('sukses') }}
+    </div>
+  @endif
+  <span class="dark:text-white block text-center text-sm">{{ $time }} {{ $date }}</span>
 
-
-  <div class="container mx-auto py-6">
+  <div class="container mx-auto py-2">
     <!-- Tabel pertama -->
-    <div class="mb-10 px-20 mx-auto">
-      <h2 class="text-xl font-bold mb-4 text-center dark:text-white">Tabel absensi siswa hadir</h2>
+    <div class="mb-10 px-4 sm:px-20 mx-auto">
+      <h2 class="text-lg sm:text-xl font-bold mb-4 text-center dark:text-white">Tabel Absensi Siswa Hadir</h2>
       <div class="overflow-x-auto">
-        <table class="table-auto w-full text-center">
+        <table class="table-auto w-full text-center text-xs sm:text-sm">
           <thead>
-            <tr class="border-t-4 border border-purple-700 bg-gray-600 text-white thead">
-              <th class="border border-gray-700 px-4 py-2">No</th>
-              <th class="border border-gray-700 px-4 py-2">Username</th>
-              <th class="border border-gray-700 px-4 py-2">Status</th>
-              <th class="border border-gray-700 px-4 py-2">Waktu Datang</th>
-              <th class="border border-gray-700 px-4 py-2">Waktu Pulang</th>
+            <tr class="border-t-4 border border-purple-700 bg-gray-600 text-white">
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">No</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Username</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Status</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Waktu Datang</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Waktu Pulang</th>
             </tr>
           </thead>
           <tbody>
             <?php $no = 1; ?>
             @foreach ($absensihadir as $item)
             <tr class="dark:text-white">
-              <td class="border border-gray-700 px-4 py-2">{{ $no }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->username }}</td>
-
-              <td class="border border-gray-700 px-4 py-2 p-5">
-
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $no }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->username }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">
                 <button id="statusBtn-{{ $item->uid }}" 
                   onclick="updateStatus('{{ route('updateStatus', $item->uid) }}', '{{ $item->uid }}')" 
                   class="{{ $item->status ? 'bg-green-500' : 'bg-yellow-500' }} p-2 font-bold text-white rounded-lg">
                   {{ $item->status ? 'Disetujui' : 'Pending' }}
                 </button>
-
               </td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->waktu_datang }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->waktu_pulang }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->waktu_datang }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->waktu_pulang }}</td>
             </tr>
-            
+            <?php $no++; ?>
             @endforeach
           </tbody>
         </table>
@@ -52,34 +48,33 @@
     </div>
 
     <!-- Tabel kedua -->
-    <div class="w-3/4 mx-auto">
-      <h2 class="text-xl font-bold mb-4 text-center dark:text-white">Tabel absensi siswa tidak hadir</h2>
+    <div class="w-full sm:w-3/4 mx-auto">
+      <h2 class="text-lg sm:text-xl font-bold mb-4 text-center dark:text-white">Tabel Absensi Siswa Tidak Hadir</h2>
       <div class="overflow-x-auto">
-        <table class="table-auto w-full text-center">
+        <table class="table-auto w-full text-center text-xs sm:text-sm">
           <thead>
-            <tr class="border-t-4 border-purple-700 bg-gray-700 text-white thead">
-              <th class="border border-gray-700 px-4 py-2">No</th>
-              <th class="border border-gray-700 px-4 py-2">Hari/Tanggal</th>
-              <th class="border border-gray-700 px-4 py-2">username</th>
-              <th class="border border-gray-700 px-4 py-2">Keterangan</th>
+            <tr class="border-t-4 border-purple-700 bg-gray-700 text-white">
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">No</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Hari/Tanggal</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Username</th>
+              <th class="border border-gray-700 px-2 sm:px-4 py-2">Keterangan</th>
             </tr>
           </thead>
           <tbody class="dark:text-white">
             <?php $no = 1; ?>
             @foreach ($tidakhadir as $item)
             <tr>
-              <td class="border border-gray-700 px-4 py-2">{{ $no }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->hari }} /{{ $item->tanggal }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->username }}</td>
-              <td class="border border-gray-700 px-4 py-2">{{ $item->alasan }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $no }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->hari }} /{{ $item->tanggal }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->username }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
             </tr>
             <?php $no++; ?>
             @endforeach
           </tbody>
         </table>
-        <br>
-      {{ $tidakhadir->links('pagination::tailwind') }}
       </div>
+      {{ $tidakhadir->links('pagination::tailwind') }}
     </div>
   </div>
 </div>
