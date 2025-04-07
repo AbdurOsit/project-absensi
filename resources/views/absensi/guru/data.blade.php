@@ -9,14 +9,18 @@
             <th class="border border-gray-700 px-4 py-2">No.Card</th>
             <th class="border border-gray-700 px-4 py-2">Nama Siswa</th>
             <th class="border border-gray-700 px-4 py-2">Alamat</th>
+            <th class="border border-gray-700 px-4 py-2">Jurusan</th>
           </tr>
         </thead>
         <tbody class="dark:text-white">
+          @foreach ($data as $item)              
           <tr>
-            <td class="border border-gray-700 px-4 py-2">08233</td>
-            <td class="border border-gray-700 px-4 py-2">Gilber Hidaya</td>
-            <td class="border border-gray-700 px-4 py-2">Puri</td>
+            <td class="border border-gray-700 px-4 py-2">{{ $item->uid }}</td>
+            <td class="border border-gray-700 px-4 py-2">{{ $item->username }}</td>
+            <td class="border border-gray-700 px-4 py-2">{{ $item->kelas }}</td>
+            <td class="border border-gray-700 px-4 py-2">{{ $item->jurusan }}</td>
           </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

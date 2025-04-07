@@ -44,7 +44,7 @@
           </tbody>
         </table>
       </div>
-      {{ $absensihadir->links('pagination::tailwind') }}
+      {{ $absensihadir->appends(['absensihadir' => request('absensihadir'), 'absensihadir' => request('absensihadir')])->links('pagination::tailwind') }}
     </div>
 
     <!-- Tabel kedua -->
@@ -74,7 +74,7 @@
           </tbody>
         </table>
       </div>
-      {{ $tidakhadir->links('pagination::tailwind') }}
+      {{ $tidakhadir->appends(['tidakhadir' => request('tidakhadir'), 'tidakhadir' => request('tidakhadir')])->links('pagination::tailwind') }}
     </div>
   </div>
 </div>
