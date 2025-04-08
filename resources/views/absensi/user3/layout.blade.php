@@ -5,15 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Absensi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {},
-            },
-        };
-    </script>
+    @vite('resources/css/app.css')
     <style>
         /* For smooth dark mode transition */
         * {
@@ -83,7 +75,7 @@
                         {{-- Image --}}
                         <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700">
                             <img src="{{ asset('image/' . Auth::user()->image) }}" alt="Profile"
-                            class="w-8 h-8 rounded-full" />
+                                class="w-8 h-8 rounded-full" />
                         </div>
                         {{-- Username --}}
                         <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>
@@ -92,14 +84,20 @@
             </div>
         </div>
     </nav>
+    <button id="mobileOpenBtn" class="fixed flex items-center justify-center top-16 left-4 w-8 h-8 text-white bg-purple-600 rounded-xl md:hidden" onclick='mobileSidebartgl()'>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
     <div class="flex pt-14">
-        <div id="sidebar"
-            class="left-0 top-0 h-full w-16 bg-purple-500 dark:bg-zinc-800 flex flex-col transition-all duration-200 rounded-full mt-8 ml-3">
+        {{-- Desktop sidebar --}}
+        <div id="sidebar" class="left-0 top-0 h-full w-fit bg-purple-500 dark:bg-zinc-800 hidden md:flex md:flex-col transition-all duration-200 rounded-full mt-8 ml-3">
             <!-- Header Section -->
             <div class="w-full flex items-center h-16">
                 <!-- Hamburger Menu (Visible when collapsed) -->
                 <button id="openBtn"
-                    class="w-16 h-16 flex items-center justify-center text-white hover:bg-purple-600 hover:rounded-full"
+                    class="w-16 h-16 flex items-center justify-center text-white hover:bg-purple-600 rounded-t-full"
                     title="3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -109,10 +107,10 @@
                 </button>
 
                 <!-- Admin Title and Close Button (Hidden by default) -->
-                <div id="headerExpanded" class="hidden w-full px-4 flex justify-between items-center">
-                    <span class="text-white text-2xl font-semibold">Menu</span>
+                <div id="headerExpanded" class="hidden w-full flex justify-between items-center">
+                    <span class="text-white text-2xl font-semibold pl-4">Menu</span>
                     <button id="closeBtn"
-                        class="w-16 h-16 flex items-center justify-center text-white hover:bg-purple-600 hover:rounded-3xl"
+                        class="w-16 h-16 flex items-center justify-center text-white hover:bg-purple-600 rounded-tr-3xl"
                         title="4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -169,7 +167,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                        class="w-full flex items-center text-white hover:bg-purple-600 hover:rounded-b-3xl mb-0.1">
+                        class="w-full flex items-center text-white hover:bg-purple-600 rounded-b-3xl mb-0.1">
                         <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -177,7 +175,85 @@
                                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                             </svg>
                         </div>
-                        <span class="hidden nav-text">Logout</span>
+                        <span class="hidden nav-text px-4">Logout</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {{-- Mobile Sidebar --}}
+        <div id="mobile-sidebar" class="fixed -left-full top-10 h-[520px] w-fit bg-purple-500 dark:bg-zinc-800 md:hidden flex flex-col transition-all duration-200 rounded-3xl mt-8 ml-3">
+            <!-- Header Section -->
+            <div class="w-full flex items-center h-16">
+                <!-- Admin Title and Close Button (Hidden by default) -->
+                <div id="headerExpanded" class=" w-full flex justify-between items-center">
+                    <span class="text-white text-2xl font-semibold pl-4">Menu</span>
+                    <button id="closeBtn"
+                        class="w-16 h-16 flex items-center justify-center text-white hover:bg-purple-600 rounded-tr-3xl"
+                        title="4" onclick="mobileSidebartgl()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Items -->
+            <div class="flex flex-col flex-1 pt-4">
+                <!-- Home -->
+                <a href="/user" class="w-full flex items-center text-white hover:bg-purple-600">
+                    <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <span class=" nav-text px-4">Home</span>
+                </a>
+
+                <!-- Documents -->
+                <a href="/user/rekap" class="w-full flex items-center text-white hover:bg-purple-600">
+                    <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined">
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 3v4a1 1 0 0 1-1 1H5m4 10v-2m3 2v-6m3 6v-3m4-11v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                            </svg>
+                        </span>
+                    </div>
+                    <span class=" nav-text px-4">Rekap</span>
+                </a>
+
+                <!-- Settings -->
+                <a href="#" class="w-full flex items-center text-white hover:bg-purple-600 mt-44 mb-2">
+                    <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <span class=" nav-text px-4">Settings</span>
+                </a>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="w-full flex items-center text-white hover:bg-purple-600 rounded-b-3xl mb-0.1">
+                        <div class="w-16 h-16 flex items-center justify-center flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </div>
+                        <span class=" nav-text px-4">Logout</span>
                     </button>
                 </form>
             </div>
@@ -222,19 +298,19 @@
         const navTexts = document.querySelectorAll(".nav-text");
 
         function expandSidebar() {
+            sidebar.classList.add("rounded-3xl");
             sidebar.classList.remove("w-16");
             sidebar.classList.add("w-64");
             sidebar.classList.remove("rounded-full");
-            sidebar.classList.add("rounded-3xl");
             openBtn.classList.add("hidden");
             headerExpanded.classList.remove("hidden");
             navTexts.forEach((text) => text.classList.remove("hidden"));
         }
 
         function collapseSidebar() {
+            sidebar.classList.remove("rounded-3xl");
             sidebar.classList.remove("w-64");
             sidebar.classList.add("w-16");
-            sidebar.classList.remove("rounded-3xl");
             sidebar.classList.add("rounded-full");
             openBtn.classList.remove("hidden");
             headerExpanded.classList.add("hidden");
@@ -244,7 +320,15 @@
         openBtn.addEventListener("click", expandSidebar);
         closeBtn.addEventListener("click", collapseSidebar);
 
-        
+        const mobileSidebar = document.getElementById('mobile-sidebar')
+        const mobilesidebatBtn = document.getElementById("mobileOpenBtn")
+
+        function mobileSidebartgl(){
+            console.log('clicked')
+            mobileSidebar.classList.toggle('-left-full')
+            mobileSidebar.classList.toggle('left-0')
+            mobilesidebatBtn.classList.toggle('hidden')
+        }
     </script>
 </body>
 
