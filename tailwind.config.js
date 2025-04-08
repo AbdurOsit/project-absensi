@@ -14,7 +14,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                oswald: ['oswald']
+                oswald: ['oswald', 'arial']
             },
             screens: {
                 'sm': '640px',

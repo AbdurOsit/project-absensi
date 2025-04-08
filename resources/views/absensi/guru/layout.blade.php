@@ -38,7 +38,7 @@
         <div class="min-h-screen flex ml-5">
             <div id="sidebarContainer" class="md:relative md:block pt-5 pb-5 rounded-lg h-full transition-all duration-300">
                 <!-- Desktop Sidebar -->
-                <div class="hidden md:block h-auto w-fit bg-purple-600 rounded-3xl">
+                <div class="hidden md:block h-auto w-fit bg-purple-600 rounded-3xl z-50">
                     <div class="flex items-center justify-between p-4 border-purple-500 cursor-pointer" onclick="toggleSidebar()">
                         <div class="text-yellow-300 text-3xl font-semibold font-oswald titles">A<span class="text-white" >bsensi</span>
                         </div>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <!-- Mobile Sidebar -->
-                <div id="mobile-sidebar" class="md:hidden absolute -left-full h-auto w-400 bg-purple-600 rounded-3xl transition-all duration-200">
+                <div id="mobile-sidebar" class="md:hidden absolute -left-full h-auto w-400 bg-purple-600 rounded-3xl transition-all duration-200 z-50">
                     <div class="flex items-center justify-between p-4 border-purple-500 cursor-pointer" onclick="mobileToggle()">
                         <div class="text-yellow-300 text-3xl font-semibold font-oswald">A<span class="text-white" >bsensi</span>
                         </div>

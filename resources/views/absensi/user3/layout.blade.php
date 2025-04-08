@@ -90,7 +90,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     </button>
-    <div class="flex pt-14">
+    <div class="flex pt-14 z-50">
         {{-- Desktop sidebar --}}
         <div id="sidebar" class="left-0 top-0 h-full w-fit bg-purple-500 dark:bg-zinc-800 hidden md:flex md:flex-col transition-all duration-200 rounded-full mt-8 ml-3">
             <!-- Header Section -->
