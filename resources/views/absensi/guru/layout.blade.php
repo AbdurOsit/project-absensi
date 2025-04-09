@@ -2,6 +2,8 @@
 <html>
 
 <head>
+    <meta content="charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Absensi</title>
     @vite('resources/css/app.css')
     <style>
@@ -54,8 +56,8 @@
                         </svg>
                     </div>
 
+                    <!-- Menu Items -->
                     <div class="p-4 space-y-4">
-                        <!-- Menu Items -->
 
                         {{-- Home Navigation --}}
                         <a href="/guru" class="pb-5">
@@ -94,6 +96,16 @@
                                         d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                                 </svg>
                                 <span class="titles">Rekapitulasi Siswa</span>
+                            </div>
+                        </a>
+
+                        {{-- Profile Navigation --}}
+                        <a href="{{ route('guru.profile') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                                <span class="titles">Profile</span>
                             </div>
                         </a>
 
@@ -141,7 +153,7 @@
                     <div class="flex items-center justify-between p-4 border-purple-500 cursor-pointer" onclick="mobileToggle()">
                         <div class="text-yellow-300 text-3xl font-semibold font-oswald">A<span class="text-white" >bsensi</span>
                         </div>
-                        <svg class="w-10 h-10 texaria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                         </svg>
@@ -187,6 +199,16 @@
                                         d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                                 </svg>
                                 <span >Rekapitulasi Siswa</span>
+                            </div>
+                        </a>
+
+                        {{-- Profile Navigation --}}
+                        <a href="{{ route('guru.profile') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                                <span class="titles">Profile</span>
                             </div>
                         </a>
 
@@ -329,7 +351,7 @@
                 {{-- Search --}}
                 <div class="flex items-center gap-2 w-full md:w-auto order-2 md:order-1">
                     <input type="search" placeholder="search"
-                        class=" bg-gray-100 dark:bg-gray-700 text-white rounded px-3 py-1 w-full md:w-64">
+                    class=" bg-gray-100 dark:bg-gray-700 dark:text-white rounded px-3 py-1 w-full md:w-64">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
@@ -344,7 +366,7 @@
                         <button id="theme-toggle" class="text-gray-600 dark:text-gray-400 flex items-center">
                             <!-- Sun Icon -->
                             <svg id="sunIcon"
-                                class="w-6 h-6 text-gray-800 dark:text-white opacity-0 dark:opacity-100 absolute"
+                                class="w-6 h-6 text-gray-800 dark:text-white opacity-0 dark:opacity-100"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -352,7 +374,7 @@
                                     d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
                             </svg>
                             <!-- Moon Icon -->
-                            <svg id="moonIcon" class="w-6 h-6 text-gray-900 opacity-100 dark:opacity-0 mr-4 absolute"
+                            <svg id="moonIcon" class="w-6 h-6 text-gray-900 opacity-100 dark:opacity-0 mr-4"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
