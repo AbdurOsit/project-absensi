@@ -26,15 +26,15 @@ class InitialSetup extends Command
     public function handle()
     {
         $scope = $this->argument('scope');
-
+        $newdb = $this->choice('New fresh database?', ['yes','no'], 1);
         switch ($scope) {
             case 'dev':
                 $this->info('Running Instalation Development Environment');
-                $this->runDevCommand();
+                $this->runDevCommand($newdb);
                 break;
             case 'server':
                 $this->info('Running Instalation Server Environment');
-                $this->runServerCommand();
+                $this->runServerCommand($newdb);
                 break;
             default:
                 $this->error('invalid argument, only supported "dev" and "server" argument');
@@ -42,22 +42,28 @@ class InitialSetup extends Command
         }
     }
 
-    private function runDevCommand() {
+    private function runDevCommand($newdb) {
         $commands = [
             'composer install --ansi',
             'npm install --color=always',
-            'php artisan migrate --ansi',
-            'php artisan db:seed --ansi',
+            'php artisan key:generate --ansi',
         ];
-
+        
         foreach ($commands as $command) {
             passthru($command);
         }
+        
+        if ($newdb == "yes") {
+          passthru('php artisan migrate --ansi');
+          passthru('php artisan db:seed --ansi');
+        }
     }
-    private function runServerCommand() {
+    private function runServerCommand($newdb) {
         $commands = [
             'composer install --no-dev --optimize-autoload --ansi',
             'npm install --production --color=always',
+            'npm run build --color=always',
+            'php artisan key:generate --ansi',
             'php artisan migrate --force --ansi',
             'php artisan db:seed --ansi',
             'php artisan route:cache --ansi',
