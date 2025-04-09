@@ -32,7 +32,7 @@
                 <!-- Jurusan update -->
                 <div class="space-y-2">
                     <label for="jurusan" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                        Class
+                        Jurusan
                     </label>
                     <input type="text" name="jurusan" id="jurusan" value="{{ $data->jurusan }}"
                         class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('jurusan') border-red-500 @enderror">
