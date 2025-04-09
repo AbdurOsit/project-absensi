@@ -114,21 +114,17 @@
                         </button>
                     </form>
                 </div>
-                <div class="dark:text-white ml-5">
+                <div class="dark:text-white ml-5 text-end">
                     <table border="1" class="border border-white w-full">
                         <thead>
                             <tr>
                                 <th class="border border-white px-24">Username</th>
-                                <th class="border border-white px-24">Kelas</th>
-                                <th class="border border-white px-24">Jurusan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($user as $item)
                                 <tr>
                                     <td class="border border-white text-center py-2">{{ $item->username }}</td>
-                                    <td class="border border-white text-center py-2">{{ $item->kelas }}</td>
-                                    <td class="border border-white text-center py-2">{{ $item->jurusan }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

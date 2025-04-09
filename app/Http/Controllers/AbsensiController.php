@@ -25,8 +25,8 @@ class AbsensiController extends Controller
         $date = Carbon::now()->format('Y-m-d');
         $time = Carbon::now()->locale('id')->translatedFormat('l');
 
-        $users = $query ? User::where('username', 'like', "%$query%")->paginate(3) : User::paginate(3);
-        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiHadir::paginate(3);
+        $users = $query ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username') : User::paginate(3, ['*'], 'username');
+        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(3, ['*'], 'absensihadir') : AbsensiHadir::paginate(3, ['*'], 'absensihadir');
         $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiTidakHadir::paginate(3);
 
         return view('absensi.admin2.index', [
@@ -97,7 +97,6 @@ class AbsensiController extends Controller
         return redirect()->route('admin.input')->with('sukses', 'Data siswa berhasil disimpan!');
     }
     
-
     public function update($id){
         $data = User::where('id', $id)->first();
         $role = Role::all();
@@ -420,16 +419,98 @@ class AbsensiController extends Controller
         $tidakhadir = AbsensiTidakHadir::all();
         return view('absensi.guru.index', compact('title', 'absensihadir', 'date', 'time', 'tidakhadir'));
     }
-    function guru_data()
+    function guru_data(Request $request)
     {
         $title = 'data';
-        return view('absensi.guru.data', compact('title'));
+        $query = $request->query('query');
+
+        // Jika ada query pencarian
+        if ($query) {
+            $data = User::where('role_id', 3)
+                ->where('username', 'like', "%$query%")
+                ->get();
+        } else {
+            // Jika tidak ada pencarian, tampilkan semua data
+            $data = User::where('role_id', 3)->with('role')->get();
+        }
+
+        return view('absensi.guru.data', compact('title', 'data', 'query'));
     }
-    function guru_rekap()
+    function guru_rekap(Request $request)
     {
         $title = 'rekap';
-        return view('absensi.guru.rekap', compact('title'));
+        $query = $request->query('query');
+        $sort = $request->query('sort', 'asc'); // default sort asc
+        $sortColumn = $request->query('sortColumn', 'username'); // default sort by username
+    
+        // Query dasar
+        $dataQuery = AbsensiHadir::query();
+    
+        // Jika ada query pencarian
+        if ($query) {
+            $dataQuery->where('username', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('waktu_datang', 'like', "%$query%")->orWhere('waktu_pulang', 'like', "%$query%");
+        }
+    
+        // Terapkan sorting
+        $dataQuery->orderBy($sortColumn, $sort);
+    
+        // Ambil data dengan pagination
+        Carbon::setLocale('id');
+        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('l'))->paginate(10);
+    
+        return view('absensi.guru.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
+    }
+    public function guru_profile()
+    {
+        $data = Auth::user();
+        // $role = Role::all();
+        return view('absensi.guru.profile', compact('data'));
     }
 
+    public function guru_profile_update(string $uid)
+    {
+        $data = Auth::user();
+        // $role = Role::all();
+        return view('absensi.guru.profile_update', compact('data'));
+    }
+
+    public function guru_profile_update_proccess(Request $request, string $uid)
+    {
+        $request->validate([
+            'username' => 'required',
+            'jurusan' => 'required',
+            'password' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = User::where('uid', $uid)->first();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+
+            // Hapus foto lama jika ada
+            if ($user->image && File::exists(public_path('image/' . $user->image))) {
+                File::delete(public_path('image/' . $user->image));
+            }
+
+            // Simpan foto baru
+            $file->move(public_path('image'), $imageName);
+            $user->image = $imageName;
+        }
+
+         // Update username dan class
+        $user->username = $request->username;
+        $user->jurusan = $request->jurusan;
+
+    // Update password jika ada input baru
+    if ($request->password) {
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+
+        return redirect()->route('guru.profile')->with('sukses', 'Profil berhasil diupdate!');
+    }
 
 }

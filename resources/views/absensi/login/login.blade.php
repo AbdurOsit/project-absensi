@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +30,7 @@
                     <div class="space-y-4">
                         <div class="relative">
                             <input type="text" placeholder="Username"
-                                class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent lowercase"
                                 name="username" value="{{ Session::get('username') }}">
                         </div>
                         <div class="relative flex items-center">

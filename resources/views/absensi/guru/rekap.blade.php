@@ -33,13 +33,25 @@
                 </tr>
             </thead>
             <tbody class="divide-y">
+                @php $no = 1; @endphp
+                @if($data->isEmpty())
                 <tr class="dark:text-white">
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">1</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">01</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Gilbert Hidaya</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">10.00</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">11.00</td>
+                    <tr>
+                        <td colspan="6" class="text-center py-2 text-center py-2 dark:text-white">Belum ada siswa yang absen</td>
+                    </tr>
+                @else
+                @foreach ($data as $item)
+                <tr class="dark:text-white">
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $no }}</td>
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->username }}</td>
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->kelas }}</td>
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->jurusan }}</td>
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_datang }}</td>
+                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_pulang }}</td>
                 </tr>
+                @php $no++; @endphp
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>    

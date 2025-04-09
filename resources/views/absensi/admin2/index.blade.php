@@ -44,7 +44,9 @@
           </tbody>
         </table>
       </div>
-      {{ $absensihadir->links('pagination::tailwind') }}
+      <div class="mt-3 relative z-10">
+        {{ $absensihadir->appends(['absensihadir' => request('absensihadir'), 'tidakhadir' => request('tidakhadir')])->links('pagination::tailwind') }}
+      </div>
     </div>
 
     <!-- Tabel kedua -->
@@ -65,7 +67,7 @@
             @foreach ($tidakhadir as $item)
             <tr>
               <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $no }}</td>
-              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->hari }} /{{ $item->tanggal }}</td>
+              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->hari }} /{{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
               <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->username }}</td>
               <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
             </tr>
@@ -74,7 +76,9 @@
           </tbody>
         </table>
       </div>
-      {{ $tidakhadir->links('pagination::tailwind') }}
+      <div class="mt-3 relative z-20">
+        {{ $tidakhadir->appends(['tidakhadir' => request('tidakhadir'), 'absensihadir' => request('absensihadir')])->links('pagination::tailwind') }}
+      </div>
     </div>
   </div>
 </div>

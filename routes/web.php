@@ -85,6 +85,9 @@ Route::middleware([AuthMiddleware::class])->group(function () {
             Route::get('/guru', [AbsensiController::class, 'guru_index'])->name('guru.index');
             Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
             Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
+            Route::get('guru/profile', [AbsensiController::class, 'guru_profile'])->name('guru.profile');
+            Route::get('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update'])->name('guru.profile.update');
+            Route::put('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update_proccess'])->name('guru.profile.update_proccess');
     });
     Route::middleware(['role:siswa'])->group(function(){
         // Siswa
