@@ -27,7 +27,7 @@ class AbsensiController extends Controller
 
         $users = $query ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username') : User::paginate(3, ['*'], 'username');
         $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(3, ['*'], 'absensihadir') : AbsensiHadir::paginate(3, ['*'], 'absensihadir');
-        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(3, ['*'], 'tidakhadir') : AbsensiTidakHadir::paginate(3, ['*'], 'tidakhadir');
+        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiTidakHadir::paginate(3);
 
         return view('absensi.admin2.index', [
             'users' => $users,
@@ -460,6 +460,57 @@ class AbsensiController extends Controller
     
         return view('absensi.guru.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
+    public function guru_profile()
+    {
+        $data = Auth::user();
+        // $role = Role::all();
+        return view('absensi.guru.profile', compact('data'));
+    }
 
+    public function guru_profile_update(string $uid)
+    {
+        $data = Auth::user();
+        // $role = Role::all();
+        return view('absensi.guru.profile_update', compact('data'));
+    }
+
+    public function guru_profile_update_proccess(Request $request, string $uid)
+    {
+        $request->validate([
+            'username' => 'required',
+            'jurusan' => 'required',
+            'password' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = User::where('uid', $uid)->first();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+
+            // Hapus foto lama jika ada
+            if ($user->image && File::exists(public_path('image/' . $user->image))) {
+                File::delete(public_path('image/' . $user->image));
+            }
+
+            // Simpan foto baru
+            $file->move(public_path('image'), $imageName);
+            $user->image = $imageName;
+        }
+
+         // Update username dan class
+        $user->username = $request->username;
+        $user->jurusan = $request->jurusan;
+
+    // Update password jika ada input baru
+    if ($request->password) {
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+
+        return redirect()->route('guru.profile')->with('sukses', 'Profil berhasil diupdate!');
+    }
 
 }

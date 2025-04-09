@@ -208,7 +208,7 @@
             </tbody>
         </table>
         <!-- Pagination -->
-        <div class="mt-4">
+        <div class="mt-4 relative z-10">
             {{ $kegiatan->appends(['praktek_page' => request('praktek_page'), 'kegiatan_page' => request('kegiatan_page')])->links('pagination::tailwind') }}
         </div>
     </div>

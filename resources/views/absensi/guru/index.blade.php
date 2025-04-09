@@ -1,6 +1,6 @@
 @extends('absensi.guru.layout')
 @section('guru')
-    <div class="bg-gray-100 dark:bg-gray-800">
+    <div class="bg-gray-100 dark:bg-gray-800 text-center">
         @if (session('sukses'))
                 <div class="bg-green-500 text-white p-3 rounded">
                     {{ session('sukses') }}
@@ -50,8 +50,7 @@
                     <table class="table-auto w-full text-center">
                         <thead>
                             <tr class="border-t-4 border-purple-700 bg-gray-700 text-white thead">
-                                <th class="border border-gray-700 px-4 py-2">Id</th>
-                                <th class="border border-gray-700 px-4 py-2">Hari/Tanggal</th>
+                                <th class="border border-gray-700 px-4 py-2">No</th>
                                 <th class="border border-gray-700 px-4 py-2">Username</th>
                                 <th class="border border-gray-700 px-4 py-2">Kelas</th>
                                 <th class="border border-gray-700 px-4 py-2">Jurusan</th>
@@ -66,11 +65,10 @@
                             @foreach ($tidakhadir as $item)
                                 <tr>
                                     <td class="border border-gray-700 px-4 py-2">{{ $no }}</td>
-                                    <td class="border border-gray-700 px-4 py-2">{{ $time }} {{ $item->hari_tanggal }}</td>
                                     <td class="border border-gray-700 px-4 py-2">{{ $item->username }}</td>
                                     <td class="border border-gray-700 px-4 py-2">{{ $item->kelas }}</td>
                                     <td class="border border-gray-700 px-4 py-2">{{ $item->jurusan }}</td>
-                                    <td class="border border-gray-700 px-4 py-2">{{ $item->keterangan }}</td>
+                                    <td class="border border-gray-700 px-4 py-2">{{ $item->alasan }}</td>
                                     <td class="border border-gray-700 px-4 py-2">{{ $date }}</td>
                                 </tr>
                                 @php
