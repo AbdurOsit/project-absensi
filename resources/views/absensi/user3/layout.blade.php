@@ -5,15 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Absensi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {},
-            },
-        };
-    </script>
+    @vite('resources/css/app.css')
     <style>
         /* For smooth dark mode transition */
         * {
