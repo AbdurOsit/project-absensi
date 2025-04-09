@@ -72,7 +72,7 @@ class AbsensiController extends Controller
             'kelas' => 'required',
             'role' => 'required',
             'email' => 'nullable',
-            'password' => 'required',
+            'password' => 'nullable',
         ]);
     
         $imageName = null;
@@ -474,8 +474,7 @@ class AbsensiController extends Controller
         return view('absensi.guru.profile_update', compact('data'));
     }
 
-    public function guru_profile_update_proccess(Request $request, string $uid)
-    {
+    public function guru_profile_update_proccess(Request $request, string $uid){
         $request->validate([
             'username' => 'required',
             'jurusan' => 'required',
@@ -503,14 +502,14 @@ class AbsensiController extends Controller
         $user->username = $request->username;
         $user->jurusan = $request->jurusan;
 
-    // Update password jika ada input baru
-    if ($request->password) {
-        $user->password = Hash::make($request->password);
-    }
+        // Update password jika ada input baru
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
 
-    $user->save();
+        $user->save();
 
-        return redirect()->route('guru.profile')->with('sukses', 'Profil berhasil diupdate!');
+            return redirect()->route('guru.profile')->with('sukses', 'Profil berhasil diupdate!');
     }
 
 }

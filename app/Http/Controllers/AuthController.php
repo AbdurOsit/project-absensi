@@ -24,12 +24,22 @@ class AuthController extends Controller
         Session::flash('password', $request->password);
         // $credentials = $request->validate([
         $request->validate([
-            'username' => 'required|',
-            'password' => 'required'
+            'username' => 'required',
+            'password' => 'required',
         ], [
             'username.required' => 'username harus diisi',
             'password.required' => 'password harus diisi',
         ]);
+    
+        $user = User::where('username', $request->username)->first();
+    
+        if (!$user) {
+            return back()->withErrors(['username' => 'Username tidak ditemukan'])->withInput();
+        }
+    
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Password salah'])->withInput();
+        }
 
         $credentials = [
             'username' => $request->username,

@@ -98,7 +98,7 @@
                         <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Password
                         </label>
-                        <input type="text" name="password" id="password" value="{{ $data->password }}"
+                        <input type="text" name="password" id="password"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('name') border-red-500 @enderror">
                         <button type="button" onclick="generatePassword()"
                             class="bg-purple-500 text-white p-2 rounded-lg">Generate Password</button>
@@ -135,8 +135,10 @@
                 alert("Masukkan username terlebih dahulu!");
                 return;
             }
-            let randomNum = Math.floor(Math.random() * 900) + 100; // 3 digit angka acak
-            document.getElementById('password').value = username + randomNum;
+            // 3 digit angka acak
+            // let randomNum = Math.floor(Math.random() * 900) + 100; 
+            // document.getElementById('password').value = username + randomNum;
+            document.getElementById('password').value = username;
         }
     </script>
 @endsection

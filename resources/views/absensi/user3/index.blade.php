@@ -7,28 +7,23 @@
     @endif
     <!-- Tugas,Praktek,Kegiatan Minggu Ini Section -->
     <div class="space-y-1">
-        <h3 class="text-gray-900 dark:text-white text-3xl font-bold ml-12">Tugas Minggu Ini</h3>
+        <h3 class="text-gray-900 dark:text-white text-2xl md:text-3xl font-bold mx-4 md:ml-12">Tugas Minggu Ini</h3>
         {{-- Tugas Section --}}
-        <div class="bg-gray-300 dark:bg-zinc-800 p-6 rounded-2xl flex space-x-6 ml-28">
+        <div class="bg-gray-300 dark:bg-zinc-800 p-3 md:p-6 rounded-2xl flex space-x-2 md:space-x-1 mx-4 md:ml-28">
             <!-- Previous button -->
-            <button onclick="moveCarousel('left')" class="text-purple-600 dark:text-purple-400 p-2 rounded-lg hover:bg-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button onclick="moveCarousel('left')" class="text-purple-600 dark:text-purple-400 p-1 md:p-2 rounded-lg hover:bg-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="md:w-20 md:h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m15 18-6-6 6-6"/>
                 </svg>
             </button>
             
-            @if ($tugas->empty())
-            <div class="flex justify-center items-center">
-                <p class="text-gray-900 dark:text-white text-3xl font-bold ">Tidak ada tugas</p>
-            </div>
-            @endif
-            <div id="carousel" class="flex space-x-4 flex-1 justify-center carousel-container" data-tugas='@json($tugas)'>
+            <div id="carousel" class="flex space-x-2 md:space-x-4 flex-1 justify-center carousel-container" data-tugas='@json($tugas)'>
                 
             </div>
             
             <!-- Next button -->
-            <button onclick="moveCarousel('right')" class="text-purple-600 dark:text-purple-400 p-2 rounded-lg hover:bg-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button onclick="moveCarousel('right')" class="text-purple-600 dark:text-purple-400 p-1 md:p-2 rounded-lg hover:bg-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="md:w-20 md:h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 18 6-6-6-6"/>
                 </svg>
             </button>
@@ -36,24 +31,24 @@
         
     </div>
 
-    <div class="flex p-3">
+    <div class="flex flex-col md:flex-row p-2 md:p-3">
         <!-- Praktek Section -->
-        <div class="space-y-1 mt-4 ml-10">
-            <h3 class="text-gray-900 dark:text-white text-xl font-bold">Praktek Minggu Ini</h3>
-            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
+        <div class="space-y-1 mt-4 mx-4 md:ml-10 w-full md:w-auto">
+            <h3 class="text-gray-900 dark:text-white text-lg md:text-xl font-bold">Praktek Minggu Ini</h3>
+            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-52">
                 <div class="space-y-2 h-auto">
                     <div class="space-y-2 h-auto pb-2">
                         @if ($kegiatan->isEmpty())
                         <p class="text-center dark:text-white text-lg font-bold flex justify-center items-center">Tidak ada Praktek</p>
                         @else
                         @foreach ($praktek as $item)
-                        <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm">
-                            <button class="w-8 h-8 flex items-center justify-center rounded-full">
-                                <svg class="bg-blue-500 w-10 h-auto rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm mx-2 my-2">
+                            <button class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center rounded-full">
+                                <svg class="bg-blue-500 w-8 h-auto md:w-10 rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                  </svg>                            
+                                </svg>                            
                             </button>
-                            <span class="text-gray-900 dark:text-white font-medium">{{ $item->hari }} - {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
+                            <span class="text-gray-900 dark:text-white text-sm md:font-medium">{{ $item->hari }} - {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
                         </li>
                         @endforeach
                         <div class="flex justify-center text-center">
@@ -66,21 +61,21 @@
         </div>
 
         <!-- Kegiatan Section -->
-        <div class="space-y-1 mt-4 ml-5">
-            <h3 class="text-gray-900 dark:text-white text-xl font-bold">Kegiatan Minggu Ini</h3>
-            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-52">
+        <div class="space-y-1 mt-4 mx-4 md:ml-5 w-full md:w-auto">
+            <h3 class="text-gray-900 dark:text-white text-lg md:text-xl font-bold">Kegiatan Minggu Ini</h3>
+            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-48">
                 <div class="space-y-2 h-auto pb-2">
                     @if ($kegiatan->isEmpty())
                     <p class="text-center dark:text-white text-lg font-bold flex justify-center items-center">Tidak ada kegiatan</p>
                     @else
                     @foreach ($kegiatan as $item)
-                    <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                        <button class="w-8 h-8 flex items-center justify-center rounded-full">
-                            <svg class="bg-blue-500 w-10 h-auto rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <li class="flex items-center gap-3 bg-white dark:bg-gray-700 p-3 md:p-4 rounded-lg shadow-sm mx-2 my-2">
+                        <button class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center rounded-full">
+                            <svg class="bg-blue-500 w-8 h-auto md:w-10 rounded-full text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                              </svg>                            
+                            </svg>                            
                         </button>
-                        <span class="text-gray-900 dark:text-white font-medium">{{ $item->hari }} - {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
+                        <span class="text-gray-900 dark:text-white text-sm md:font-medium">{{ $item->hari }} - {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
                     </li>
                     @endforeach
                     <div class="flex justify-center text-center">
@@ -92,31 +87,31 @@
         </div>
 
         <!-- Absensi Section -->
-        <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 ml-5 p-4 shadow-md">
-            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-4">Absensi Hari Ini</h3>
+        <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 mx-4 md:ml-5 p-3 md:p-4 shadow-md w-full md:w-auto">
+            <h3 class="text-gray-900 dark:text-white text-xl md:text-2xl font-bold mb-2 md:mb-4">Absensi Hari Ini</h3>
             <div class="overflow-x-auto">
-                <table class="w-full text-gray-900 dark:text-white border-collapse">
+                <table class="w-full text-gray-900 dark:text-white border-collapse text-sm md:text-base">
                     <thead>
                         <tr class="bg-blue-500 text-white text-left">
-                            <th class="py-3 px-4 rounded-tl-lg">No. Card</th>
-                            <th class="py-3 px-4">Nama</th>
-                            <th class="py-3 px-4">Status</th>
-                            <th class="py-3 px-4">Waktu Kedatangan</th>
-                            <th class="py-3 px-4 rounded-tr-lg">Waktu Pulang</th>
+                            <th class="py-2 md:py-3 px-2 md:px-4 rounded-tl-lg">No. Card</th>
+                            <th class="py-2 md:py-3 px-2 md:px-4">Nama</th>
+                            <th class="py-2 md:py-3 px-2 md:px-4">Status</th>
+                            <th class="py-2 md:py-3 px-2 md:px-4">Waktu Kedatangan</th>
+                            <th class="py-2 md:py-3 px-2 md:px-4 rounded-tr-lg">Waktu Pulang</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($absensi)
                         <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
-                            <td class="py-3 px-4">{{ $absensi->uid }}</td>
-                            <td class="py-3 px-4">{{ $absensi->username }}</td>
-                            <td class="py-3 px-4">{{ $absensi->status }}</td>
-                            <td class="py-3 px-4">{{ $absensi->waktu_datang }}</td>
-                            <td class="py-3 px-4">{{ $absensi->waktu_pulang }}</td>
+                            <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->uid }}</td>
+                            <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->username }}</td>
+                            <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->status }}</td>
+                            <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->waktu_datang }}</td>
+                            <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->waktu_pulang }}</td>
                         </tr>
                         @else
                         <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
-                            <td colspan="5" class="py-3 px-4 text-gray-500 italic">Belum ada absensi</td>
+                            <td colspan="5" class="py-2 md:py-3 px-2 md:px-4 text-gray-500 italic">Belum ada absensi</td>
                         </tr>
                         @endif
                     </tbody>
@@ -126,44 +121,39 @@
 
     </div>
     <script>
-        // Ambil data tugas dari Laravel dan konversi ke JSON
         const tasks = @json($tugas);
+const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
 
-        // Warna untuk setiap tugas
-        const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
+let currentIndex = 0;
 
-        let currentIndex = 0; // Mulai dari tugas pertama
+function generateTaskSlides() {
+    const carousel = document.getElementById('carousel');
+    carousel.innerHTML = '';
 
-        function generateTaskSlides() {
-            const carousel = document.getElementById('carousel');
-            carousel.innerHTML = ''; // Bersihkan isi carousel sebelum mengisi ulang
+    // Ambil 3 tugas dari posisi sekarang tanpa loop
+    const endIndex = Math.min(currentIndex + 3, tasks.length);
+    for (let i = currentIndex; i < endIndex; i++) {
+        const task = tasks[i];
+        const card = document.createElement('div');
+        card.className = `task-card w-24 h-16 md:w-48 md:h-24 ${colors[i % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
+        card.innerHTML = `<span class="text-white text-xs md:text-lg font-bold p-1 md:p-0 text-center">${task.judul}</span>`;
+        carousel.appendChild(card);
+    }
+}
 
-            // Pastikan selalu 3 tugas ditampilkan
-            for (let i = 0; i < 3; i++) {
-                const taskIndex = (currentIndex + i) % tasks.length; // Loop jika sudah mencapai akhir
-                const task = tasks[taskIndex];
+function moveCarousel(direction) {
+    if (tasks.length <= 3) return;
 
-                const card = document.createElement('div');
-                card.className = `task-card w-40 h-20 md:w-48 md:h-24 ${colors[taskIndex % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
-                card.innerHTML = `<span class="text-white text-lg font-bold">${task.judul}</span>`;
+    if (direction === 'right' && currentIndex + 3 < tasks.length) {
+        currentIndex++;
+    } else if (direction === 'left' && currentIndex > 0) {
+        currentIndex--;
+    }
 
-                carousel.appendChild(card);
-            }
-        }
+    generateTaskSlides();
+}
 
-        function moveCarousel(direction) {
-            if (tasks.length <= 3) return; // Tidak perlu geser jika tugas kurang dari atau sama dengan 3
-        
-            if (direction === 'right') {
-                currentIndex = (currentIndex + 1) % tasks.length;
-            } else {
-                currentIndex = (currentIndex - 1 + tasks.length) % tasks.length;
-            }
-        
-            generateTaskSlides();
-        }
-        
-        // Inisialisasi carousel
-        generateTaskSlides();
+generateTaskSlides();
+
     </script>
 @endsection

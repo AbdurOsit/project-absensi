@@ -25,7 +25,7 @@ class SiswaController extends Controller
     public function siswa_index()
     {
         $data = Auth::user();
-
+        $now = Carbon::now();
         // Ambil hari Senin minggu ini
         $startDate = Carbon::now()->startOfWeek(); // Senin minggu ini
         $endDate = $startDate->copy()->addDays(4); // Jumat minggu ini
@@ -38,7 +38,7 @@ class SiswaController extends Controller
         $tugas = DB::table('tugas')
             ->whereBetween('tanggal', [$startDate, $adjustedEndDate]) // Perpanjang hingga H+1 dari deadline
             ->whereNotNull('tugas')
-            ->select('tanggal', 'tugas as judul', 'hari')
+            ->select('tanggal', 'tugas as judul', 'hari','deadline_tanggal','deadline_hari')
             ->get();
 
         // Ambil data praktek dengan pagination
@@ -46,18 +46,18 @@ class SiswaController extends Controller
             ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('praktek')
             ->select('tanggal', 'praktek', 'hari')
-            ->paginate(3);
+            ->paginate(3, ['*'], 'praktek');
 
         // Ambil data kegiatan dengan pagination
         $kegiatan = DB::table('kegiatan')
             ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
             ->whereNotNull('kegiatan')
             ->select('tanggal', 'kegiatan', 'hari')
-            ->paginate(3);
+            ->paginate(3, ['*'], 'kegiatan');
 
         $absensi = AbsensiHadir::where('username', Auth::user()->username)->first();
 
-        return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan', 'absensi'));
+        return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan', 'absensi','now'));
     }
 
     public function siswa_rekap()
