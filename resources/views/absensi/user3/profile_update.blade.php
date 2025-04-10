@@ -4,7 +4,7 @@
     <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
         <!-- Card Header -->
         <div class="border-b border-gray-200 dark:border-gray-700 p-6">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Update Data </h2>
+            <h2 class="text-2xl font-semibold text-gray-700 dark:text-white">Update Data </h2>
         </div>
 
         <!-- Form Content -->
@@ -43,7 +43,7 @@
 
                 <!-- Form Buttons -->
                 <div class="flex justify-between space-x-4 pt-4">
-                    <div class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"><a href="{{ route('admin.input') }}" >Back</a></div>
+                    <div class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"><a href="{{ route('siswa.rekap') }}" >Back</a></div>
                     <div class="flex justify-end space-x-4">
                         <button type="reset"
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
