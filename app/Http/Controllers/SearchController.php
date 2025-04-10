@@ -8,6 +8,7 @@ use App\Models\AbsensiTidakHadir;
 use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
@@ -36,6 +37,12 @@ class SearchController extends Controller
                 return $this->searchWaktu($query);
             case 'admin.surat':
                 return $this->searchSurat($query);
+            case 'guru.index':
+                return $this->guruIndex($query);
+            case 'guru.data':
+                return $this->guruData($query);
+            case 'guru.rekap':
+                return $this->guruRekap($query);
             default:
                 return $this->searchIndex($query);
         }
@@ -117,6 +124,38 @@ class SearchController extends Controller
         $user = User::where('username', 'like', "%$query%")->paginate(10);
         return redirect()->route('admin.surat', ['query' => $query])->with([
             'user' => $user,
+            'search_query' => $query
+        ]);
+    }
+    private function guruIndex($query)
+    {
+        $users = User::where('username', 'like', "%$query%")->paginate(10);
+        $absensihadir = AbsensiHadir::where('username', 'like', "%$query%")->paginate(10);
+        $absensitidakhadir = AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(10);
+        $date = Carbon::now()->format('Y-m-d');
+        $time = Carbon::now()->locale('id')->translatedFormat('l');
+        return redirect()->route('guru.index', ['query' => $query])->with([
+            'users' => $users,
+            'absensihadir' => $absensihadir,
+            'tidakhadir' => $absensitidakhadir,
+            'search_query' => $query,
+            'date' => $date,
+            'time' => $time,
+        ]);
+    }
+    private function guruData($query)
+    {
+        $absensiHadirs = User::where('username', 'like', "%$query%")->paginate(10);
+        return redirect()->route('guru.data', ['query' => $query])->with([
+            'data' => $absensiHadirs,
+            'search_query' => $query
+        ]);
+    }
+    private function guruRekap($query)
+    {
+        $absensiHadirs = AbsensiHadir::where('username', 'like', "%$query%")->orWhere('hari_tanggal', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('waktu_datang', 'like', "%$query%")->orWhere('waktu_pulang', 'like', "%$query%")->paginate(10);
+        return redirect()->route('guru.rekap', ['query' => $query])->with([
+            'data' => $absensiHadirs,
             'search_query' => $query
         ]);
     }

@@ -207,7 +207,7 @@ class AbsensiController extends Controller
     
         // Ambil data dengan pagination
         Carbon::setLocale('id');
-        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('l'))->paginate(10);
+        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('Y-m-d'))->paginate(10);
     
         return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
@@ -410,14 +410,30 @@ class AbsensiController extends Controller
     }
 
     // Guru
-    function guru_index()
+    function guru_index(Request $request)
     {
         $title = 'index';
-        $absensihadir = AbsensiHadir::all();
+        // $absensihadir = AbsensiHadir::all();
+        // $time = AbsensiHadir::where('hari_tanggal')->first();
+        // $date = Carbon::parse($time)->locale('id')->translatedFormat('l, d F Y');
+        // $tidakhadir = AbsensiTidakHadir::all();
+        // return view('absensi.guru.index', compact('title', 'absensihadir', 'date', 'time', 'tidakhadir'));
+        $query = $request->query('query');
         $time = AbsensiHadir::where('hari_tanggal')->first();
         $date = Carbon::parse($time)->locale('id')->translatedFormat('l, d F Y');
-        $tidakhadir = AbsensiTidakHadir::all();
-        return view('absensi.guru.index', compact('title', 'absensihadir', 'date', 'time', 'tidakhadir'));
+
+        $users = $query ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username') : User::paginate(3, ['*'], 'username');
+        $absensihadir = $query ? AbsensiHadir::where('username', 'like', "%$query%")->paginate(3, ['*'], 'absensihadir') : AbsensiHadir::paginate(3, ['*'], 'absensihadir');
+        $absensitidakhadir = $query ? AbsensiTidakHadir::where('username', 'like', "%$query%")->paginate(3) : AbsensiTidakHadir::paginate(3);
+
+        return view('absensi.guru.index', [
+            'users' => $users,
+            'absensihadir' => $absensihadir,
+            'tidakhadir' => $absensitidakhadir,
+            'search_query' => $query,
+            'date' => $date,
+            'time' => $time,
+        ]);
     }
     function guru_data(Request $request)
     {
@@ -431,7 +447,7 @@ class AbsensiController extends Controller
                 ->get();
         } else {
             // Jika tidak ada pencarian, tampilkan semua data
-            $data = User::where('role_id', 3)->with('role')->get();
+            $data = User::where('role_id', 3)->get();
         }
 
         return view('absensi.guru.data', compact('title', 'data', 'query'));
@@ -456,7 +472,7 @@ class AbsensiController extends Controller
     
         // Ambil data dengan pagination
         Carbon::setLocale('id');
-        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('l'))->paginate(10);
+        $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('Y-m-d'))->paginate(10);
     
         return view('absensi.guru.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }

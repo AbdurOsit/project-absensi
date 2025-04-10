@@ -12,8 +12,8 @@
                     {{ session('error') }}
                 </div> --}}
             @endif
-            <div class="flex">
-                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg form">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <div class="w-full lg:w-1/2 bg-white dark:bg-gray-800 rounded-lg md:p-3 sm:p-5 shadow-lg form">
                     <form action="{{ route('surat.proccess') }}" method="POST" class="space-y-4"
                         enctype="multipart/form-data">
                         @csrf
@@ -114,21 +114,23 @@
                         </button>
                     </form>
                 </div>
-                <div class="dark:text-white ml-5 text-end">
-                    <table border="1" class="border border-white w-full">
-                        <thead>
-                            <tr>
-                                <th class="border border-white px-24">Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($user as $item)
+                <div class="w-full lg:w-1/2 dark:text-white md:ml-5 text-end">
+                    <div class="overflow-x-auto mt-4">
+                        <table border="1" class="border border-white w-full">
+                            <thead>
                                 <tr>
-                                    <td class="border border-white text-center py-2">{{ $item->username }}</td>
+                                    <th class="border border-white px-24 text-center">Username</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($user as $item)
+                                    <tr>
+                                        <td class="border border-white text-center py-2">{{ $item->username }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     {{ $user->links('pagination::tailwind') }}
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-<div class="p-6">
+<div class="p-6 sm:p-3">
     <!-- Header Controls -->
     <div class="flex items-center gap-4 mb-6">
         <!-- Search Box -->
@@ -23,39 +23,39 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
-        <table class="table-auto w-full border border-black dark:border-white">
-            <thead>
-                <tr class="dark:text-white">
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">No</th>
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Username</th>
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Kelas</th>
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Jurusan</th>
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Waktu Datang</th>
-                    <th class="px-4 py-3 text-sm font-normal border border-black dark:border-white">Waktu Pulang</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y">
-                @php $no = 1; @endphp
-                @if($data->isEmpty())
-                <tr class="dark:text-white">
-                    <tr>
-                        <td colspan="6" class="text-center py-2 text-center py-2 dark:text-white">Belum ada siswa yang absen</td>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full lg:w-1/2 border border-black dark:border-white">
+                <thead>
+                    <tr class="dark:text-white">
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">No</th>
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Username</th>
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Kelas</th>
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Jurusan</th>
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Datang</th>
+                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Pulang</th>
                     </tr>
-                @else
-                @foreach ($data as $item)
-                <tr class="dark:text-white">
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $no }}</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->username }}</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->kelas }}</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->jurusan }}</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_datang }}</td>
-                    <td class="px-4 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_pulang }}</td>
-                </tr>
-                @php $no++; @endphp
-                @endforeach
-                @endif
-            </tbody>
-        </table>
-    </div>    
+                </thead>
+                <tbody class="divide-y">
+                    @php $no = 1; @endphp
+                    @if($data->isEmpty())
+                        <tr class="dark:text-white">
+                            <td colspan="6" class="text-center py-1 text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
+                        </tr>
+                    @else
+                    @foreach ($data as $item)
+                    <tr class="dark:text-white text-center">
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $no }}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->username }}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->kelas }}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->jurusan }}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_datang }}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_pulang }}</td>
+                    </tr>
+                    @php $no++; @endphp
+                    @endforeach
+                    @endif
+                </tbody>
+            </table>
+            {{ $data->links('pagination::tailwind') }}
+        </div>   
 @endsection
