@@ -37,8 +37,8 @@
                     <span class="text-black dark:text-white text-xs sm:text-base hidden xs:inline">Dashboard</span>
                 </div>
                 <div class="flex flex-col items-center date-time-container">
-                    <span class="dark:text-white font-semibold text-xs sm:text-sm">07.10</span>
-                    <span class="dark:text-white font-semibold text-xs sm:text-sm">Senin, 09 Des 2024</span>
+                    <span id="time" class="dark:text-white font-semibold text-xs sm:text-sm"></span>
+                    <span id="date" class="dark:text-white font-semibold text-xs sm:text-sm"></span>
                 </div>
 
                 <!-- Right side icons -->
@@ -250,6 +250,31 @@
                 });
             }
         });
+
+        function updateDateTime() {
+        const now = new Date();
+
+        // Format waktu (jam:menit)
+        const time = now.toLocaleTimeString('id-ID', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        // Format hari dan tanggal (Senin, 09 Des 2024)
+        const date = now.toLocaleDateString('id-ID', {
+            weekday: 'long',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+
+        document.getElementById('time').textContent = time;
+        document.getElementById('date').textContent = date;
+    }
+
+    // Update setiap detik
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // Panggil langsung saat halaman load
         
         // Card Slider Functionality
         // const tasks = [{
