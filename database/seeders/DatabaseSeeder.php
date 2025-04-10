@@ -173,6 +173,7 @@ class DatabaseSeeder extends Seeder
                 'hari' => Carbon::now()->translatedFormat('l'), 
                 'tanggal' => Carbon::now()->toDateString(),
                 'alasan' => 'izin',
+                'surat' => 'surat.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -185,6 +186,7 @@ class DatabaseSeeder extends Seeder
                 'hari' => Carbon::now()->translatedFormat('l'), 
                 'tanggal' => Carbon::now()->toDateString(),
                 'alasan' => 'sakit',
+                'surat' => 'surat.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

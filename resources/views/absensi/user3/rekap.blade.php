@@ -31,7 +31,7 @@
         </div>
 
         {{-- Update Profil Icon --}}
-        <div class="flex justify-end mt-2">
+        {{-- <div class="flex justify-end mt-2">
             <div class="bg-purple-600 w-8 h-8 md:w-10 md:h-10 rounded-full flex justify-center items-center">
                 <a href="{{ route('profile.update', $data->uid) }}">
                     <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-300 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
                     </svg>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Attendance Recap Section -->
@@ -113,6 +113,7 @@
                             Hari
                         </th>
                         <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">Keterangan</th>
+                        <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">Foto Surat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,9 +124,13 @@
                     @else
                         @foreach ($absensi as $item)
                             <tr class="bg-gray-300 dark:bg-zinc-800">
-                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ $item->tanggal }}</td>
+                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
                                 <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ $item->hari }}</td>
                                 <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ $item->alasan }}</td>
+                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">
+                                    <img src=" {{ asset('image/' . $item->surat) }}" alt="surat"
+                                    class="w-24 h-24 object-cover rounded-md mb-2">    
+                                </td>
                             </tr>
                         @endforeach
                     @endif

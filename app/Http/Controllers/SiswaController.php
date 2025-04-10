@@ -66,7 +66,7 @@ class SiswaController extends Controller
 
         $absensi = AbsensiTidakHadir::where('username', $data->username)
             ->orderBy('tanggal', 'asc')
-            ->paginate(2);
+            ->paginate(1);
         // Menghitung jumlah alasan sakit, izin, dan alpha
         $sakit = AbsensiTidakHadir::where('username', $data->username)->where('alasan', 'sakit')->count();
         $izin = AbsensiTidakHadir::where('username', $data->username)->where('alasan', 'izin')->count();
@@ -74,6 +74,11 @@ class SiswaController extends Controller
 
         // Menampilkan hasil (contoh dalam Blade)
         return view('absensi.user3.rekap', compact('absensi','data' ,'sakit', 'izin', 'alpha'));
+    }
+
+    public function siswa_profile(){
+        $data = Auth::user();
+        return view('absensi.user3.profile',compact('data'));
     }
 
     public function profile_update(string $uid)
@@ -113,6 +118,6 @@ class SiswaController extends Controller
 
         $user->save();
 
-        return redirect()->route('siswa.rekap')->with('sukses', 'Profil berhasil diupdate!');
+        return redirect()->route('siswa.profile')->with('sukses', 'Profil berhasil diupdate!');
     }
 }
