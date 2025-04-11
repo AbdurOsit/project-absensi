@@ -100,7 +100,7 @@
                             <th class="py-2 md:py-3 px-2 md:px-4 rounded-tr-lg">Waktu Pulang</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="absensiRealtimeBody">
                         @if($absensi)
                         <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
                             <td class="py-2 md:py-3 px-1 md:px-4">{{ $absensi->uid }}</td>
@@ -154,6 +154,35 @@ function moveCarousel(direction) {
 }
 
 generateTaskSlides();
+function fetchAbsensiUser() {
+    fetch('/user/absensi/realtime')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('absensiRealtimeBody');
+            tbody.innerHTML = '';
 
+            if (data) {
+                const row = `
+                    <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                        <td class="py-2 md:py-3 px-1 md:px-4">${data.uid}</td>
+                        <td class="py-2 md:py-3 px-1 md:px-4">${data.username}</td>
+                        <td class="py-2 md:py-3 px-1 md:px-4">${data.status}</td>
+                        <td class="py-2 md:py-3 px-1 md:px-4">${data.waktu_datang ?? '-'}</td>
+                        <td class="py-2 md:py-3 px-1 md:px-4">${data.waktu_pulang ?? '-'}</td>
+                    </tr>
+                `;
+                tbody.innerHTML = row;
+            } else {
+                tbody.innerHTML = `
+                    <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                        <td colspan="5" class="py-2 md:py-3 px-2 md:px-4 text-gray-500 italic">Belum ada absensi</td>
+                    </tr>
+                `;
+            }
+        });
+}
+
+// Jalankan setiap 3 detik
+setInterval(fetchAbsensiUser, 3000);
     </script>
 @endsection

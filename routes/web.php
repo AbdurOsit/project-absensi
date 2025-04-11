@@ -9,6 +9,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaktuController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\RoleMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +32,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::middleware(['role:admin'])->group(function(){
         // Admin
         Route::get('/admin', [AbsensiController::class, 'index'])->name('admin.index');
+        // routes/web.php
+    
         // Admin CRUD
         Route::get('/admin/input', [AbsensiController::class, 'input'])->name('admin.input');
         Route::get('/input/form', [AbsensiController::class, 'input_form'])->name('admin.input_form');
@@ -92,7 +95,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::middleware(['role:siswa'])->group(function(){
         // Siswa
             Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
-            Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');
+            Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');            
             Route::get('/user/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
             Route::get('/profile', [SiswaController::class, 'siswa_profile'])->name('siswa.profile');
             Route::get('/profile/update/{uid}', [SiswaController::class, 'profile_update'])->name('profile.update');
@@ -100,4 +103,30 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     });
     // Search (bisa diakses oleh semua role yang login)
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+    // Route data realtime
+    //Admin dan Guru
+    Route::get('/absensi-hadir/realtime', function () {
+        $data = App\Models\AbsensiHadir::latest()->take(10)->get(); // Bisa disesuaikan
+        return response()->json($data);
+    });
+    Route::get('/admin/rekap/realtime', function () {
+        $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
+            ->orderBy('username', 'asc')
+            ->get();
+    
+        return response()->json($data);
+    });
+    Route::get('/guru/rekap/realtime', function () {
+        $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
+            ->orderBy('username', 'asc')
+            ->get();
+    
+        return response()->json($data);
+    });
+    // Siswa
+    Route::get('/user/absensi/realtime', function () {
+        $absensi = \App\Models\AbsensiHadir::where('username', Auth::user()->username)->first();
+        return response()->json($absensi);
+    });
 });

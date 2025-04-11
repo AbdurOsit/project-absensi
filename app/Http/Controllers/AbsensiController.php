@@ -413,11 +413,6 @@ class AbsensiController extends Controller
     function guru_index(Request $request)
     {
         $title = 'index';
-        // $absensihadir = AbsensiHadir::all();
-        // $time = AbsensiHadir::where('hari_tanggal')->first();
-        // $date = Carbon::parse($time)->locale('id')->translatedFormat('l, d F Y');
-        // $tidakhadir = AbsensiTidakHadir::all();
-        // return view('absensi.guru.index', compact('title', 'absensihadir', 'date', 'time', 'tidakhadir'));
         $query = $request->query('query');
         $time = AbsensiHadir::where('hari_tanggal')->first();
         $date = Carbon::parse($time)->locale('id')->translatedFormat('l, d F Y');

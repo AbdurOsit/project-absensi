@@ -33,7 +33,7 @@
                     <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Pulang</th>
                 </tr>
             </thead>
-            <tbody class="divide-y">
+            <tbody class="divide-y" id="rekapRealtimeBody">
                 @php $no = 1; @endphp
                 @if($data->isEmpty())
                     <tr class="dark:text-white">
@@ -55,4 +55,42 @@
             </tbody>
         </table>
     </div>    
+    <script>
+        function fetchRekapRealtime() {
+    fetch('/guru/rekap/realtime')
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('rekapRealtimeBody');
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr class="dark:text-white">
+                        <td colspan="6" class="text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let no = 1;
+            data.forEach(item => {
+                const row = `
+                    <tr class="dark:text-white text-center">
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${no}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.username}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.kelas}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.jurusan}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_datang ?? '-'}</td>
+                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_pulang ?? '-'}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+                no++;
+            });
+        });
+}
+
+// Jalankan setiap 3 detik
+setInterval(fetchRekapRealtime, 3000);
+    </script>
 @endsection

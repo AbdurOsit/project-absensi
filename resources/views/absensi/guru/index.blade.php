@@ -2,10 +2,10 @@
 @section('guru')
     <div class="bg-gray-100 dark:bg-gray-800 text-center">
         @if (session('sukses'))
-                <div class="bg-green-500 text-white p-3 rounded">
-                    {{ session('sukses') }}
-                </div>
-            @endif
+            <div class="bg-green-500 text-white p-3 rounded">
+                {{ session('sukses') }}
+            </div>
+        @endif
         <span class="dark:text-white">{{ $date }}</span>
         <div class="container mx-auto py-6">
             <!-- Tabel pertama -->
@@ -22,7 +22,7 @@
                                 <th class="border border-gray-700 px-4 py-2">Waktu Pulang</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="absensiHadirBody">
                             @php
                                 $no = 1;
                             @endphp
@@ -58,7 +58,7 @@
                                 <th class="border border-gray-700 px-4 py-2">Hari Tidak Masuk</th>
                             </tr>
                         </thead>
-                        <tbody class="dark:text-white">
+                        <tbody class="dark:text-white" id="tidakHadirRealtimeBody">
                             @php
                                 $no = 1;
                             @endphp
@@ -81,4 +81,70 @@
             </div>
         </div>
     </div>
+    <script>
+        function fetchAbsensiHadir() {
+            fetch('/absensi-hadir/realtime')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('absensiHadirBody');
+                    tbody.innerHTML = '';
+
+                    data.forEach((item, index) => {
+                        const statusColor = item.status ? 'bg-green-500' : 'bg-yellow-500';
+                        const statusText = item.status ? 'Disetujui' : 'Pending';
+                        const row = `
+              <tr class="dark:text-white">
+                <td class="border px-2 py-2">${index + 1}</td>
+                <td class="border px-2 py-2">${item.username}</td>
+                <td class="border px-2 py-2">${item.waktu_datang ?? '-'}</td>
+                <td class="border px-2 py-2">${item.waktu_pulang ?? '-'}</td>
+              </tr>
+            `;
+                        tbody.innerHTML += row;
+                    });
+                });
+        }
+
+        // Jalankan setiap 5 detik
+        setInterval(fetchAbsensiHadir, 5000);
+
+        function fetchTidakHadir() {
+            fetch('/guru/tidakhadir/realtime')
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById('tidakHadirRealtimeBody');
+                    tbody.innerHTML = '';
+                    let no = 1;
+
+                    data.forEach(item => {
+                        const row = `
+                    <tr>
+                        <td class="border border-gray-700 px-4 py-2">${no}</td>
+                        <td class="border border-gray-700 px-4 py-2">${item.username}</td>
+                        <td class="border border-gray-700 px-4 py-2">${item.kelas}</td>
+                        <td class="border border-gray-700 px-4 py-2">${item.jurusan}</td>
+                        <td class="border border-gray-700 px-4 py-2">${item.alasan}</td>
+                        <td class="border border-gray-700 px-4 py-2">${formatTanggal(item.hari_tanggal)}</td>
+                    </tr>
+                `;
+                        tbody.innerHTML += row;
+                        no++;
+                    });
+                });
+        }
+
+        // Format tanggal seperti "Jumat, 11 April 2025"
+        function formatTanggal(tgl) {
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            return new Date(tgl).toLocaleDateString('id-ID', options);
+        }
+
+        // Jalankan setiap 3 detik
+        setInterval(fetchTidakHadir, 3000);
+    </script>
 @endsection

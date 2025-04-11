@@ -23,7 +23,7 @@
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Waktu Pulang</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="absensiHadirBody">
             <?php $no = 1; ?>
             @foreach ($absensihadir as $item)
             <tr class="dark:text-white">
@@ -103,5 +103,37 @@
       })
       .catch(error => console.error('Error:', error));
   }
+    function fetchAbsensiHadir() {
+      fetch('/absensi-hadir/realtime')
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.getElementById('absensiHadirBody');
+          tbody.innerHTML = '';
+
+          data.forEach((item, index) => {
+            const statusColor = item.status ? 'bg-green-500' : 'bg-yellow-500';
+            const statusText = item.status ? 'Disetujui' : 'Pending';
+            const row = `
+              <tr class="dark:text-white">
+                <td class="border px-2 py-2">${index + 1}</td>
+                <td class="border px-2 py-2">${item.username}</td>
+                <td class="border px-2 py-2">
+                  <button id="statusBtn-${item.uid}" 
+                    onclick="updateStatus('/update-status/${item.uid}', '${item.uid}')" 
+                    class="${statusColor} p-2 font-bold text-white rounded-lg">
+                    ${statusText}
+                  </button>
+                </td>
+                <td class="border px-2 py-2">${item.waktu_datang ?? '-'}</td>
+                <td class="border px-2 py-2">${item.waktu_pulang ?? '-'}</td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        });
+    }
+
+    // Jalankan setiap 5 detik
+    setInterval(fetchAbsensiHadir, 5000);
 </script>
 @endsection
