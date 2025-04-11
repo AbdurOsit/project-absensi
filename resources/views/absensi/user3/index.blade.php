@@ -8,7 +8,7 @@
     <!-- Tugas,Praktek,Kegiatan Minggu Ini Section -->
     <div class="space-y-1">
         <h3 class="text-gray-900 dark:text-white text-2xl md:text-3xl font-bold mx-4 md:ml-12">Tugas Minggu Ini</h3>
-        {{-- Tugas Section --}}
+        {{-- Jadwal Pelajaran Section --}}
         <div class="bg-gray-300 dark:bg-zinc-800 p-3 md:p-6 rounded-2xl flex space-x-2 md:space-x-1 mx-4 md:ml-28">
             <!-- Previous button -->
             <button onclick="moveCarousel('left')" class="text-purple-600 dark:text-purple-400 p-1 md:p-2 rounded-lg hover:bg-gray-700">
@@ -16,11 +16,11 @@
                     <path d="m15 18-6-6 6-6"/>
                 </svg>
             </button>
-            
-            <div id="carousel" class="flex space-x-2 md:space-x-4 flex-1 justify-center carousel-container" data-tugas='@json($tugas)'>
-                
+        
+            <div id="carousel" class="flex space-x-2 md:space-x-4 flex-1 justify-center carousel-container">
+                <!-- Filled by JS -->
             </div>
-            
+        
             <!-- Next button -->
             <button onclick="moveCarousel('right')" class="text-purple-600 dark:text-purple-400 p-1 md:p-2 rounded-lg hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="md:w-20 md:h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -121,39 +121,89 @@
 
     </div>
     <script>
-        const tasks = @json($tugas);
-const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
+        const jadwal = [
+            {
+                hari: "Senin",
+                pelajaran: [
+                    { nama: "Matematika", jam: "07.00 - 08.30" },
+                    { nama: "Bahasa Indonesia", jam: "08.30 - 10.00" },
+                    { nama: "PPKN", jam: "10.00 - 11.30" }
+                ]
+            },
+            {
+                hari: "Selasa",
+                pelajaran: [
+                    { nama: "IPA", jam: "07.00 - 08.30" },
+                    { nama: "IPS", jam: "08.30 - 10.00" }
+                ]
+            },
+            {
+                hari: "Rabu",
+                pelajaran: [
+                    { nama: "Bahasa Inggris", jam: "07.00 - 08.30" },
+                    { nama: "Seni Budaya", jam: "08.30 - 10.00" }
+                ]
+            },
+            {
+                hari: "Kamis",
+                pelajaran: [
+                    { nama: "PJOK", jam: "07.00 - 08.30" },
+                    { nama: "Informatika", jam: "08.30 - 10.00" }
+                ]
+            },
+            {
+                hari: "Jumat",
+                pelajaran: [
+                    { nama: "Keagamaan", jam: "07.00 - 08.30" },
+                    { nama: "Prakarya", jam: "08.30 - 10.00" }
+                ]
+            }
+        ];
 
-let currentIndex = 0;
+        const colors = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500'];
+        let currentIndex = 0;
 
-function generateTaskSlides() {
-    const carousel = document.getElementById('carousel');
-    carousel.innerHTML = '';
+        function generateSlides() {
+            const carousel = document.getElementById('carousel');
+            carousel.innerHTML = '';
 
-    // Ambil 3 tugas dari posisi sekarang tanpa loop
-    const endIndex = Math.min(currentIndex + 3, tasks.length);
-    for (let i = currentIndex; i < endIndex; i++) {
-        const task = tasks[i];
-        const card = document.createElement('div');
-        card.className = `task-card w-24 h-16 md:w-48 md:h-24 ${colors[i % colors.length]} rounded-lg shadow-lg transform transition-all duration-300 cursor-pointer flex items-center justify-center`;
-        card.innerHTML = `<span class="text-white text-xs md:text-lg font-bold p-1 md:p-0 text-center">${task.judul}</span>`;
-        carousel.appendChild(card);
-    }
-}
+            for (let i = 0; i < 3; i++) {
+                const index = (currentIndex + i) % jadwal.length;
+                const item = jadwal[index];
 
-function moveCarousel(direction) {
-    if (tasks.length <= 3) return;
+                const card = document.createElement('div');
+                card.className = `w-60 md:w-80 min-h-[200px] ${colors[index % colors.length]} rounded-xl shadow-lg p-4 flex flex-col justify-start transition duration-300 ease-in-out`;
 
-    if (direction === 'right' && currentIndex + 3 < tasks.length) {
-        currentIndex++;
-    } else if (direction === 'left' && currentIndex > 0) {
-        currentIndex--;
-    }
+                let htmlContent = `<div class="font-bold text-white text-lg mb-3 text-center">${item.hari}</div>`;
+                item.pelajaran.forEach(p => {
+                    htmlContent += `
+                        <div class="flex justify-between text-sm md:text-base text-white py-1 gap-3">
+                            <span class="truncate w-1/2">${p.nama}</span>
+                            <span class="text-right w-1/2">${p.jam}</span>
+                        </div>
+                    `;
+                });
 
-    generateTaskSlides();
-}
+                card.innerHTML = htmlContent;
+                carousel.appendChild(card);
+            }
+        }
 
-generateTaskSlides();
+        function moveCarousel(direction) {
+            if (direction === 'right') {
+                currentIndex = (currentIndex + 1) % jadwal.length;
+            } else if (direction === 'left') {
+                currentIndex = (currentIndex - 1 + jadwal.length) % jadwal.length;
+            }
+            generateSlides();
+        }
+
+        document.addEventListener("DOMContentLoaded", generateSlides);
+
+
+// Inisialisasi saat halaman dimuat
+document.addEventListener("DOMContentLoaded", generateSlides);
+
 function fetchAbsensiUser() {
     fetch('/user/absensi/realtime')
         .then(response => response.json())

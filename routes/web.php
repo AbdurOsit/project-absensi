@@ -95,7 +95,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::middleware(['role:siswa'])->group(function(){
         // Siswa
             Route::get('/layout', [SiswaController::class, 'siswa_layout'])->name('siswa.layout');
-            Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');            
+            Route::get('/user', [SiswaController::class, 'siswa_index'])->name('siswa.index');   
             Route::get('/user/rekap', [SiswaController::class, 'siswa_rekap'])->name('siswa.rekap');
             Route::get('/profile', [SiswaController::class, 'siswa_profile'])->name('siswa.profile');
             Route::get('/profile/update/{uid}', [SiswaController::class, 'profile_update'])->name('profile.update');
