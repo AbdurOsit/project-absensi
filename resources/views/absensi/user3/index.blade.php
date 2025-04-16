@@ -59,104 +59,104 @@
 
     <div class="flex flex-col md:flex-row p-2 md:p-3">
         <!-- Praktek Section -->
-        <div class="space-y-1 mt-4 mx-2 md:ml-10 w-full md:w-auto">
-            <h3 class="text-gray-900 dark:text-white text-base md:text-xl font-bold">Praktek Minggu Ini</h3>
-            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-52">
-                <div class="space-y-1 h-auto">
+            <div class="space-y-1 mt-4 mx-2 md:ml-10 w-full md:w-auto">
+                <h3 class="text-gray-900 dark:text-white text-base md:text-xl font-bold">Praktek Minggu Ini</h3>
+                <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-52">
+                    <div class="space-y-1 h-auto">
+                        <div class="space-y-1 h-auto pb-2">
+                            @if ($kegiatan->isEmpty())
+                                <p class="text-center dark:text-white text-base font-bold flex justify-center items-center">Tidak
+                                    ada Praktek</p>
+                            @else
+                                @foreach ($praktek as $item)
+                                    <li
+                                        class="flex items-center gap-2 bg-white dark:bg-gray-700 p-2 rounded-lg shadow-sm mx-2 my-1">
+                                        <button class="w-5 h-5 md:w-8 md:h-8 flex items-center justify-center rounded-full">
+                                            <svg class="bg-blue-500 w-6 h-auto md:w-10 rounded-full text-gray-800 dark:text-white"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+                                            </svg>
+                                        </button>
+                                        <span class="text-gray-900 dark:text-white text-xs md:font-medium">{{ $item->hari }} -
+                                            {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
+                                    </li>
+                                @endforeach
+                                <div class="flex justify-center text-center">
+                                    {{ $praktek->links('pagination::tailwind') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Kegiatan Section -->
+            <div class="space-y-1 mt-4 mx-2 md:ml-5 w-full md:w-auto">
+                <h3 class="text-gray-900 dark:text-white text-base md:text-xl font-bold">Kegiatan Minggu Ini</h3>
+                <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-48">
                     <div class="space-y-1 h-auto pb-2">
                         @if ($kegiatan->isEmpty())
-                            <p class="text-center dark:text-white text-base font-bold flex justify-center items-center">Tidak
-                                ada Praktek</p>
+                            <p class="text-center dark:text-white text-base font-bold flex justify-center items-center">Tidak ada
+                                kegiatan</p>
                         @else
-                            @foreach ($praktek as $item)
+                            @foreach ($kegiatan as $item)
                                 <li
-                                    class="flex items-center gap-2 bg-white dark:bg-gray-700 p-2 rounded-lg shadow-sm mx-2 my-1">
+                                    class="flex items-center gap-2 bg-white dark:bg-gray-700 p-2 md:p-4 rounded-lg shadow-sm mx-2 my-1">
                                     <button class="w-5 h-5 md:w-8 md:h-8 flex items-center justify-center rounded-full">
                                         <svg class="bg-blue-500 w-6 h-auto md:w-10 rounded-full text-gray-800 dark:text-white"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" fill="none" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                 stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
                                         </svg>
                                     </button>
                                     <span class="text-gray-900 dark:text-white text-xs md:font-medium">{{ $item->hari }} -
-                                        {{ $item->praktek ?? 'Tidak Ada Praktek' }}</span>
+                                        {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
                                 </li>
                             @endforeach
                             <div class="flex justify-center text-center">
-                                {{ $praktek->links('pagination::tailwind') }}
+                                {{ $kegiatan->links('pagination::tailwind') }}
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Kegiatan Section -->
-        <div class="space-y-1 mt-4 mx-2 md:ml-5 w-full md:w-auto">
-            <h3 class="text-gray-900 dark:text-white text-base md:text-xl font-bold">Kegiatan Minggu Ini</h3>
-            <div class="bg-gray-300 dark:bg-zinc-800 rounded-lg w-full md:w-48">
-                <div class="space-y-1 h-auto pb-2">
-                    @if ($kegiatan->isEmpty())
-                        <p class="text-center dark:text-white text-base font-bold flex justify-center items-center">Tidak ada
-                            kegiatan</p>
-                    @else
-                        @foreach ($kegiatan as $item)
-                            <li
-                                class="flex items-center gap-2 bg-white dark:bg-gray-700 p-2 md:p-4 rounded-lg shadow-sm mx-2 my-1">
-                                <button class="w-5 h-5 md:w-8 md:h-8 flex items-center justify-center rounded-full">
-                                    <svg class="bg-blue-500 w-6 h-auto md:w-10 rounded-full text-gray-800 dark:text-white"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
-                                    </svg>
-                                </button>
-                                <span class="text-gray-900 dark:text-white text-xs md:font-medium">{{ $item->hari }} -
-                                    {{ $item->kegiatan ?? 'Tidak Ada Kegiatan' }}</span>
-                            </li>
-                        @endforeach
-                        <div class="flex justify-center text-center">
-                            {{ $kegiatan->links('pagination::tailwind') }}
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
 
         <!-- Absensi Section -->
-        <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 mx-2 md:ml-5 p-2 md:p-4 shadow-md w-full md:w-auto">
-            <h3 class="text-gray-900 dark:text-white text-lg md:text-2xl font-bold mb-2 md:mb-4">Absensi Hari Ini</h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-gray-900 dark:text-white border-collapse text-xs md:text-base">
-                    <thead>
-                        <tr class="bg-blue-500 text-white text-left">
-                            <th class="py-1 md:py-3 px-1 md:px-4 rounded-tl-lg">No. Card</th>
-                            <th class="py-1 md:py-3 px-1 md:px-4">Nama</th>
-                            <th class="py-1 md:py-3 px-1 md:px-4">Status</th>
-                            <th class="py-1 md:py-3 px-1 md:px-4">Waktu Kedatangan</th>
-                            <th class="py-1 md:py-3 px-1 md:px-4 rounded-tr-lg">Waktu Pulang</th>
-                        </tr>
-                    </thead>
-                    <tbody id="absensiRealtimeBody">
-                        @if ($absensi)
-                            <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
-                                <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->uid }}</td>
-                                <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->username }}</td>
-                                <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->status }}</td>
-                                <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_datang }}</td>
-                                <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_pulang }}</td>
+            <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl mt-6 mx-2 md:ml-5 p-2 md:p-4 shadow-md w-full md:w-auto">
+                <h3 class="text-gray-900 dark:text-white text-lg md:text-2xl font-bold mb-2 md:mb-4">Absensi Hari Ini</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-gray-900 dark:text-white border-collapse text-xs md:text-base">
+                        <thead>
+                            <tr class="bg-blue-500 text-white text-left">
+                                <th class="py-1 md:py-3 px-1 md:px-4 rounded-tl-lg">No. Card</th>
+                                <th class="py-1 md:py-3 px-1 md:px-4">Nama</th>
+                                <th class="py-1 md:py-3 px-1 md:px-4">Status</th>
+                                <th class="py-1 md:py-3 px-1 md:px-4">Waktu Kedatangan</th>
+                                <th class="py-1 md:py-3 px-1 md:px-4 rounded-tr-lg">Waktu Pulang</th>
                             </tr>
-                        @else
-                            <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
-                                <td colspan="5" class="py-1 md:py-3 px-1 md:px-4 text-gray-500 italic">Belum ada
-                                    absensi</td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="absensiRealtimeBody">
+                            @if ($absensi)
+                                <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->uid }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->username }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->status }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_datang }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_pulang }}</td>
+                                </tr>
+                            @else
+                                <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
+                                    <td colspan="5" class="py-1 md:py-3 px-1 md:px-4 text-gray-500 italic">Belum ada
+                                        absensi</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
     </div>
     <script>
@@ -337,7 +337,7 @@
                             </tr>
                         `;
                         tbody.innerHTML = row;
-                    } else {
+                        } else {
                         tbody.innerHTML = `
                             <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
                                 <td colspan="5" class="py-1 md:py-3 px-1 md:px-4 text-gray-500 italic">Belum ada absensi</td>

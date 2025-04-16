@@ -129,7 +129,7 @@
                         {{-- Log-out Navigation --}}
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-40">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -230,9 +230,9 @@
                         </a> --}}
 
                         {{-- Log-out Navigation --}}
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" class="mt-40">
                             @csrf
-                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-40">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
