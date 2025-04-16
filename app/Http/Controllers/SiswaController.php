@@ -49,8 +49,11 @@ class SiswaController extends Controller
             ->paginate(3, ['*'], 'praktek');
 
         // Ambil data kegiatan dengan pagination
+        $kegiatanStart = Carbon::now()->startOfWeek(); // Senin
+        $kegiatanEnd = Carbon::now()->endOfWeek(); // Minggu
+
         $kegiatan = DB::table('kegiatan')
-            ->whereBetween('tanggal', [$startDate, $adjustedEndDate])
+            ->whereBetween('tanggal', [$kegiatanStart, $kegiatanEnd])
             ->whereNotNull('kegiatan')
             ->select('tanggal', 'kegiatan', 'hari')
             ->paginate(3, ['*'], 'kegiatan');

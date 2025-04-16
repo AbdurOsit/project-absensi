@@ -20,7 +20,8 @@ Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        // return view('welcome');
+        return view('absensi.login.login');
     });
     Route::get('/layout2', function(){
         return view('absensi.admin2.layout',[

@@ -110,7 +110,7 @@
                         </a>
 
                         {{-- Setting Navigation --}}
-                        <a href="#">
+                        {{-- <a href="#">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-40">
                                 <svg viewBox="0 0 1024 1024" class="w-6 h-6 text-white font-bold"
                                     xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
@@ -124,7 +124,7 @@
                                 </svg>
                                 <span class="titles">Setting</span>
                             </div>
-                        </a>
+                        </a> --}}
 
                         {{-- Log-out Navigation --}}
                         <form method="POST" action="{{ route('logout') }}">
@@ -212,7 +212,7 @@
                             </div>
                         </a>
 
-                        {{-- Setting Navigation --}}
+                        {{-- Setting Navigation
                         <a href="#">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-40">
                                 <svg viewBox="0 0 1024 1024" class="w-6 h-6 text-white font-bold"
@@ -227,7 +227,7 @@
                                 </svg>
                                 <span >Setting</span>
                             </div>
-                        </a>
+                        </a> --}}
 
                         {{-- Log-out Navigation --}}
                         <form method="POST" action="{{ route('logout') }}">

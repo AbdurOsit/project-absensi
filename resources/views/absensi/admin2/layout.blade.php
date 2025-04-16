@@ -168,7 +168,7 @@
                             </div>
                         </a>
 
-                        {{-- Setting Navigation --}}
+                        {{-- Setting Navigation
                         <a href="#">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-20">
                                 <svg viewBox="0 0 1024 1024" class="w-6 h-6 text-white font-bold"
@@ -183,12 +183,12 @@
                                 </svg>
                                 <span class="titles" >Setting</span>
                             </div>
-                        </a>
+                        </a> --}}
 
                         {{-- Log-out Navigation --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-3.5">
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-20">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -207,6 +207,7 @@
                         </form>
                     </div>
                 </div>
+                
                 <!-- Mobile Sidebar -->
                 <div id="mobile-sidebar" class="md:hidden fixed -left-full h-auto w-400 bg-purple-600 rounded-3xl transition-all duration-200 z-50">
                     <div class="flex items-center justify-between p-4 border-purple-500 cursor-pointer" onclick="mobileToggle()">
@@ -330,7 +331,7 @@
                         </a>
 
                         {{-- Setting Navigation --}}
-                        <a href="#">
+                        {{-- <a href="#">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-20">
                                 <svg viewBox="0 0 1024 1024" class="w-6 h-6 text-white font-bold"
                                     xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
@@ -344,12 +345,12 @@
                                 </svg>
                                 <span>Setting</span>
                             </div>
-                        </a>
+                        </a> --}}
 
                         {{-- Log-out Navigation --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-3.5">
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-20">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
