@@ -30,8 +30,8 @@
                     <div class="space-y-4">
                         <div class="relative">
                             <input type="text" placeholder="Username"
-                                class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent lowercase @error('username') border-red-500 @enderror"
-                                name="username" value="{{ Session::get('username') }}">
+                                class="block w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent @error('username') border-red-500 @enderror"
+                                name="username" value="{{ Session::get('username') }}" autocomplete="off">
                             </div>
                             @error('username')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
