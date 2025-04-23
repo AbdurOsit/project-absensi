@@ -4,7 +4,7 @@
         <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <!-- Card Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 p-6">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Input Waktu</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Update Waktu Masuk dan Pulang</h2>
             </div>
 
             <!-- Flash Messages -->
@@ -20,7 +20,6 @@
                 <form action="{{ route('waktu.update.proccess', ['id' => $waktu->id]) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
-                    <!-- Hari Input -->
                     <!-- Hari update -->
                     <div class="space-y-2">
                         <label for="hari" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
@@ -28,9 +27,9 @@
                         </label>
                         @php
                             $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-                            $selected_hari = old('hari', $data->hari ?? ''); // Ambil dari database jika tidak ada old input
+                            $selected_hari = old('hari', $waktu->hari ?? ''); // gunakan $waktu, bukan $data
                         @endphp
-                    
+                        <strong class="dark:text-white">Hari sebelumnya: {{ $waktu->hari }}</strong> 
                         <select name="hari" id="hari"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
                             @foreach($hari_enum as $h)
@@ -71,7 +70,7 @@
                     <!-- Form Buttons -->
                     <div class="flex justify-between space-x-4 pt-4">
 
-                        <div class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"><a href="{{ route('admin.input') }}" >Back</a></div>
+                        <div class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"><a href="{{ route('admin.waktu') }}" >Back</a></div>
 
                         <div>
                             <button type="reset"
