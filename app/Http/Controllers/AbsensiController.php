@@ -46,6 +46,7 @@ class AbsensiController extends Controller
                         'hari' => $time,
                         'tanggal' => $date,
                         'alasan' => 'alpha',
+                        'created_at' => Carbon::now(),
                     ]);
                 }
             }
