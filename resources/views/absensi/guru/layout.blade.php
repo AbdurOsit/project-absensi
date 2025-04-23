@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Absensi</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
         /* Existing styles */
         * {
@@ -96,6 +98,14 @@
                                         d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                                 </svg>
                                 <span class="titles">Rekapitulasi Siswa</span>
+                            </div>
+                        </a>
+
+                        {{-- Tidak Hadir Navigation --}}
+                        <a href="{{ route('guru.tidak_hadir') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <i class="bi bi-people-fill"></i>  
+                                <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
                         </a>
 
@@ -199,6 +209,14 @@
                                         d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                                 </svg>
                                 <span >Rekapitulasi Siswa</span>
+                            </div>
+                        </a>
+
+                        {{-- Tidak Hadir Navigation --}}
+                        <a href="{{ route('guru.tidak_hadir') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <i class="bi bi-people-fill"></i>  
+                                <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
                         </a>
 

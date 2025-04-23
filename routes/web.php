@@ -53,6 +53,10 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/waktu/update/{id}', [WaktuController::class, 'update'])->name('waktu.update');
         Route::put('/waktu/update/{id}', [WaktuController::class, 'update_proccess'])->name('waktu.update.proccess');
         Route::delete('/waktu/delete/{id}', [WaktuController::class, 'delete'])->name('waktu.delete');
+
+        // Jumlah Tidak Hadir
+        Route::get('/admin/tidak_hadir', [AbsensiController::class, 'tidak_hadir'])->name('admin.tidak_hadir');
+
         // Jadwal(Tugas,Praktek,Kegiatan)
         Route::get('/admin/jadwal', [AbsensiController::class, 'jadwal'])->name('admin.jadwal');
         // Tugas
@@ -89,6 +93,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
             Route::get('/guru', [AbsensiController::class, 'guru_index'])->name('guru.index');
             Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
             Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
+            Route::get('/guru/tidak_hadir', [AbsensiController::class, 'guru_tidak_hadir'])->name('guru.tidak_hadir');
             Route::get('guru/profile', [AbsensiController::class, 'guru_profile'])->name('guru.profile');
             Route::get('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update'])->name('guru.profile.update');
             Route::put('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update_proccess'])->name('guru.profile.update_proccess');

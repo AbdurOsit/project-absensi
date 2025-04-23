@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Absensi</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         /* Existing styles */
         * {
@@ -128,6 +129,14 @@
                                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
                                 </svg>  
                                 <span class="titles" >Waktu Datang dan Pulang</span>
+                            </div>
+                        </a>
+
+                        {{-- Tidak Hadir Navigation --}}
+                        <a href="{{ route('admin.tidak_hadir') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <i class="bi bi-people-fill"></i>  
+                                <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
                         </a>
 
@@ -290,6 +299,14 @@
                                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
                                 </svg>  
                                 <span>Waktu Datang dan Pulang</span>
+                            </div>
+                        </a>
+
+                        {{-- Tidak Hadir Navigation --}}
+                        <a href="{{ route('admin.tidak_hadir') }}">
+                            <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
+                                <i class="bi bi-people-fill"></i>  
+                                <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
                         </a>
 

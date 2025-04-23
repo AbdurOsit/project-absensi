@@ -272,6 +272,23 @@ class AbsensiController extends Controller
         return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort'));
     }
 
+    function tidak_hadir(){
+        $data = DB::table('users as u')
+        ->leftJoin('absensi_tidak_hadirs as a', 'u.username', '=', 'a.username')
+        ->select(
+            'u.id',
+            'u.username',
+            DB::raw("COUNT(CASE WHEN a.alasan = 'sakit' THEN 1 END) as jumlah_sakit"),
+            DB::raw("COUNT(CASE WHEN a.alasan = 'izin' THEN 1 END) as jumlah_izin"),
+            DB::raw("COUNT(CASE WHEN a.alasan = 'alpha' THEN 1 END) as jumlah_alpha"),
+            DB::raw("COUNT(a.id) as total_tidak_hadir")
+        )
+        ->where('u.role_id', 3)
+        ->groupBy('u.id', 'u.username')
+        ->get();
+        return view('absensi.admin2.tidak_hadir', compact('data'));
+    }
+
     function jadwal(Request $request){
         $query = $request->query('query');
         $tugas = $query ? DB::table('tugas')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('tugas', 'like', "%$query%")->orWhere('deadline_hari', 'like', "%$query%")->orWhere('deadline_tanggal', 'like', "%$query%")->paginate(3, ['*'], 'tugas_page') : DB::table('tugas')->orderBy('id','desc')->paginate(3, ['*'], 'tugas_page');
@@ -539,6 +556,22 @@ class AbsensiController extends Controller
         $data = $dataQuery->where('hari_tanggal',Carbon::now()->translatedFormat('Y-m-d'))->paginate(10);
     
         return view('absensi.guru.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
+    }
+    function guru_tidak_hadir(){
+        $data = DB::table('users as u')
+        ->leftJoin('absensi_tidak_hadirs as a', 'u.username', '=', 'a.username')
+        ->select(
+            'u.id',
+            'u.username',
+            DB::raw("COUNT(CASE WHEN a.alasan = 'sakit' THEN 1 END) as jumlah_sakit"),
+            DB::raw("COUNT(CASE WHEN a.alasan = 'izin' THEN 1 END) as jumlah_izin"),
+            DB::raw("COUNT(CASE WHEN a.alasan = 'alpha' THEN 1 END) as jumlah_alpha"),
+            DB::raw("COUNT(a.id) as total_tidak_hadir")
+        )
+        ->where('u.role_id', 3)
+        ->groupBy('u.id', 'u.username')
+        ->get();
+        return view('absensi.guru.tidak_hadir', compact('data'));
     }
     public function guru_profile()
     {
