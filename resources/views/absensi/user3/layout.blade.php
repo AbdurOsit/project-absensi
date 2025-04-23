@@ -73,7 +73,7 @@
                     <!-- Avatar -->
                     <div class="flex" style="align-items: center">
                         <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
-                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo" style="width: 50px; height: 30px; border-radius: 50%;">            
+                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo" style="width: 30px; height: 30px; border-radius: 190%;">            
                         </a>
                         <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
                             <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>

@@ -12,6 +12,7 @@
             </form>
         </div>
 
+        {{-- Dropdown --}}
         <select onchange="window.location.href=this.value" class="rounded px-10 py-2 text-sm flex focus:outline-none dark:bg-gray-800 dark:text-white rounded-xl">
             <option value="{{ route('admin.rekap', ['sortColumn' => 'username', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'username' && request('sort') == 'asc' ? 'selected' : '' }}>Nama Siswa A-Z</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'username', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'username' && request('sort') == 'desc' ? 'selected' : '' }}>Nama Siswa Z-A</option>
@@ -20,6 +21,7 @@
             <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'asc' ? 'selected' : '' }}>Waktu Pulang Paling Awal</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_pulang', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_pulang' && request('sort') == 'desc' ? 'selected' : '' }}>Waktu Pulang Paling Telat</option>
         </select>
+
     </div>
 
     <!-- Table -->
@@ -35,7 +37,8 @@
                         <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Pulang</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y" id="rekapRealtimeBody">
+                {{-- <tbody class="divide-y" id="rekapRealtimeBody"> --}}
+                <tbody class="divide-y">
                     @php $no = 1; @endphp
                     @if($data->isEmpty())
                         <tr class="dark:text-white">
@@ -58,42 +61,41 @@
             </table>
             {{ $data->links('pagination::tailwind') }}
         </div>   
-        <script>
-            function fetchRekapRealtime() {
-    fetch('/admin/rekap/realtime')
-        .then(res => res.json())
-        .then(data => {
-            const tbody = document.getElementById('rekapRealtimeBody');
-            tbody.innerHTML = '';
+<script>
+//     function fetchRekapRealtime() {
+//         fetch('/admin/rekap/realtime')
+//         .then(res => res.json())
+//         .then(data => {
+//             const tbody = document.getElementById('rekapRealtimeBody');
+//             tbody.innerHTML = '';
 
-            if (data.length === 0) {
-                tbody.innerHTML = `
-                    <tr class="dark:text-white">
-                        <td colspan="6" class="text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
-                    </tr>
-                `;
-                return;
-            }
+//             if (data.length === 0) {
+//                 tbody.innerHTML = `
+//                     <tr class="dark:text-white">
+//                         <td colspan="6" class="text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
+//                     </tr>
+//                 `;
+//                 return;
+//             }
 
-            let no = 1;
-            data.forEach(item => {
-                const row = `
-                    <tr class="dark:text-white text-center">
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${no}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.username}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.kelas}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.jurusan}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_datang ?? '-'}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_pulang ?? '-'}</td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-                no++;
-            });
-        });
-}
-
-// Jalankan setiap 3 detik
-setInterval(fetchRekapRealtime, 3000);
-        </script>
+//             let no = 1;
+//             data.forEach(item => {
+//                 const row = `
+//                     <tr class="dark:text-white text-center">
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${no}</td>
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.username}</td>
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.kelas}</td>
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.jurusan}</td>
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_datang ?? '-'}</td>
+//                         <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">${item.waktu_pulang ?? '-'}</td>
+//                     </tr>
+//                 `;
+//                 tbody.innerHTML += row;
+//                 no++;
+//             });
+//         });
+// }
+// // Jalankan setiap 3 detik
+// setInterval(fetchRekapRealtime, 3000);
+</script>
 @endsection

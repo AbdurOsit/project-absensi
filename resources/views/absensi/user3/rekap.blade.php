@@ -51,7 +51,7 @@
         <!-- Filter Controls -->
         <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-4">
             <!-- First row of filters for mobile -->
-            <div class="flex justify-between space-x-2">
+            {{-- <div class="flex justify-between space-x-2">
                 <div class="flex items-center space-x-2">
                     <span class="dark:text-white text-sm md:text-base">Bulan:</span>
                     <select
@@ -82,7 +82,7 @@
                         <option>10</option>
                     </select>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Second row of status counters for mobile -->
             <div class="grid grid-cols-3 gap-2">
@@ -119,7 +119,7 @@
                 <tbody>
                     @if ($absensi->isEmpty())
                         <tr>
-                            <td colspan="3" class="text-center py-2 text-sm md:text-base">Tidak ada data absensi tidak hadir.</td>
+                            <td colspan="4" class="text-center py-2 text-sm md:text-base">Tidak ada data absensi tidak hadir.</td>
                         </tr>
                     @else
                         @foreach ($absensi as $item)

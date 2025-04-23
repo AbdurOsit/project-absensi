@@ -385,7 +385,13 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+
+                    {{-- foto profil --}}
+                    <div class="w-8 h-8 rounded-full">
+                        @if(auth()->check())
+                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="Foto Profil" style="width: 50px; height: 30px; border-radius: 50%;">
+                        @endif
+                    </div>
                 </div>
             </nav>
             {{-- Content --}}

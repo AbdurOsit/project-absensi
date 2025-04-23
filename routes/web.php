@@ -107,27 +107,27 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
     // Route data realtime
     //Admin dan Guru
-    Route::get('/absensi-hadir/realtime', function () {
-        $data = App\Models\AbsensiHadir::latest()->take(10)->get(); // Bisa disesuaikan
-        return response()->json($data);
-    });
-    Route::get('/admin/rekap/realtime', function () {
-        $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
-            ->orderBy('username', 'asc')
-            ->get();
+    // Route::get('/absensi-hadir/realtime', function () {
+    //     $data = App\Models\AbsensiHadir::latest()->take(10)->get(); // Bisa disesuaikan
+    //     return response()->json($data);
+    // });
+    // Route::get('/admin/rekap/realtime', function () {
+    //     $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
+    //         ->orderBy('username', 'asc')
+    //         ->get();
     
-        return response()->json($data);
-    });
-    Route::get('/guru/rekap/realtime', function () {
-        $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
-            ->orderBy('username', 'asc')
-            ->get();
+    //     return response()->json($data);
+    // });
+    // Route::get('/guru/rekap/realtime', function () {
+    //     $data = \App\Models\AbsensiHadir::whereDate('hari_tanggal', \Carbon\Carbon::today())
+    //         ->orderBy('username', 'asc')
+    //         ->get();
     
-        return response()->json($data);
-    });
-    // Siswa
-    Route::get('/user/absensi/realtime', function () {
-        $absensi = \App\Models\AbsensiHadir::where('username', Auth::user()->username)->first();
-        return response()->json($absensi);
-    });
+    //     return response()->json($data);
+    // });
+    // // Siswa
+    // Route::get('/user/absensi/realtime', function () {
+    //     $absensi = \App\Models\AbsensiHadir::where('username', Auth::user()->username)->first();
+    //     return response()->json($absensi);
+    // });
 });
