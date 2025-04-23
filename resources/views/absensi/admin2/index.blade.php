@@ -9,7 +9,7 @@
   <span class="dark:text-white block text-center text-sm">{{ $time }} {{ $date }}</span>
 
   <div class="container mx-auto py-2">
-    <!-- Tabel pertama -->
+    <!-- Tabel Absensi Hadir -->
     <div class="mb-10 px-4 sm:px-20 mx-auto">
       <h2 class="text-lg sm:text-xl font-bold mb-4 text-center dark:text-white">Tabel Absensi Siswa Hadir</h2>
       <div class="overflow-x-auto">
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <!-- Tabel kedua -->
+    <!-- Tabel Absensi Tidak Hadir -->
     <div class="w-full sm:w-3/4 mx-auto">
       <h2 class="text-lg sm:text-xl font-bold mb-4 text-center dark:text-white">Tabel Absensi Siswa Tidak Hadir</h2>
       <div class="overflow-x-auto">
