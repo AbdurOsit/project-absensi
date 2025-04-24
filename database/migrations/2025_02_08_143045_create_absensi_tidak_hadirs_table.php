@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('hari');
             $table->date('tanggal');
             $table->string('alasan');
-            $table->string('surat');
+            $table->string('surat')->nullable();
             $table->timestamps();
         });
     }
