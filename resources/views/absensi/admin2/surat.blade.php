@@ -23,7 +23,7 @@
                             <label for="username" class="dark:text-white font-bold">Username :</label>
                             <input type="text" placeholder="example: brody"
                                 class="w-full bg-transparent dark:text-white border-none focus:outline-none focus:ring-0 pb-2 @error('username') border-red-500 @enderror"
-                                name="username" value="{{ old('username') }}">
+                                name="username" value="{{ Session::get('username') }}">
                             </div>
                             @error('username')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -131,7 +131,10 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $user->links('pagination::tailwind') }}
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $user->appends(['username' => request('username')])->links('pagination::tailwind') }}
+                    </div>
                 </div>
             </div>
         </div>

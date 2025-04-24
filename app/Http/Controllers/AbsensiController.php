@@ -52,7 +52,7 @@ class AbsensiController extends Controller
                         'jurusan'    => $absen->jurusan,
                         'hari'       => $time,
                         'tanggal'    => $today,
-                        'alasan'     => 'alpha',
+                        'alasan'     => 'izin',
                         'surat'      => null,
                         'created_at' => Carbon::now('Asia/Jakarta'),
                         'updated_at' => Carbon::now('Asia/Jakarta'),
@@ -74,7 +74,7 @@ class AbsensiController extends Controller
         // Ambil data absensi tidak hadir untuk hari ini
         $absensitidakhadir = $query
             ? AbsensiTidakHadir::where('username', 'like', "%$query%")->whereDate('tanggal', $today)->paginate(3)
-            : AbsensiTidakHadir::whereDate('tanggal', $today)->paginate(3);
+            : AbsensiTidakHadir::whereDate('tanggal', $today)->paginate(3); 
     
         return view('absensi.admin2.index', [
             'users' => $users,
@@ -424,7 +424,9 @@ class AbsensiController extends Controller
     {
         $title = 'surat';
         $query = $request->query('query');
-        $user = $query ? User::where('username', 'like', "%$query%")->paginate(3) : User::paginate(3);
+        $user = $query
+            ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username')
+            : User::where('role_id',3)->paginate(11, ['*'], 'username');
         // $siswa = User::where('role_id',3)->paginate(11);
         return view('absensi.admin2.surat', compact('title','user'));
     }
