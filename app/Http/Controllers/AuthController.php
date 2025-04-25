@@ -20,9 +20,11 @@ class AuthController extends Controller
     
     function auth(Request $request)
     {
+        // Simpan input username dan password ke session untuk sementara
         Session::flash('username', $request->username);
         Session::flash('password', $request->password);
-        // $credentials = $request->validate([
+        
+        // Validasi form login
         $request->validate([
             'username' => 'required',
             'password' => 'required',
@@ -31,34 +33,43 @@ class AuthController extends Controller
             'password.required' => 'password harus diisi',
         ]);
     
+        // Mencari username berdasarkan input
         $user = User::where('username', $request->username)->first();
     
         if (!$user) {
+            // Jika username tidak ada maka muncul pesan berikut
             return back()->withErrors(['username' => 'Username tidak ditemukan'])->withInput();
         }
-    
+
         if (!Hash::check($request->password, $user->password)) {
+            // Jika username ada tapi password yang di input salah maka muncul pesan berikut
             return back()->withErrors(['password' => 'Password salah'])->withInput();
         }
 
+        // Siapkan data login
         $credentials = [
             'username' => $request->username,
             'password' => $request->password
         ];
 
-        $remember = $request->has('remember'); // Ambil nilai Remember Me
-        
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
+        // Cek apakah Remember Me dicentang
+        $remember = $request->has('remember');
 
+        // Lakukan proses login
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate(); // Amankan session baru
+
+            // Kalau Remember Me aktif, simpan cookie selama 3 bulan
             if ($remember) {
-                // Set cookie dengan durasi 3 bulan (60 * 24 * 90 menit)
-                Cookie::queue('remember_web', Auth::user()->username, 129600);
+                Cookie::queue('remember_web', Auth::user()->username, 129600); // 90 hari
             }
-            
+
+            // Ambil data user yang login
             $user = Auth::user();
+
+            // Arahkan ke halaman sesuai peran user
             if ($user->role->name == 'admin') {
-                return redirect()->intended(route('admin.index'))->with('sukses', ' Hallo Admin ');
+                return redirect()->intended(route('admin.index'))->with('sukses', 'Hallo Admin');
             } elseif ($user->role->name == 'guru') {
                 return redirect()->intended(route('guru.index'))->with('sukses', 'Guru ' . $user->username . ' berhasil login');
             } else {

@@ -7,7 +7,7 @@
     @endif
     
     <!-- Main Title -->
-    <h1 class="text-2xl font-semibold mb-8 dark:text-white">Input Waktu</h1>
+    <h1 class="text-2xl font-semibold mb-8 dark:text-white">Waktu Masuk dan Pulang</h1>
     {{-- <a href="{{ route('waktu.create') }}" class="bg-purple-600 p-3 rounded-xl text-white font-bold button"><button>Create</button></a> --}}
     <!-- Data Grid -->
     <div class="w-3/4 mt-6">

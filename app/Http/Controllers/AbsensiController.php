@@ -312,10 +312,12 @@ class AbsensiController extends Controller
 
         return view('absensi.admin2.jadwal',compact('tugas','praktek','kegiatan'));
     }
+
     function scan()
     {
         $title = 'scan';
-        return view('absensi.admin2.scan', compact('title'));
+        $data = AbsensiHadir::whereDate ('hari_tanggal',Carbon::today())->orderBy('updated_at','desc')->first();
+        return view('absensi.admin2.scan', compact('title','data'));
     }
 
     public function scan_input(Request $request)

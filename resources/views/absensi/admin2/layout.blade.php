@@ -431,10 +431,13 @@
                         </button>
                     </div>
                     {{-- foto profil --}}
-                    <div class="w-8 h-8 rounded-full">
-                        @if(auth()->check())
-                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="Foto Profil" style="width: 50px; height: 30px; border-radius: 50%;">
+                    <div class="flex" style="align-items: center">
+                        @if (Auth::user()->image)
+                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo" style="width: 30px; height: 30px; border-radius: 190%;">
+                        @else
+                        <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile"
                         @endif
+                        class="w-28 h-28 rounded-full" style="width: 30px; height: 30px; border-radius: 190%;"/>
                     </div>
                 </div>
             </nav>
