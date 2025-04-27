@@ -26,11 +26,12 @@
                             $hari_enum = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
                             $selected_hari = old('hari', $data->hari ?? ''); // Ambil dari database jika tidak ada old input
                         @endphp
-                    
+
                         <select name="hari" id="hari"
                             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
-                            @foreach($hari_enum as $h)
-                                <option value="{{ $h }}" {{ $selected_hari == $h ? 'selected' : '' }}>{{ $h }}</option>
+                            @foreach ($hari_enum as $h)
+                                <option value="{{ $h }}" {{ $selected_hari == $h ? 'selected' : '' }}>
+                                    {{ $h }}</option>
                             @endforeach
                         </select>
                         @error('hari')
@@ -43,7 +44,8 @@
                         <label for="tanggal" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Tanggal
                         </label>
-                        <input type="date" name="tanggal" id="tanggal" value="{{ $data->tanggal }}" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
+                        <input type="date" name="tanggal" id="tanggal" value="{{ $data->tanggal }}"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:text-white @error('hari') border-red-500 @enderror">
                     </div>
 
                     <!-- Praktek update -->
@@ -51,13 +53,17 @@
                         <label for="kelas" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
                             Praktek
                         </label>
-                        <textarea name="praktek" id="praktek" cols="82" rows="5" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">{{ $data->praktek }}</textarea>
-    
+                        <textarea name="praktek" id="praktek"
+                            class="w-full h-32 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-purple-600 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                            {{ $data->praktek }}
+                        </textarea>
                     </div>
 
                     <!-- Form Buttons -->
                     <div class="flex justify-between space-x-4 pt-4">
-                        <div class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"><a href="{{ route('admin.jadwal') }}" >Back</a></div>
+                        <div
+                            class="flex justify-start items-center px-4 py-3 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <a href="{{ route('admin.jadwal') }}">Back</a></div>
                         <div class="flex justify-end space-x-4">
                             <button type="reset"
                                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
