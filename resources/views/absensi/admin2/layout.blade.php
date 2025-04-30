@@ -133,12 +133,12 @@
                         </a>
 
                         {{-- Tidak Hadir Navigation --}}
-                        {{-- <a href="{{ route('admin.tidak_hadir') }}">
+                        <a href="{{ route('admin.tidak_hadir') }}">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
                                 <i class="bi bi-people-fill"></i>  
                                 <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
-                        </a> --}}
+                        </a>
 
                         {{-- Tugas Navigation --}}
                         <a href="{{ route('admin.jadwal') }}">
@@ -303,12 +303,12 @@
                         </a>
 
                         {{-- Tidak Hadir Navigation --}}
-                        {{-- <a href="{{ route('admin.tidak_hadir') }}">
+                        <a href="{{ route('admin.tidak_hadir') }}">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
                                 <i class="bi bi-people-fill"></i>  
                                 <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
-                        </a> --}}
+                        </a>
 
                         {{-- Tugas Navigation --}}
                         <a href="{{ route('admin.jadwal') }}">
