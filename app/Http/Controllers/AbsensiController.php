@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AbsensiHadir;
 use App\Models\AbsensiTidakHadir;
+use App\Models\PulangEksklusif;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Waktu;
@@ -213,8 +214,15 @@ class AbsensiController extends Controller
         $item = AbsensiHadir::where('uid', $uid)->firstOrFail();
         $item->status = !$item->status; // Toggle status
         $item->save();
+        $pulang = PulangEksklusif::where('uid', $uid)->firstOrFail();
+        $pulang->status = !$pulang->status; // Toggle status
+        $pulang->save();
 
-        return response()->json(['success' => true, 'status' => $item->status]);
+        return response()->json([
+            'success' => true,
+            'status' => $item->status,
+            'pulang_status' => $pulang->status
+        ]);
     }
 
     public function data(Request $request)
@@ -268,12 +276,16 @@ class AbsensiController extends Controller
 
         // Query dasar
         $dataQuery = Waktu::query();
+        $pulangQuery = PulangEksklusif::query();
 
         // Jika ada query pencarian
         if ($query) {
             $dataQuery->where('hari', 'like', "%$query%")
                       ->orWhere('jam_masuk','like', "%$query%")
                       ->orWhere('jam_pulang','like', "%$query%");
+        $dataQuery->where('hari', 'like', "%$query%")
+        ->orWhere('jam_masuk','like', "%$query%")
+        ->orWhere('jam_pulang','like', "%$query%");
         }
 
         // Terapkan sorting

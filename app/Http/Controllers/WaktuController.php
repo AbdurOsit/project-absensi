@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PulangEksklusif;
 use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,8 +17,11 @@ class WaktuController extends Controller
 
         $waktu = $query ? Waktu::where('hari', 'like', "%$query%")->orWhere('jam_masuk', 'like', "%$query%")->orWhere('jam_pulang', 'like', "%$query%")->paginate(10) : Waktu::all();
 
+        $pulang = $query ? PulangEksklusif::where('hari', 'like', "%$query%")->orWhere('uid', 'like', "%$query%")->orWhere('nama', 'like', "%$query%")->paginate(10) : PulangEksklusif::paginate(5);
+
         return view('absensi.admin2.waktu', [
             'waktu' => $waktu,
+            'pulang' => $pulang,
             'search_query' => $query,
             'date' => $date,
             'time' => $time,
