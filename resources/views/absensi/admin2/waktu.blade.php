@@ -89,10 +89,10 @@
                         <td class="border border-gray-600 px-4 py-2">{{ $item->user->username }}</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->hari }}</td>
                         <td class="border border-gray-700 px-2 text-center sm:px-4 py-2">
-                            <button id="statusBtn-{{ $item->uid }}" 
-                              onclick="updateStatus('{{ route('updateStatus', $item->user->uid) }}', '{{ $item->user->uid }}')" 
-                              class="{{ $item->status ? 'bg-green-500' : 'bg-red-500' }} p-2 font-bold text-white rounded-lg">
-                              {{ $item->status ? 'Disetujui' : 'TidakDisetujui' }}
+                            <button id="statusBtn-{{ $item->user->uid }}"
+                                onclick="updateStatus('{{ route('pulangStatus', $item->user->uid) }}', '{{ $item->user->uid }}')"
+                                class="{{ $item->status ? 'bg-green-500' : 'bg-red-500' }} p-2 font-bold text-white rounded-lg">
+                                {{ $item->status ? 'Disetujui' : 'Tidak Disetujui' }}
                             </button>
                         </td>
                         <td class="border border-gray-600 px-4 py-2">{{ $item->jam_pulang }}</td>
@@ -112,26 +112,36 @@
             </tbody>
         </table>
     </div>
-    <script>
-        function updateStatus(url, uid) {
-      fetch(url, {
-          method: 'PUT',
-          headers: {
-              'X-CSRF-TOKEN': '{{ csrf_token() }}',
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({})
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              let btn = document.getElementById('statusBtn-' + uid);
-              btn.textContent = data.status ? 'Disetujui' : 'TidakDisetujui';
-              btn.className = data.status ? 'bg-green-500 p-2 font-bold text-white rounded-lg' 
-                                          : 'bg-red-500 p-2 font-bold text-white rounded-lg';
-          }
-      })
-      .catch(error => console.error('Error:', error));
-  }
-    </script>
+<script>
+    function updateStatus(url, uid) {
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const btn = document.getElementById('statusBtn-' + uid);
+                if (data.new_status) {
+                    btn.classList.remove('bg-red-500');
+                    btn.classList.add('bg-green-500');
+                    btn.innerText = 'Disetujui';
+                } else {
+                    btn.classList.remove('bg-green-500');
+                    btn.classList.add('bg-red-500');
+                    btn.innerText = 'Tidak Disetujui';
+                }
+            } else {
+                alert('Gagal memperbarui status');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan');
+        });
+    }
+</script>
 @endsection

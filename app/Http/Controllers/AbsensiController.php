@@ -214,15 +214,24 @@ class AbsensiController extends Controller
         $item = AbsensiHadir::where('uid', $uid)->firstOrFail();
         $item->status = !$item->status; // Toggle status
         $item->save();
-        $pulang = PulangEksklusif::where('uid', $uid)->firstOrFail();
-        $pulang->status = !$pulang->status; // Toggle status
-        $pulang->save();
-
         return response()->json([
             'success' => true,
             'status' => $item->status,
-            'pulang_status' => $pulang->status
         ]);
+    }
+
+    public function pulangStatus($uid){
+        // Ambil data berdasarkan uid dari relasi user
+        $pulang = PulangEksklusif::where('user_uid', $uid)->first();
+
+        if ($pulang) {
+            $pulang->status = !$pulang->status; // toggle status
+            $pulang->save();
+
+            return response()->json(['success' => true, 'new_status' => $pulang->status]);
+        }
+
+        return response()->json(['success' => false], 404);
     }
 
     public function data(Request $request)

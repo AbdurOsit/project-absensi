@@ -86,6 +86,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::post('/admin/surat', [AbsensiController::class,'surat_proccess'])->name('surat.proccess');
         // Status
         Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
+
+        Route::put('/pulang-status/{uid}', [AbsensiController::class, 'pulangStatus'])->name('pulangStatus');
         
     });
     Route::middleware(['role:guru'])->group(function(){

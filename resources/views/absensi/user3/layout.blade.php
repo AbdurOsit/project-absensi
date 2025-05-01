@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Absensi</title>
     @vite('resources/css/app.css')
@@ -77,9 +78,9 @@
                             <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo" style="width: 30px; height: 30px; border-radius: 190%;">            
                         </a>
                         @else
-                        <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile"
+                        <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile">
                         @endif
-                        class="w-28 h-28 rounded-full" style="width: 30px; height: 30px; border-radius: 190%;"/>
+                        <span class="w-7 h-8 rounded-full"></span>
                         <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
                             <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>
                         </a>
