@@ -28,7 +28,7 @@
             <?php $no = 1; ?>
             @if($absensihadir->isEmpty())
                 <tr class="dark:text-white">
-                    <td colspan="5" class="text-center py-1 text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
+                    <td colspan="5" class="text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
                 </tr>
             @else
             @foreach ($absensihadir as $item)
