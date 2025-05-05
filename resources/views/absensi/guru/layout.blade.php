@@ -102,12 +102,12 @@
                         </a>
 
                         {{-- Tidak Hadir Navigation --}}
-                        {{-- <a href="{{ route('guru.tidak_hadir') }}">
+                        <a href="{{ route('guru.tidak_hadir') }}">
                             <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
                                 <i class="bi bi-people-fill"></i>  
                                 <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
                             </div>
-                        </a> --}}
+                        </a>
 
                         {{-- Profile Navigation --}}
                         <a href="{{ route('guru.profile') }}">
