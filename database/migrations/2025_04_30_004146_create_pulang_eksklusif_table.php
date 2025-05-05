@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_uid');
             $table->foreign('user_uid')->references('uid')->on('users');
-            $table->string('hari');
+            $table->enum('hari',['Senin','Selasa','Rabu','Kamis','Jumat']);
             $table->boolean('status')->default(false);
             $table->time('waktu_pulang');
             $table->timestamps();

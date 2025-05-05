@@ -118,7 +118,7 @@
                 <span class="text-xs mt-1">Settings</span>
             </a> --}}
 
-            {{-- Logout Navigatiob --}}
+            {{-- Logout Navigation --}}
             <form method="POST" action="{{ route('logout') }}" class="flex-1">
                 @csrf
                 <button type="submit" class="w-full py-3 flex flex-col items-center justify-center text-white">
