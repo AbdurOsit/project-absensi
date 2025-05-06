@@ -97,7 +97,7 @@ class SiswaController extends Controller
     {
         $request->validate([
             'password' => 'nullable',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $user = User::where('uid', $uid)->first();
