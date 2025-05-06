@@ -59,8 +59,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'uid' => 'U002',
-            'username' => 'guru1',
-            'jurusan' => 'Matematika',
+            'username' => 'Wali Kelas 12 Sija 1',
+            'jurusan' => 'Sija',
             'kelas' => 0, // Bisa null jika tidak relevan untuk guru
             'role_id' => 2,
             'email' => 'guru@gmail.com',
@@ -113,6 +113,18 @@ class DatabaseSeeder extends Seeder
             'kelas' => 10,
             'role_id' => 3,
             'email' => 'siswa4@gmail.com',
+            'password' => Hash::make('password123'),
+            'created_at' => Carbon::now(), // Tambahkan ini
+            'updated_at' => Carbon::now(), // Tambahkan ini
+        ]);
+
+        User::create([
+            'uid' => 'U007',
+            'username' => 'guru1',
+            'jurusan' => 'Sija',
+            'kelas' => 0, // Bisa null jika tidak relevan untuk guru
+            'role_id' => 2,
+            'email' => 'guru@gmail.com',
             'password' => Hash::make('password123'),
             'created_at' => Carbon::now(), // Tambahkan ini
             'updated_at' => Carbon::now(), // Tambahkan ini
