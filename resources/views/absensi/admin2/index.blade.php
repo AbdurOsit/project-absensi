@@ -6,7 +6,7 @@
       {{ session('sukses') }}
     </div>
   @endif
-  <span class="dark:text-white block text-center text-sm">{{ $time }} {{ $date }}</span>
+  <span class="dark:text-white block text-center text-sm">{{ $time }} {{ $day }}</span>
 
   <div class="container mx-auto py-2">
     <!-- Tabel Absensi Hadir -->

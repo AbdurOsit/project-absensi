@@ -26,7 +26,8 @@ class AbsensiController extends Controller
         date_default_timezone_set('Asia/Jakarta');
     
         $query = $request->query('query');
-        $today = Carbon::now('Asia/Jakarta')->toDateString(); // format: YYYY-MM-DD
+        $day = Carbon::now('Asia/Jakarta')->format('d-m-Y'); // format: YYYY-MM-DD
+        $today = Carbon::now('Asia/Jakarta')->toDatestring(); // format: YYYY-MM-DD
         $hari_ini = Carbon::today('Asia/Jakarta');
         $time = Carbon::now('Asia/Jakarta')->locale('id')->translatedFormat('l');
     
@@ -82,6 +83,7 @@ class AbsensiController extends Controller
             'absensihadir' => $absensihadir,
             'tidakhadir' => $absensitidakhadir,
             'search_query' => $query,
+            'day' => $day,
             'date' => $today,
             'time' => $time,
         ]);
