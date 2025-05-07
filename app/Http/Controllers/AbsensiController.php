@@ -33,7 +33,7 @@ class AbsensiController extends Controller
     
         // Mengecek waktu saat ini
         $currentTime = Carbon::now('Asia/Jakarta');
-        $cutoffTime = Carbon::createFromTimeString('12:00:00', 'Asia/Jakarta');
+        $cutoffTime = Carbon::createFromTimeString('10:00:00', 'Asia/Jakarta');
     
         // Jika lewat dari jam 09:00
         if ($currentTime->greaterThan($cutoffTime)) {
