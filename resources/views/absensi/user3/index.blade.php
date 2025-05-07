@@ -142,13 +142,15 @@
                         {{-- <tbody id="absensiRealtimeBody"> --}}
                         <tbody>
                             @if ($absensi)
+                            @foreach ($absensi as $item)
                                 <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->uid }}</td>
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->username }}</td>
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->status }}</td>
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_datang }}</td>
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $absensi->waktu_pulang }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->uid }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->username }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->status }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->waktu_datang }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->waktu_pulang }}</td>
                                 </tr>
+                                @endforeach
                             @else
                                 <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
                                     <td colspan="5" class="py-1 md:py-3 px-1 md:px-4 text-gray-500 italic">Belum ada
@@ -157,6 +159,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="flex justify-end text-center mt-3">
+                        {{ $absensi->links('pagination::tailwind') }}
+                    </div>
                 </div>
             </div>
 

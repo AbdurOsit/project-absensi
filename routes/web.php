@@ -66,7 +66,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::put('/tugas/update/{id}', [JadwalController::class, 'tugas_update_proccess'])->name('tugas.update_proccess');
         Route::delete('/tugas/delete/{id}', [JadwalController::class, 'tugas_delete'])->name('tugas.delete');
         // Praktek
-    Route::get('/praktek/create', [JadwalController::class, 'praktek_input'])->name('praktek.input');
+        Route::get('/praktek/create', [JadwalController::class, 'praktek_input'])->name('praktek.input');
         Route::post('/praktek/create', [JadwalController::class, 'praktek_create'])->name('praktek.create');
         Route::get('/praktek/update/{id}', [JadwalController::class, 'praktek_update'])->name('praktek.update');
         Route::put('/praktek/update/{id}', [JadwalController::class, 'praktek_update_proccess'])->name('praktek.update_proccess');
