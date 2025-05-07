@@ -85,7 +85,7 @@
                     <tr>
                         <td colspan="6" class="border border-gray-600 px-4 py-3 text-center">Belum ada yang Izin Pulang</td>
                     </tr>
-                @endif
+                @else
                 @foreach ($pulang as $item)
                     <tr>
                         <td class="border border-gray-600 px-4 py-2">{{ $no }}</td>
@@ -99,12 +99,13 @@
                                 {{ $item->status ? 'Disetujui' : 'Tidak Disetujui' }}
                             </button>
                         </td>
-                        <td class="border border-gray-600 px-4 py-2">{{ $item->jam_pulang }}</td>
+                        <td class="border border-gray-600 px-4 py-2">{{ $item->waktu_pulang }}</td>
                     </tr>
                     @php
                         $no++;
                     @endphp
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

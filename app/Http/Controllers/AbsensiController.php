@@ -33,7 +33,7 @@ class AbsensiController extends Controller
     
         // Mengecek waktu saat ini
         $currentTime = Carbon::now('Asia/Jakarta');
-        $cutoffTime = Carbon::createFromTimeString('10:00:00', 'Asia/Jakarta');
+        $cutoffTime = Carbon::createFromTimeString('15:00:00', 'Asia/Jakarta');
     
         // Jika lewat dari jam 09:00
         if ($currentTime->greaterThan($cutoffTime)) {
@@ -279,34 +279,36 @@ class AbsensiController extends Controller
         return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
 
-    function waktu(Request $request)
-    {
-        $title = 'waktu';
-        $query = $request->query('query');
-        $sort = $request->query('sort', 'asc'); // default sort asc
+    // function waktu(Request $request)
+    // {
+    //     $title = 'waktu';
+    //     $query = $request->query('query');
+    //     $sort = $request->query('sort', 'asc'); // default sort asc
+    //     Carbon::setLocale('id');
+    //     // Query dasar
+    //     $dataQuery = Waktu::query();
+    //     $pulangQuery = PulangEksklusif::query();
 
-        // Query dasar
-        $dataQuery = Waktu::query();
-        $pulangQuery = PulangEksklusif::query();
+    //     // Jika ada query pencarian
+    //     if ($query) {
+    //         $dataQuery->where('hari', 'like', "%$query%")
+    //                   ->orWhere('jam_masuk','like', "%$query%")
+    //                   ->orWhere('jam_pulang','like', "%$query%");
+    //         $pulangQuery->where('hari', 'like', "%$query%")
+    //                 ->orWhere('status','like', "%$query%")
+    //                 ->orWhere('user_uid','like', "%$query%");
+    //     }
 
-        // Jika ada query pencarian
-        if ($query) {
-            $dataQuery->where('hari', 'like', "%$query%")
-                      ->orWhere('jam_masuk','like', "%$query%")
-                      ->orWhere('jam_pulang','like', "%$query%");
-        $dataQuery->where('hari', 'like', "%$query%")
-        ->orWhere('jam_masuk','like', "%$query%")
-        ->orWhere('jam_pulang','like', "%$query%");
-        }
+    //     // Terapkan sorting
+    //     $dataQuery->orderBy('hari', $sort);
+    //     $pulangQuery->orderBy('hari', $sort);
 
-        // Terapkan sorting
-        $dataQuery->orderBy('hari', $sort);
+    //     // Ambil data dengan pagination
+    //     $data = $dataQuery->paginate(5);
+    //     $pulang = $pulangQuery->paginate(5);
 
-        // Ambil data dengan pagination
-        $data = $dataQuery->paginate(10);
-
-        return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort'));
-    }
+    //     return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort', 'pulang'));
+    // }
 
     function tidak_hadir(){
         $data = DB::table('users as u')
@@ -333,7 +335,7 @@ class AbsensiController extends Controller
 
         $kegiatan = $query ? DB::table('kegiatan')->where('hari', 'like', "%$query%")->orWhere('tanggal', 'like', "%$query%")->orWhere('kegiatan', 'like', "%$query%")->paginate(3, ['*'], 'kegiatan_page') : DB::table('kegiatan')->orderBy('id','desc')->paginate(3, ['*'], 'kegiatan_page');
 
-        return view('absensi.admin2.jadwal',compact('tugas','praktek','kegiatan'));
+        return view('absensi.admin2.jadwal',compact('tugas','praktek','kegiatan','query'));
     }
 
     function scan()

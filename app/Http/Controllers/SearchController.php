@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\AbsensiHadir;
 use App\Models\AbsensiTidakHadir;
+use App\Models\PulangEksklusif;
 use App\Models\Waktu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -112,6 +113,12 @@ class SearchController extends Controller
     {
         // Sesuaikan dengan kebutuhan halaman input Anda
         $data = Waktu::where('hari', 'like', "%$query%")->orWhere('jam_masuk', 'like', "%$query%")->orWhere('jam_pulang', 'like', "%$query%")->paginate(10);
+
+        $pulang = PulangEksklusif::where('hari', 'like', "%$query%")
+        ->orWhere('user_uid', 'like', "%$query%")
+        ->orWhereHas('user', function ($q) use ($query) {
+            $q->where('username', 'like', "%$query%");
+        })->paginate(10);
         return redirect()->route('admin.waktu', ['query' => $query])->with([
             'data' => $data,
             'search_query' => $query

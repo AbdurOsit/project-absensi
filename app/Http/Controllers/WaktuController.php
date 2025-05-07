@@ -10,23 +10,35 @@ use Illuminate\Support\Facades\Session;
 
 class WaktuController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->query('query');
-        $date = Carbon::now()->format('Y-m-d');
-        $time = Carbon::now()->locale('id')->translatedFormat('l');
+    public function index(Request $request)
+{
+    $query = $request->query('query');
+    $date = Carbon::now()->format('Y-m-d');
+    $time = Carbon::now()->locale('id')->translatedFormat('l');
 
-        $waktu = $query ? Waktu::where('hari', 'like', "%$query%")->orWhere('jam_masuk', 'like', "%$query%")->orWhere('jam_pulang', 'like', "%$query%")->paginate(10) : Waktu::all();
+    // Coba cari dulu di masing-masing model
+    $waktuSearch = Waktu::where('hari', 'like', "%$query%")
+        ->orWhere('jam_masuk', 'like', "%$query%")
+        ->orWhere('jam_pulang', 'like', "%$query%")
+        ->get();
 
-        $pulang = $query ? PulangEksklusif::where('hari', 'like', "%$query%")->orWhere('uid', 'like', "%$query%")->orWhere('nama', 'like', "%$query%")->paginate(10) : PulangEksklusif::where('created_at',$date)->paginate(5);
+    $pulangSearch = PulangEksklusif::where('hari', 'like', "%$query%")
+        ->orWhere('user_uid', 'like', "%$query%")
+        ->orWhereHas('user', function ($q) use ($query) {
+            $q->where('username', 'like', "%$query%");
+        })
+        ->get();
 
-        return view('absensi.admin2.waktu', [
-            'waktu' => $waktu,
-            'pulang' => $pulang,
-            'search_query' => $query,
-            'date' => $date,
-            'time' => $time,
-        ]);
-    }
+    // Jika hasil kosong dan query ada, tampilkan default
+    $waktu = ($query && $waktuSearch->isEmpty()) ? Waktu::all() : ($query ? $waktuSearch : Waktu::all());
+
+    $pulang = ($query && $pulangSearch->isEmpty()) 
+        ? PulangEksklusif::where('hari', $time)->get() 
+        : ($query ? $pulangSearch : PulangEksklusif::where('hari', $time)->get());
+
+    return view('absensi.admin2.waktu', compact('waktu','pulang','query','date','time'));
+}
+
 
     public function create(Request $request){
         return view('absensi.admin2.waktu_create');
