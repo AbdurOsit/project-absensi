@@ -59,7 +59,7 @@ class SiswaController extends Controller
             ->paginate(3, ['*'], 'kegiatan');
 
         $absensi = AbsensiHadir::where('username', Auth::user()->username)
-        ->whereDate('created_at', Carbon::today())
+        ->whereDate('hari_tanggal', Carbon::today())
         ->first();
 
         return view('absensi.user3.index', compact('data', 'tugas', 'praktek', 'kegiatan', 'absensi','now'));

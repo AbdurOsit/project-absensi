@@ -54,7 +54,7 @@ class AbsensiController extends Controller
                         'jurusan'    => $absen->jurusan,
                         'hari'       => $time,
                         'tanggal'    => $today,
-                        'alasan'     => 'izin',
+                        'alasan'     => 'alpha',
                         'surat'      => null,
                         'created_at' => Carbon::now('Asia/Jakarta'),
                         'updated_at' => Carbon::now('Asia/Jakarta'),
