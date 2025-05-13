@@ -18,13 +18,13 @@
         <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
             <thead>
                 <tr>
-                    <th class="border border-gray-700 px-4 py-2">No</th>
-                    <th class="border border-gray-700 px-4 py-2">Hari</th>
-                    <th class="border border-gray-700 px-4 py-2">Tanggal</th>
-                    <th class="border border-gray-700 px-4 py-2">Tugas</th>
-                    <th class="border border-gray-700 px-4 py-2">Hari Deadline</th>
-                    <th class="border border-gray-700 px-4 py-2">Tanggal Deadline</th>
-                    <th class="border border-gray-700 px-4 py-2">Aksi</th>
+                    <th>No</th>
+                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Tugas</th>
+                    <th>Hari Deadline</th>
+                    <th>Tanggal Deadline</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody> --}}
@@ -33,13 +33,13 @@
                 @endphp
                 @foreach ($tugas as $item) --}}
                     {{-- <tr> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $no }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->hari }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->tugas }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->deadline_hari }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->deadline_tanggal)->format('d M Y') }}</td> --}}
-                        {{-- <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base text-center flex justify-center"> --}}
+                        {{-- <td>{{ $no }}</td> --}}
+                        {{-- <td>{{ $item->hari }}</td> --}}
+                        {{-- <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td> --}}
+                        {{-- <td>{{ $item->tugas }}</td> --}}
+                        {{-- <td>{{ $item->deadline_hari }}</td> --}}
+                        {{-- <td>{{ \Carbon\Carbon::parse($item->deadline_tanggal)->format('d M Y') }}</td> --}}
+                        {{-- <td class="last:text-center"> --}}
 
                             {{-- Update Icon --}}
                             {{-- <a class="font-bold text-lg text-white" href="{{ route('tugas.update',  $item->id) }}"> --}}
@@ -88,14 +88,14 @@
             <a href="{{ route('praktek.input') }}" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button text-center"><button>Create</button ></a>
         </div>
         <div class="overflow-x-auto">
-        <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="border border-gray-700 px-4 py-2">No</th>
-                    <th class="border border-gray-700 px-4 py-2">Hari</th>
-                    <th class="border border-gray-700 px-4 py-2">Tanggal</th>
-                    <th class="border border-gray-700 px-4 py-2">Praktek</th>
-                    <th class="border border-gray-700 px-4 py-2">Aksi</th>
+                    <th>No</th>
+                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Praktek</th>
+                    <th class="last:text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,20 +104,16 @@
                 @endphp
                 @foreach ($praktek as $item)
                     <tr>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $no }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->hari }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->praktek }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base text-center flex justify-center">
+                        <td>{{ $no }}</td>
+                        <td>{{ $item->hari }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                        <td>{{ $item->praktek }}</td>
+                        <td class="last:text-center justify-center flex gap-2">
 
                             {{-- Update Icon --}}
-                            <a class="font-bold text-lg text-white" href="{{ route('praktek.update', $item->id) }}">
-                                <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778" />
+                            <a class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors" href="{{ route('praktek.update', $item->id) }}">
+                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
                                 </svg>
                             </a>
 
@@ -125,13 +121,9 @@
                             <form action="{{ route('praktek.delete',$item->id) }}" method="POST" class="font-bold text-lg text-white">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit">
-                                    <svg class="w-6 h-6 bg-red-700 dark:bg-red-500" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">
+                                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                     </svg>
                                 </button>
                             </form>
@@ -157,14 +149,14 @@
             <a href="{{ route('kegiatan.input') }}" class="bg-purple-600 px-5 py-2 ml-2 rounded-xl text-white font-bold button text-center"><button>Create</button ></a>
         </div>
         <div class="overflow-x-auto">
-        <table class="w-full table-auto border-collapse border dark:text-white border-gray-700">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="border border-gray-700 px-4 py-2">No</th>
-                    <th class="border border-gray-700 px-4 py-2">Hari</th>
-                    <th class="border border-gray-700 px-4 py-2">Tanggal</th>
-                    <th class="border border-gray-700 px-4 py-2">Kegiatan</th>
-                    <th class="border border-gray-700 px-4 py-2">Aksi</th>
+                    <th>No</th>
+                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Kegiatan</th>
+                    <th class="last:text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -173,37 +165,29 @@
                 @endphp
                 @foreach ($kegiatan as $item)
                     <tr>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $no }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->hari }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base">{{ $item->kegiatan }}</td>
-                        <td class="border border-gray-600 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base text-center">
+                        <td>{{ $no }}</td>
+                        <td>{{ $item->hari }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                        <td>{{ $item->kegiatan }}</td>
+                        <td class="last:text-center">
                             <div class="flex justify-center gap-2">
                                 {{-- Update Icon --}}
-                                <a class="font-bold text-lg text-white" href="{{ route('kegiatan.update', $item->id) }}">
-                                    <svg class="w-6 h-6 bg-blue-700 dark:bg-blue-500" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778" />
-                                    </svg>
-                                </a>
+                            <a class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors" href="{{ route('kegiatan.update', $item->id) }}">
+                                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+                                </svg>
+                            </a>
 
-                                {{-- Delete Icon --}}
-                                <form action="{{ route('kegiatan.delete',$item->id) }}" method="POST" class="font-bold text-lg text-white">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">
-                                        <svg class="w-6 h-6 bg-red-700 dark:bg-red-500" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                        </svg>
-                                    </button>
-                                </form>
+                            {{-- Delete Icon --}}
+                            <form action="{{ route('kegiatan.delete',$item->id) }}" method="POST" class="font-bold text-lg text-white">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-600 transition-colors">
+                                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                    </svg>
+                                </button>
+                            </form>
                             </div>
                         </td>
                     </tr>

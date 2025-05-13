@@ -69,31 +69,25 @@
             <div class="mt-6 flex justify-center">
                 <!-- Table -->
                 <div class="overflow-x-auto md:justify-center">
-                    <table class="table-auto w-full lg:w-1/2 border border-black dark:border-white">
+                    <table class="table">
                         <thead>
-                            <tr class="dark:text-white">
-                                <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">UID</th>
-                                <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Username
-                                </th>
-                                <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Absen
-                                </th>
+                            <tr>
+                                <th>UID</th>
+                                <th>Username</th>
+                                <th>Waktu Absen</th>
                             </tr>
                         </thead>
                         {{-- <tbody class="divide-y" id="rekapRealtimeBody"> --}}
                         <tbody class="divide-y">
                             @if ($data)
-                                <tr class="dark:text-white text-center">
-                                    <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">
-                                        {{ $data->uid }}</td>
-                                    <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">
-                                        {{ $data->username }}</td>
-                                    <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">
-                                        {{ $data->waktu_datang }}</td>
+                                <tr>
+                                    <td>{{ $data->uid }}</td>
+                                    <td>{{ $data->username }}</td>
+                                    <td>{{ $data->waktu_datang }}</td>
                                 </tr>
                             @else
-                                <tr class="dark:text-white">
-                                    <td colspan="6" class="text-center py-1 text-center py-1 dark:text-white">Belum ada
-                                        siswa yang absen</td>
+                                <tr>
+                                    <td colspan="6" class="text-center py-1 text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
                                 </tr>
                             @endif
                         </tbody>

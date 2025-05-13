@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .sidebar {
+        @apply relative mt-5 pt-5 pb-5 block h-auto bg-purple-600 z-40 whitespace-nowrap overflow-hidden transition-all duration-300 rounded-3xl;
+
+        svg {
+            @apply min-h-6 min-w-6;
+        }
+
+        &[side='open'] {
+            @apply left-0;
+
+            @screen md {
+                & {
+                    @apply left-0 w-64;
+                }
+
+                .titles {
+                    @apply opacity-100;
+                }
+            }
+
+            #collapseIcon {
+                @apply hidden;
+            }
+        }
+
+        &[side='close'] {
+            @apply -left-[2000px] w-64;
+
+            @screen md {
+                & {
+                    @apply left-0 w-14;
+                }
+
+                .titles {
+                    @apply opacity-0;
+                }
+            }
+
+
+            .expandIcon {
+                @apply hidden;
+            }
+        }
+
+        a {
+            .titles {
+                @apply transition-all ease-in duration-300 whitespace-nowrap overflow-hidden text-ellipsis;
+            }
+        }
+    }
+}

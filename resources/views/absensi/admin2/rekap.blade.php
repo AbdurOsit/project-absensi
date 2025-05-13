@@ -26,15 +26,15 @@
 
     <!-- Table -->
         <div class="overflow-x-auto">
-            <table class="table-auto w-full lg:w-1/2 border border-black dark:border-white">
+            <table class="table">
                 <thead>
                     <tr class="dark:text-white">
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">No</th>
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Username</th>
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Kelas</th>
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Jurusan</th>
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Datang</th>
-                        <th class="px-1 py-3 text-sm font-normal border border-black dark:border-white">Waktu Pulang</th>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Kelas</th>
+                        <th>Jurusan</th>
+                        <th>Waktu Datang</th>
+                        <th class="text-left">Waktu Pulang</th>
                     </tr>
                 </thead>
                 {{-- <tbody class="divide-y" id="rekapRealtimeBody"> --}}
@@ -42,17 +42,17 @@
                     @php $no = 1; @endphp
                     @if($data->isEmpty())
                         <tr class="dark:text-white">
-                            <td colspan="6" class="text-center py-1 text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
+                            <td colspan="6" class="text-center py-1 dark:text-white">Belum ada siswa yang absen</td>
                         </tr>
                     @else
-                    @foreach ($data as $item)
+                    @foreach ($data as $item) 
                     <tr class="dark:text-white text-center">
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $no }}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->username }}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->kelas }}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->jurusan }}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_datang }}</td>
-                        <td class="px-1 py-3 text-sm font-normal border border-black dark:border-white">{{ $item->waktu_pulang }}</td>
+                        <td>{{ $no }}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->kelas }}</td>
+                        <td>{{ $item->jurusan }}</td>
+                        <td>{{ $item->waktu_datang }}</td>
+                        <td>{{ $item->waktu_pulang }}</td>
                     </tr>
                     @php $no++; @endphp
                     @endforeach

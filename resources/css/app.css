@@ -7,3 +7,24 @@
     font-family: 'oswald';
     src: url(/public/fonts/Oswald-VariableFont_wght.ttf) format('ttf');
 }
+
+@layer components {
+    .table {
+        @apply w-full table-auto border-separate border-spacing-0 dark:text-white;
+        thead {
+            tr {
+                th {
+                    @apply dark:bg-gray-800 dark:border-gray-700 bg-gray-100 border-y-gray-300 border-y px-4 py-2 text-left;
+                }
+            }
+        }
+        tbody {
+            tr {
+                @apply even:bg-white dark:even:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
+                td {
+                   @apply border-y border-x-0 border-gray-300 dark:border-gray-700 px-4 py-2;
+                }
+            }
+        }
+    }
+}

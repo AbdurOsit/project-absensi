@@ -62,15 +62,13 @@
 
         <!-- Attendance Data Container -->
         <div class="bg-gray-300 dark:bg-zinc-800 rounded-xl p-2 min-h-[120px] overflow-x-auto">
-            <table class="w-full border border-gray-900 dark:text-white">
+            <table class="table">
                 <thead>
-                    <tr class="bg-gray-300 dark:bg-zinc-800 text-left">
-                        <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">Tanggal</th>
-                        <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">
-                            Hari
-                        </th>
-                        <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">Keterangan</th>
-                        <th class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">Foto Surat</th>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Hari</th>
+                        <th>Keterangan</th>
+                        <th>Foto Surat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,11 +78,11 @@
                         </tr>
                     @else
                         @foreach ($absensi as $item)
-                            <tr class="bg-gray-300 dark:bg-zinc-800">
-                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
-                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ $item->hari }}</td>
-                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">{{ $item->alasan }}</td>
-                                <td class="border border-gray-500 px-2 md:px-4 py-1 md:py-2 text-sm md:text-base">
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
+                                <td>{{ $item->hari }}</td>
+                                <td>{{ $item->alasan }}</td>
+                                <td>
                                     <img src=" {{ asset('image/' . $item->surat) }}" alt="surat"
                                     class="w-24 h-24 object-cover rounded-md mb-2">    
                                 </td>

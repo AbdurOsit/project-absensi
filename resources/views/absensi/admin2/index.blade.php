@@ -24,7 +24,7 @@
             </tr>
           </thead>
           {{-- <tbody id="absensiHadirBody"> --}}
-          <tbody class="divide-y">
+          <tbody class="divide-y [&>tr]:odd:bg-gray-400">
             <?php $no = 1; ?>
             @if($absensihadir->isEmpty())
                 <tr class="dark:text-white">
@@ -69,19 +69,19 @@
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Keterangan</th>
             </tr>
           </thead>
-          <tbody class="dark:text-white">
+          <tbody class="dark:text-white [&>tr]:odd:bg-gray-400">
             <?php $no = 1; ?>
             @if ($tidakhadir->isEmpty())
             <tr class="dark:text-white">
-              <td colspan="4" class="text-center py-1 text-center py-1 dark:text-white">Belum ada data tidak hadir</td>
+              <td colspan="4" class="text-center py-1 dark:text-white">Belum ada data tidak hadir</td>
             </tr>
             @else
             @foreach ($tidakhadir as $item)
             <tr>
-              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $no }}</td>
-              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->username }}</td>
-              <td class="border border-gray-700 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
+              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $no }}</td>
+              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->username }}</td>
+              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
             </tr>
             <?php $no++; ?>
             @endforeach
