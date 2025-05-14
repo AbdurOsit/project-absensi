@@ -302,6 +302,7 @@
 
         const themeToggle = document.getElementById("theme-toggle");
         themeToggle?.addEventListener("click", () => {
+            // console.log("Theme toggle clicked");
             document.documentElement.classList.toggle("dark");
             localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
         });
