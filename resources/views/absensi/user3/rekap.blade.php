@@ -16,10 +16,10 @@
             <div class="flex justify-center mb-3 md:mb-0">
                 @if (Auth::user()->image)
                     <img src="{{ asset('image/' . Auth::user()->image) }}" alt="Profile"
-                        class="w-28 h-28 md:w-44 md:h-44 rounded-full" />
+                        class="w-28 h-28 md:w-44 md:h-44 rounded-full object-cover object-center" />
                 @else
                     <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile"
-                        class="w-28 h-28 md:w-44 md:h-44 rounded-full" />
+                        class="w-28 h-28 md:w-44 md:h-44 rounded-full object-cover object-center" />
                 @endif
             </div>
 

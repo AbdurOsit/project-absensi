@@ -15,10 +15,10 @@
         <!-- Profile Image - centered on mobile, left on desktop -->
         <div class="flex justify-center w-full md:w-auto mb-4 md:mb-0">
             @if (Auth::user()->image)
-                <img src="{{ asset('image/' . Auth::user()->image) }}" alt="Profile" class="w-32 h-32 md:w-44 md:h-44 rounded-full" />
+                <img src="{{ asset('image/' . Auth::user()->image) }}" alt="Profile" class="w-32 h-32 md:w-44 md:h-44 rounded-full object-cover object-center"/>
             @else
                 <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile"
-                    class="w-32 h-32 md:w-44 md:h-44 rounded-full" />
+                    class="w-32 h-32 md:w-44 md:h-44 rounded-full object-cover object-center"/>
             @endif
         </div>
 

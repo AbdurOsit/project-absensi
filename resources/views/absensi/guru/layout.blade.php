@@ -214,7 +214,7 @@
                         <a href="{{ route('guru.profile') }}">
                             @if (Auth::user()->image)
                                 <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo"
-                                    style="width: 30px; height: 30px; border-radius: 190%;">
+                                    style="width: 30px; height: 30px; border-radius: 190%;" class="object-cover object-center">
                             @else
                                 <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220"
                                     alt="Profile" class="w-28 h-28 rounded-full"

@@ -277,7 +277,7 @@
                                 style="width: 30px; height: 30px; border-radius: 190%;">
                         @else
                             <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220"
-                                alt="Profile" class="w-28 h-28 rounded-full"
+                                alt="Profile" class="w-28 h-28 rounded-full object-cover object-center"
                                 style="width: 30px; height: 30px; border-radius: 190%;" />
                         @endif
                     </div>

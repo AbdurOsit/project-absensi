@@ -35,7 +35,7 @@ class AbsensiController extends Controller
         $currentTime = Carbon::now('Asia/Jakarta');
         $cutoffTime = Carbon::createFromTimeString('15:00:00', 'Asia/Jakarta');
     
-        // Jika lewat dari jam 09:00
+        // Jika status pending sampai atau lewat dari jam yang diatur
         if ($currentTime->greaterThan($cutoffTime)) {
             $pendingAbsensi = AbsensiHadir::where('status', false)
                 ->whereDate('hari_tanggal', $today)
@@ -43,9 +43,10 @@ class AbsensiController extends Controller
     
             foreach ($pendingAbsensi as $absen) {
                 $sudahAda = AbsensiTidakHadir::where('username', $absen->username)
-                    ->whereDate('tanggal', $today)
-                    ->exists();
-    
+                ->whereDate('tanggal', $today)
+                ->exists();
+                
+                // Masukkan data ke absensi Tidak hadir
                 if (!$sudahAda) {
                     AbsensiTidakHadir::create([
                         'username'   => $absen->username,
@@ -59,6 +60,8 @@ class AbsensiController extends Controller
                         'created_at' => Carbon::now('Asia/Jakarta'),
                         'updated_at' => Carbon::now('Asia/Jakarta'),
                     ]);
+                    // Hapus data dari AbsensiHadir
+                    $absen->delete();
                 }
             }
         }

@@ -78,10 +78,10 @@
             @else
             @foreach ($tidakhadir as $item)
             <tr>
-              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $no }}</td>
-              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->username }}</td>
-              <td class="divide-y-2 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
+              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $no }}</td>
+              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->username }}</td>
+              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
             </tr>
             <?php $no++; ?>
             @endforeach
