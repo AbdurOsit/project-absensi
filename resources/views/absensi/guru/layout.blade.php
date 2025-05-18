@@ -92,20 +92,20 @@
                     {{-- Rekap Navigation --}}
                     <a href="/guru/rekap">
                         <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
-                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-width="2"
-                                    d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
-                            </svg>
-                            <span class="titles">Rekapitulasi Siswa</span>
+                            <i class="bi bi-people-fill"></i>
+                            <span class="titles">Pantau Siswa Hadir</span>
                         </div>
                     </a>
 
                     {{-- Tidak Hadir Navigation --}}
                     <a href="{{ route('guru.tidak_hadir') }}">
                         <div class="flex items-center gap-3 text-white cursor-pointer text-lg mt-5">
-                            <i class="bi bi-people-fill"></i>
-                            <span class="titles capitalize">Jumlah Absensi Siswa di sekolah</span>
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
+                            </svg>
+                            <span class="titles capitalize">Rekap Absensi Siswa</span>
                         </div>
                     </a>
 
