@@ -72,19 +72,17 @@
                         </svg>
                     </button>
                     <!-- Avatar -->
+                    <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
                     <div class="flex" style="align-items: center">
                         @if (Auth::user()->image)
-                        <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
                             <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo" style="width: 30px; height: 30px; border-radius: 190%;" class="object-cover object-center">            
-                        </a>
                         @else
                         <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220" alt="Profile" class="w-28 h-28 rounded-full" style="width: 30px; height: 30px; border-radius: 190%;"/>
                         @endif
                         <span class="w-7 h-8 rounded-full"></span>
-                        <a href="{{ route('siswa.profile') }}" class="cursor-pointer">
                             <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

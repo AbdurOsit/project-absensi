@@ -38,6 +38,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         // Admin CRUD
         Route::get('/admin/input', [AbsensiController::class, 'input'])->name('admin.input');
         Route::get('/input/form', [AbsensiController::class, 'input_form'])->name('admin.input_form');
+
+        // Input
         Route::post('/input', [AbsensiController::class, 'store'])->name('admin.store');
         Route::get('/admin/update/{id}', [AbsensiController::class, 'update'])->name('admin.update');
         Route::put('/update/{id}', [AbsensiController::class, 'update_process'])->name('admin.update_process');
@@ -84,6 +86,11 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         // Surat
         Route::get('/admin/surat', [AbsensiController::class, 'surat'])->name('admin.surat');
         Route::post('/admin/surat', [AbsensiController::class,'surat_proccess'])->name('surat.proccess');
+
+        // profile
+        Route::get('admin/profile', [AbsensiController::class, 'admin_profile'])->name('admin.profile');
+        Route::get('admin/profile/update/{uid}', [AbsensiController::class, 'admin_profile_update'])->name('admin.profile.update');
+        Route::put('admin/profile/update/{uid}', [AbsensiController::class, 'admin_profile_update_proccess'])->name('admin.profile.update_proccess');
         // Status
         Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
 

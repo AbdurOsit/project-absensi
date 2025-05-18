@@ -271,16 +271,20 @@
                         </button>
                     </div>
                     {{-- foto profil --}}
-                    <div class="flex" style="align-items: center">
-                        @if (Auth::user()->image)
-                            <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo"
-                                style="width: 30px; height: 30px; border-radius: 190%;">
-                        @else
-                            <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220"
-                                alt="Profile" class="w-28 h-28 rounded-full object-cover object-center"
-                                style="width: 30px; height: 30px; border-radius: 190%;" />
-                        @endif
-                    </div>
+                    <a href="{{route('admin.profile')}}">
+                        <div class="flex" style="align-items: center">
+                            @if (Auth::user()->image)
+                                <img src="{{ asset('image/' . auth()->user()->image) }}" alt="photo"
+                                    style="width: 30px; height: 30px; border-radius: 190%;">
+                            @else
+                                <img src="https://tse2.mm.bing.net/th?id=OIP.bunDCjSjB6yognR-L7SpQgHaHa&pid=Api&P=0&h=220"
+                                    alt="Profile" class="w-28 h-28 rounded-full object-cover object-center"
+                                    style="width: 30px; height: 30px; border-radius: 190%;" />
+                            @endif
+                                <div class="text-black dark:text-white ml-3">{{ Auth::user()->username }}</div>
+                        </div>
+                        </a>
+                    </a>
                 </div>
             </nav>
             {{-- Content --}}
