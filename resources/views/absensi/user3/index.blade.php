@@ -133,7 +133,7 @@
                             <tr class="bg-blue-500 text-white text-left">
                                 <th class="py-1 md:py-3 px-1 md:px-4 rounded-tl-lg">No. Card</th>
                                 <th class="py-1 md:py-3 px-1 md:px-4">Nama</th>
-                                <th class="py-1 md:py-3 px-1 md:px-4">Status</th>
+                                <th class="py-1 md:py-3 px-1 md:px-4">Tanggal</th>
                                 <th class="py-1 md:py-3 px-1 md:px-4">Waktu Kedatangan</th>
                                 <th class="py-1 md:py-3 px-1 md:px-4 rounded-tr-lg">Waktu Pulang</th>
                             </tr>
@@ -146,7 +146,7 @@
                                 <tr class="bg-white dark:bg-gray-700 text-center shadow-sm">
                                     <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->uid }}</td>
                                     <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->username }}</td>
-                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->status }}</td>
+                                    <td class="py-1 md:py-3 px-1 md:px-4">{{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                                     <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->waktu_datang }}</td>
                                     <td class="py-1 md:py-3 px-1 md:px-4">{{ $item->waktu_pulang }}</td>
                                 </tr>
