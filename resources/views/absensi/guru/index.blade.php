@@ -18,6 +18,7 @@
                                 <th class="border border-gray-700 px-1 py-1">No</th>
                                 <th class="border border-gray-700 px-1 py-1">Absen</th>
                                 <th class="border border-gray-700 px-1 py-1">Nama</th>
+                                <th class="border border-gray-700 px-1 py-1">Status</th>
                                 <th class="border border-gray-700 px-1 py-1">Waktu<br>Datang</th>
                                 <th class="border border-gray-700 px-1 py-1">Waktu<br>Pulang</th>
                             </tr>
@@ -37,6 +38,13 @@
                                     <td class="border border-gray-700 px-1 py-1">{{ $no }}</td>
                                     <td class="border border-gray-700 px-1 py-1">{{ $item->uid }}</td>
                                     <td class="border border-gray-700 px-1 py-1">{{ $item->username }}</td>
+                                    <td class="border border-gray-700 px-1 py-1">
+                                        <button id="statusBtn-{{ $item->uid }}" 
+                                        onclick="updateStatus('{{ route('updateStatus', $item->uid) }}', '{{ $item->uid }}')" 
+                                        class="{{ $item->status ? 'bg-green-500' : 'bg-yellow-500' }} p-2 font-bold text-white rounded-lg">
+                                        {{ $item->status ? 'Disetujui' : 'Pending' }}
+                                        </button>
+                                    </td>
                                     <td class="border border-gray-700 px-1 py-1">{{ $item->waktu_datang }}</td>
                                     <td class="border border-gray-700 px-1 py-1">{{ $item->waktu_pulang }}</td>
                                 </tr>
@@ -160,6 +168,26 @@
             return new Date(tgl).toLocaleDateString('id-ID', options);
         }
 
+        function updateStatus(url, uid) {
+      fetch(url, {
+          method: 'PUT',
+          headers: {
+              'X-CSRF-TOKEN': '{{ csrf_token() }}',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({})
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              let btn = document.getElementById('statusBtn-' + uid);
+              btn.textContent = data.status ? 'Disetujui' : 'Pending';
+              btn.className = data.status ? 'bg-green-500 p-2 font-bold text-white rounded-lg' 
+                                          : 'bg-yellow-500 p-2 font-bold text-white rounded-lg';
+          }
+      })
+      .catch(error => console.error('Error:', error));
+  }
         // // Jalankan setiap 3 detik
         // setInterval(fetchTidakHadir, 3000);
     </script>

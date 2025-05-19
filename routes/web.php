@@ -92,7 +92,6 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('admin/profile/update/{uid}', [AbsensiController::class, 'admin_profile_update'])->name('admin.profile.update');
         Route::put('admin/profile/update/{uid}', [AbsensiController::class, 'admin_profile_update_proccess'])->name('admin.profile.update_proccess');
         // Status
-        Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
 
         Route::put('/pulang-status/{uid}', [AbsensiController::class, 'pulangStatus'])->name('pulangStatus');
         
@@ -118,6 +117,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     });
     // Search (bisa diakses oleh semua role yang login)
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::put('/update-status/{uid}', [AbsensiController::class, 'updateStatus'])->name('updateStatus');
 
     // Route data realtime
     //Admin dan Guru
