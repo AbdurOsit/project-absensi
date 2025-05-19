@@ -568,12 +568,12 @@ class AbsensiController extends Controller
     
         // Mengecek jam sekarang
         $currentTime = Carbon::now();
-        $cutoffTime = Carbon::createFromTimeString('09:00:00');
+        $cutoffTime = Carbon::createFromTimeString('15:00:00');
     
         // Jika sudah lewat jam 09:00
         if ($currentTime->greaterThan($cutoffTime)) {
             $pendingAbsensi = AbsensiHadir::where('status', false)
-                ->whereDate('created_at', $hari_ini) // hanya data hari ini
+                ->whereDate('hari_tanggal', $hari_ini) // hanya data hari ini
                 ->get();
     
             foreach ($pendingAbsensi as $absen) {
