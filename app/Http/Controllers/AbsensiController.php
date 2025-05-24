@@ -282,6 +282,12 @@ class AbsensiController extends Controller
         return view('absensi.admin2.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
 
+    public function rekap_detail($username){
+        $name = AbsensiHadir::where('username',$username)->first();
+        $data = AbsensiTidakHadir::where('username', $username)->get();
+        return view('absensi.admin2.rekap_detail', compact('data','name'));
+    }
+
     // function waktu(Request $request)
     // {
     //     $title = 'waktu';

@@ -13,7 +13,7 @@
         </div>
 
         {{-- Dropdown --}}
-        <select onchange="window.location.href=this.value" class="rounded px-10 py-2 text-sm flex focus:outline-none dark:bg-gray-800 dark:text-white rounded-xl">
+        <select onchange="window.location.href=this.value" class="px-10 py-2 text-sm flex focus:outline-none dark:bg-gray-800 dark:text-white rounded-xl">
             <option value="{{ route('admin.rekap', ['sortColumn' => 'username', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'username' && request('sort') == 'asc' ? 'selected' : '' }}>Nama Siswa A-Z</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'username', 'sort' => 'desc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'username' && request('sort') == 'desc' ? 'selected' : '' }}>Nama Siswa Z-A</option>
             <option value="{{ route('admin.rekap', ['sortColumn' => 'waktu_datang', 'sort' => 'asc', 'query' => $query ?? '']) }}" {{ request('sortColumn') == 'waktu_datang' && request('sort') == 'asc' ? 'selected' : '' }}>Waktu Datang Paling Awal</option>

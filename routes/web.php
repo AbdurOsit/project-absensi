@@ -48,6 +48,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/admin/data', [AbsensiController::class, 'data'])->name('admin.data');
         // Rekap
         Route::get('/admin/rekap', [AbsensiController::class, 'rekap'])->name('admin.rekap');
+        Route::get('/admin/rekap-detail/{username}', [AbsensiController::class, 'rekap_detail'])->name('rekap.detail');
         // Waktu
         Route::get('/admin/waktu', [WaktuController::class, 'index'])->name('admin.waktu');
         Route::get('/waktu/create', [WaktuController::class, 'create'])->name('waktu.create');
