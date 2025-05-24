@@ -2,7 +2,7 @@
 @section('guru')
 <h1 class="dark:text-white text-2xl m-5 font-bold">{{ $name->username }}</h1>
 <!-- Table -->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto mb-5">
             <table class="table">
                 <thead>
                     <tr class="dark:text-white">
@@ -30,4 +30,5 @@
             </table>
             {{-- {{ $data->links('pagination::tailwind') }} --}}
         </div>
+        <a href="{{ route("guru.tidak_hadir") }}" class="p-3 text-white font-bold rounded-md bg-purple-600">Back</a>
 @endsection
