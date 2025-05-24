@@ -103,6 +103,7 @@ Route::middleware([AuthMiddleware::class])->group(function () {
             Route::get('/guru/data', [AbsensiController::class, 'guru_data'])->name('guru.data');
             Route::get('/guru/rekap', [AbsensiController::class, 'guru_rekap'])->name('guru.rekap');
             Route::get('/guru/tidak_hadir', [AbsensiController::class, 'guru_tidak_hadir'])->name('guru.tidak_hadir');
+            Route::get('/guru/rekap-detail/{username}', [AbsensiController::class, 'guru_rekap_detail'])->name('guru.rekap.detail');
             Route::get('guru/profile', [AbsensiController::class, 'guru_profile'])->name('guru.profile');
             Route::get('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update'])->name('guru.profile.update');
             Route::put('guru/profile/update/{uid}', [AbsensiController::class, 'guru_profile_update_proccess'])->name('guru.profile.update_proccess');

@@ -676,6 +676,13 @@ class AbsensiController extends Controller
         ->get();
         return view('absensi.guru.tidak_hadir', compact('data'));
     }
+
+    public function guru_rekap_detail($username){
+        $name = AbsensiHadir::where('username',$username)->first();
+        $data = AbsensiTidakHadir::where('username', $username)->get();
+        return view('absensi.guru.rekap_detail', compact('data','name'));
+    }
+
     public function guru_profile()
     {
         $data = Auth::user();
