@@ -1,6 +1,6 @@
 @extends('absensi.guru.layout')
 @section('guru')
-    <div class="bg-gray-100 dark:bg-gray-800 text-center p-2">
+    <div class="bg-gray-100 dark:bg-gray-900 text-center p-2">
         @if (session('sukses'))
             <div class="bg-green-500 text-white p-3 rounded mb-2">
                 {{ session('sukses') }}
@@ -14,7 +14,7 @@
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full text-center border border-black dark:border-white text-sm">
                         <thead>
-                            <tr class="border-t-2 border border-purple-700 bg-gray-600 text-white thead">
+                            <tr class="border-t-2 border border-purple-700 bg-gray-300 dark:bg-gray-800 dark:text-white thead">
                                 <th class="border border-gray-700 px-1 py-1">No</th>
                                 <th class="border border-gray-700 px-1 py-1">Absen</th>
                                 <th class="border border-gray-700 px-1 py-1">Nama</th>
@@ -64,7 +64,7 @@
                 <div class="overflow-x-auto">
                     <table class="table-auto w-full text-center border border-black dark:border-white text-sm">
                         <thead>
-                            <tr class="border-t-2 border-purple-700 bg-gray-700 text-white thead">
+                            <tr class="border-t-2 border-purple-700 bg-gray-300 dark:bg-gray-800 dark:text-white thead">
                                 <th class="border border-gray-700 px-1 py-1">No</th>
                                 <th class="border border-gray-700 px-1 py-1">Username</th>
                                 <th class="border border-gray-700 px-1 py-1">Kelas</th>

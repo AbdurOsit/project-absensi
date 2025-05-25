@@ -26,7 +26,7 @@
 </head>
 
 {{-- <body class="bg-gray-100 dark:bg-slate-900"> --}}
-<body class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-gray-100 dark:bg-gray-950">
     <!-- Mobile Menu Overlay -->
     <div class="sidebar-overlay md:hidden" id="sidebarOverlay"></div>
 
@@ -359,13 +359,13 @@
         {{-- Navbar --}}
         <div class="flex-1 p-4 md:p-6 ml-5 rounded-lg w-full">
             <nav
-                class="bg-gray-300 dark:bg-gray-800 px-2 md:px-4 py-2 flex flex-col md:flex-row items-center justify-end mb-6 rounded-lg gap-4">
+                class="bg-gray-300 dark:bg-gray-900 px-2 md:px-4 py-2 flex flex-col md:flex-row items-center justify-end mb-6 rounded-lg gap-4">
 
                 {{-- Search --}}
                 <div class="flex items-center gap-2 w-full md:w-auto order-2 md:order-1">
                     <form action="{{ route('search') }}" method="GET" class="flex items-center gap-2 w-full md:w-auto order-2 md:order-1">
                         <input type="hidden" name="page" value="{{ request()->route()->getName() }}">
-                        <input type="search" name="query" placeholder="search" class="bg-gray-100 dark:bg-gray-700 dark:text-white rounded px-3 py-1 w-full md:w-64" value="{{ request('query') }}">
+                        <input type="search" name="query" placeholder="search" class="bg-gray-100 dark:bg-gray-800 dark:text-white rounded px-3 py-1 w-full md:w-64" value="{{ request('query') }}">
                         <button type="submit">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />

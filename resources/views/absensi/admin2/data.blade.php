@@ -5,7 +5,7 @@
     <div class="overflow-x-auto">
       <table class="table">
         <thead>
-          <tr >
+          <tr>
             <th>No.Card</th>
             <th>Nama Siswa</th>
             <th>Kelas</th>

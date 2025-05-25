@@ -1,6 +1,6 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-<div class="bg-gray-100 dark:bg-gray-800 p-4">
+<div class="bg-gray-100 dark:bg-gray-900 p-4">
   @if (session('sukses'))
     <div class="bg-green-500 text-white p-3 rounded">
       {{ session('sukses') }}
@@ -15,7 +15,7 @@
       <div class="overflow-x-auto">
         <table class="table-auto w-full text-center text-xs sm:text-sm border border-black dark:border-white">
           <thead>
-            <tr class="border-t-4 border border-purple-700 bg-gray-600 text-white">
+            <tr class="border-t-4 border border-purple-700 bg-gray-800 dark:text-white">
               <th class="border border-gray-700 px-2 sm:px-4 py-2">No</th>
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Username</th>
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Status</th>
@@ -62,7 +62,7 @@
       <div class="overflow-x-auto">
         <table class="table-auto w-full text-center text-xs sm:text-sm border border-black dark:border-white">
           <thead>
-            <tr class="border-t-4 border-purple-700 bg-gray-700 text-white">
+            <tr class="border-t-4 border-purple-700 bg-gray-500 dark:bg-gray-800 dark:text-white">
               <th class="border border-gray-700 px-2 sm:px-4 py-2">No</th>
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Hari/Tanggal</th>
               <th class="border border-gray-700 px-2 sm:px-4 py-2">Username</th>
@@ -78,10 +78,10 @@
             @else
             @foreach ($tidakhadir as $item)
             <tr>
-              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $no }}</td>
-              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->username }}</td>
-              <td class="border border-slate-800 dark:border-gray-700 divide-y-2 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
+              <td class="border border-slate-800 dark:border-gray-800 divide-y-2 px-2 sm:px-4 py-2">{{ $no }}</td>
+              <td class="border border-slate-800 dark:border-gray-800 divide-y-2 px-2 sm:px-4 py-2">{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+              <td class="border border-slate-800 dark:border-gray-800 divide-y-2 px-2 sm:px-4 py-2">{{ $item->username }}</td>
+              <td class="border border-slate-800 dark:border-gray-800 divide-y-2 px-2 sm:px-4 py-2">{{ $item->alasan }}</td>
             </tr>
             <?php $no++; ?>
             @endforeach

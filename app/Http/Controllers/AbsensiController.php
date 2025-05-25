@@ -567,55 +567,72 @@ class AbsensiController extends Controller
     // Guru
     function guru_index(Request $request)
     {
+        // Set zona waktu ke Asia/Jakarta
+        date_default_timezone_set('Asia/Jakarta');
+    
         $query = $request->query('query');
-        $date = Carbon::now()->format('d/m/Y');
-        $hari_ini = Carbon::today();
-        $time = Carbon::now()->locale('id')->translatedFormat('l');
+        $day = Carbon::now('Asia/Jakarta')->format('d-m-Y'); // format: YYYY-MM-DD
+        $today = Carbon::now('Asia/Jakarta')->toDatestring(); // format: YYYY-MM-DD
+        $hari_ini = Carbon::today('Asia/Jakarta');
+        $time = Carbon::now('Asia/Jakarta')->locale('id')->translatedFormat('l');
     
-        // Mengecek jam sekarang
-        $currentTime = Carbon::now();
-        $cutoffTime = Carbon::createFromTimeString('15:00:00');
+        // Mengecek waktu saat ini
+        $currentTime = Carbon::now('Asia/Jakarta');
+        $cutoffTime = Carbon::createFromTimeString('15:00:00', 'Asia/Jakarta');
     
-        // Jika sudah lewat jam 09:00
+        // Jika status pending sampai atau lewat dari jam yang diatur
         if ($currentTime->greaterThan($cutoffTime)) {
             $pendingAbsensi = AbsensiHadir::where('status', false)
-                ->whereDate('hari_tanggal', $hari_ini) // hanya data hari ini
+                ->whereDate('hari_tanggal', $today)
                 ->get();
     
             foreach ($pendingAbsensi as $absen) {
                 $sudahAda = AbsensiTidakHadir::where('username', $absen->username)
-                    ->whereDate('hari_tanggal', $hari_ini)
-                    ->exists();
-    
+                ->whereDate('tanggal', $today)
+                ->exists();
+                
+                // Masukkan data ke absensi Tidak hadir
                 if (!$sudahAda) {
                     AbsensiTidakHadir::create([
-                        'username' => $absen->username,
-                        'hari' => $time,
-                        'tanggal' => $date,
-                        'alasan' => 'alpha',
-                        'created_at' => Carbon::now(),
+                        'username'   => $absen->username,
+                        'role_id'    => $absen->role_id,
+                        'kelas'      => $absen->kelas,
+                        'jurusan'    => $absen->jurusan,
+                        'hari'       => $time,
+                        'tanggal'    => $today,
+                        'alasan'     => 'alpha',
+                        'surat'      => null,
+                        'created_at' => Carbon::now('Asia/Jakarta'),
+                        'updated_at' => Carbon::now('Asia/Jakarta'),
                     ]);
+                    // Hapus data dari AbsensiHadir
+                    $absen->delete();
                 }
             }
         }
     
-        // Ambil data berdasarkan pencarian dan hanya untuk hari ini
-        $users = $query ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username') : User::paginate(3, ['*'], 'username');
+        // Ambil data user berdasarkan pencarian
+        $users = $query
+            ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username')
+            : User::with('role')->paginate(3, ['*'], 'username');
     
+        // Ambil data absensi hadir untuk hari ini
         $absensihadir = $query
-            ? AbsensiHadir::where('username', 'like', "%$query%")->whereDate('created_at', $hari_ini)->paginate(3, ['*'], 'absensihadir')
-            : AbsensiHadir::whereDate('created_at', $hari_ini)->paginate(3, ['*'], 'absensihadir');
+            ? AbsensiHadir::where('username', 'like', "%$query%")->whereDate('hari_tanggal', $today)->paginate(3, ['*'], 'absensihadir')
+            : AbsensiHadir::whereDate('hari_tanggal', $today)->paginate(3, ['*'], 'absensihadir');
     
+        // Ambil data absensi tidak hadir untuk hari ini
         $absensitidakhadir = $query
-            ? AbsensiTidakHadir::where('username', 'like', "%$query%")->whereDate('tanggal', $hari_ini)->paginate(3)
-            : AbsensiTidakHadir::whereDate('tanggal', $hari_ini)->paginate(3);
+            ? AbsensiTidakHadir::where('username', 'like', "%$query%")->whereDate('tanggal', $today)->paginate(3)
+            : AbsensiTidakHadir::whereDate('tanggal', $today)->paginate(3); 
     
         return view('absensi.guru.index', [
             'users' => $users,
             'absensihadir' => $absensihadir,
             'tidakhadir' => $absensitidakhadir,
             'search_query' => $query,
-            'date' => $date,
+            'day' => $day,
+            'date' => $today,
             'time' => $time,
         ]);
     }
