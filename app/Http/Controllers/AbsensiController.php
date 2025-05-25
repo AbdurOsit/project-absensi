@@ -69,7 +69,7 @@ class AbsensiController extends Controller
         // Ambil data user berdasarkan pencarian
         $users = $query
             ? User::where('username', 'like', "%$query%")->paginate(3, ['*'], 'username')
-            : User::paginate(3, ['*'], 'username');
+            : User::with('role')->paginate(3, ['*'], 'username');
     
         // Ambil data absensi hadir untuk hari ini
         $absensihadir = $query
@@ -104,7 +104,7 @@ class AbsensiController extends Controller
                 ->paginate(11);
         } else {
             // Jika tidak ada pencarian, tampilkan semua data
-            $data = User::paginate(11);
+            $data = User::with('role')->paginate(11);
         }
         
         return view('absensi.admin2.input', compact('title', 'data'));
@@ -251,7 +251,7 @@ class AbsensiController extends Controller
                 ->get();
         } else {
             // Jika tidak ada pencarian, tampilkan semua data
-            $data = User::where('role_id', 3)->get();
+            $data = User::where('role_id', 3)->with('role')->get();
         }
 
         return view('absensi.admin2.data', compact('title', 'data', 'query'));
@@ -584,7 +584,7 @@ class AbsensiController extends Controller
     
             foreach ($pendingAbsensi as $absen) {
                 $sudahAda = AbsensiTidakHadir::where('username', $absen->username)
-                    ->whereDate('created_at', $hari_ini)
+                    ->whereDate('hari_tanggal', $hari_ini)
                     ->exists();
     
                 if (!$sudahAda) {
@@ -678,7 +678,7 @@ class AbsensiController extends Controller
     }
 
     public function guru_rekap_detail($username){
-        $name = AbsensiHadir::where('username',$username)->first();
+        // $name = AbsensiHadir::where('username',$username)->first();
         $data = AbsensiTidakHadir::where('username', $username)->get();
         return view('absensi.guru.rekap_detail', compact('data','name'));
     }

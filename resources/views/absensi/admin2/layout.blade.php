@@ -25,7 +25,8 @@
     </style>
 </head>
 
-<body class="bg-gray-100 dark:bg-slate-900">
+{{-- <body class="bg-gray-100 dark:bg-slate-900"> --}}
+<body class="bg-gray-100 dark:bg-gray-900">
     <!-- Mobile Menu Overlay -->
     <div class="sidebar-overlay md:hidden" id="sidebarOverlay"></div>
 
@@ -181,7 +182,7 @@
                         {{-- Log-out Navigation --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-3.5">
+                            <button type="submit" class="flex items-center gap-3 text-white cursor-pointer text-lg mt-16">
                                 <svg viewBox="0 0 16 16" class="w-6 h-6  font-bold" xmlns="http://www.w3.org/2000/svg"
                                     fill="#ffffff" class="bi bi-box-arrow-left">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

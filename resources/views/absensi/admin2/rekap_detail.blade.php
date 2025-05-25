@@ -1,11 +1,12 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-<h1 class="dark:text-white text-2xl m-5 font-bold">{{ $name->username }}</h1>
+{{-- <h1 class="dark:text-white text-2xl m-5 font-bold">{{ $name->username }}</h1> --}}
 <!-- Table -->
         <div class="overflow-x-auto mb-5">
             <table class="table">
                 <thead>
                     <tr class="dark:text-white">
+                        <th>Username</th>
                         <th>Hari/Tanggal tidak masuk</th>
                         <th>Alasan</th>
                     </tr>
@@ -20,6 +21,7 @@
                     @else
                     @foreach ($data as $item) 
                     <tr class="dark:text-white">
+                        <td>{{ $item->username }}</td>
                         <td>{{ $item->hari }} / {{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                         <td>{{ $item->alasan }}</td>
                     </tr>
