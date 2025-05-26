@@ -30,6 +30,8 @@ class SearchController extends Controller
                 return $this->searchData($query);
             case 'admin.rekap':
                 return $this->searchRekap($query);
+            case 'admin.tidak_hadir':
+                return $this->searchTidakHadir($query);
             case 'admin.input':
                 return $this->searchInput($query);
             case 'admin.jadwal':
@@ -44,6 +46,8 @@ class SearchController extends Controller
                 return $this->guruData($query);
             case 'guru.rekap':
                 return $this->guruRekap($query);
+            case 'guru.tidak_hadir':
+                return $this->guruTidakHadir($query);
             default:
                 return $this->searchIndex($query);
         }
@@ -80,6 +84,15 @@ class SearchController extends Controller
         $absensiHadirs = AbsensiHadir::where('username', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('waktu_datang', 'like', "%$query%")->orWhere('waktu_pulang', 'like', "%$query%")->paginate(10);
         return redirect()->route('admin.rekap', ['query' => $query])->with([
             'data' => $absensiHadirs,
+            'search_query' => $query
+        ]);
+    }
+
+    private function searchTidakHadir($query)
+    {
+        $absensiTidakHadir = AbsensiTidakHadir::where('username', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('alasan', 'like', "%$query%")->paginate(10);
+        return redirect()->route('admin.tidak_hadir', ['query' => $query])->with([
+            'data' => $absensiTidakHadir,
             'search_query' => $query
         ]);
     }
@@ -163,6 +176,15 @@ class SearchController extends Controller
         $absensiHadirs = AbsensiHadir::where('username', 'like', "%$query%")->orWhere('hari_tanggal', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('waktu_datang', 'like', "%$query%")->orWhere('waktu_pulang', 'like', "%$query%")->paginate(10);
         return redirect()->route('guru.rekap', ['query' => $query])->with([
             'data' => $absensiHadirs,
+            'search_query' => $query
+        ]);
+    }
+
+    private function guruTidakHadir($query)
+    {
+        $absensiTidakHadir = AbsensiTidakHadir::where('username', 'like', "%$query%")->orWhere('kelas', 'like', "%$query%")->orWhere('jurusan', 'like', "%$query%")->orWhere('alasan', 'like', "%$query%")->paginate(10);
+        return redirect()->route('guru.tidak_hadir', ['query' => $query])->with([
+            'data' => $absensiTidakHadir,
             'search_query' => $query
         ]);
     }

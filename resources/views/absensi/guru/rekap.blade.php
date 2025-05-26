@@ -6,7 +6,7 @@
     <div class="flex items-center gap-4 mb-6">
         <!-- Search Box -->
         <div class="relative ">
-            <form action="{{ route('guru.rekap') }}" method="GET">
+            <form action="{{ route('search') }}" method="GET">
                 @csrf
                 <input type="search" name="query" placeholder="Cari siswa" class="border border-black dark:border-none rounded-xl dark:text-white dark:bg-gray-800 px-3 py-2 w-48 text-sm focus:outline-none" value="{{ request('query') }}">
                 <button class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white hover:text-gray-400 border border-none">✕</button>

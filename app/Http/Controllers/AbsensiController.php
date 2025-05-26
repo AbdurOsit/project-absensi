@@ -319,20 +319,29 @@ class AbsensiController extends Controller
     //     return view('absensi.admin2.waktu', compact('title', 'data', 'query', 'sort', 'pulang'));
     // }
 
-    function tidak_hadir(){
+    function tidak_hadir(Request $request){
+        $query = $request->input('query'); // ambil query dari input
+
         $data = DB::table('users as u')
-        ->leftJoin('absensi_tidak_hadirs as a', 'u.username', '=', 'a.username')
-        ->select(
-            'u.id',
-            'u.username',
-            DB::raw("COUNT(CASE WHEN a.alasan = 'sakit' THEN 1 END) as jumlah_sakit"),
-            DB::raw("COUNT(CASE WHEN a.alasan = 'izin' THEN 1 END) as jumlah_izin"),
-            DB::raw("COUNT(CASE WHEN a.alasan = 'alpha' THEN 1 END) as jumlah_alpha"),
-            DB::raw("COUNT(a.id) as total_tidak_hadir")
-        )
-        ->where('u.role_id', 3)
-        ->groupBy('u.id', 'u.username')
-        ->get();
+            ->leftJoin('absensi_tidak_hadirs as a', 'u.username', '=', 'a.username')
+            ->select(
+                'u.id',
+                'u.username',
+                DB::raw("COUNT(CASE WHEN a.alasan = 'sakit' THEN 1 END) as jumlah_sakit"),
+                DB::raw("COUNT(CASE WHEN a.alasan = 'izin' THEN 1 END) as jumlah_izin"),
+                DB::raw("COUNT(CASE WHEN a.alasan = 'alpha' THEN 1 END) as jumlah_alpha"),
+                DB::raw("COUNT(a.id) as total_tidak_hadir")
+            )
+            ->where('u.role_id', 3)
+            ->when($query, function ($q) use ($query) {
+                $q->where(function ($subquery) use ($query) {
+                    $subquery->where('u.username', 'like', "%$query%")
+                        ->orWhere('a.alasan', 'like', "%$query%");
+                });
+            })
+            ->groupBy('u.id', 'u.username')
+            ->get();
+
         return view('absensi.admin2.tidak_hadir', compact('data'));
     }
 
@@ -677,7 +686,9 @@ class AbsensiController extends Controller
     
         return view('absensi.guru.rekap', compact('title', 'data', 'query', 'sort', 'sortColumn'));
     }
-    function guru_tidak_hadir(){
+    function guru_tidak_hadir(Request $request){
+        $query = $request->input('query'); // ambil query dari input
+
         $data = DB::table('users as u')
         ->leftJoin('absensi_tidak_hadirs as a', 'u.username', '=', 'a.username')
         ->select(
@@ -689,15 +700,22 @@ class AbsensiController extends Controller
             DB::raw("COUNT(a.id) as total_tidak_hadir")
         )
         ->where('u.role_id', 3)
+        ->when($query, function ($q) use ($query) {
+            $q->where(function ($subquery) use ($query) {
+                $subquery->where('u.username', 'like', "%$query%")
+                    ->orWhere('a.alasan', 'like', "%$query%");
+            });
+        })
         ->groupBy('u.id', 'u.username')
         ->get();
+
         return view('absensi.guru.tidak_hadir', compact('data'));
     }
 
     public function guru_rekap_detail($username){
         // $name = AbsensiHadir::where('username',$username)->first();
         $data = AbsensiTidakHadir::where('username', $username)->get();
-        return view('absensi.guru.rekap_detail', compact('data','name'));
+        return view('absensi.guru.rekap_detail', compact('data'));
     }
 
     public function guru_profile()
