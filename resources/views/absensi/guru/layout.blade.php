@@ -184,7 +184,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
                                 </svg>
-                                <span class="titles">Pantau Siswa Hadir</span>
+                                <span>Pantau Siswa Hadir</span>
                             </div>
                         </a>
 
@@ -196,7 +196,7 @@
                                     <path stroke="currentColor" stroke-width="2"
                                         d="M3 11h18m-9 0v8m-8 0h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                                 </svg>
-                                <span class="titles capitalize">Rekap Absensi Siswa</span>
+                                <span>Rekap Absensi Siswa</span>
                             </div>
                         </a>
 

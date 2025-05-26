@@ -32,5 +32,5 @@
             </table>
             {{-- {{ $data->links('pagination::tailwind') }} --}}
         </div>
-                <a href="{{ route("guru.tidak_hadir") }}" class="p-3 text-white font-bold rounded-md bg-purple-600 relative z-50">Back</a>
+                <a href="{{ route("guru.tidak_hadir") }}" class="p-3 text-white font-bold rounded-md bg-purple-600">Back</a>
 @endsection
