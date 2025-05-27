@@ -1,6 +1,6 @@
 @extends('absensi.guru.layout')
 @section('guru')
-    <div class="bg-gray-100 dark:bg-gray-900 text-center p-2">
+    <div class="bg-gray-100 dark:bg-slate-800 text-center p-2">
         @if (session('sukses'))
             <div class="bg-green-500 text-white p-3 rounded mb-2">
                 {{ session('sukses') }}

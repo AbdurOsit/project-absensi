@@ -1,6 +1,6 @@
 @extends('absensi.admin2.layout')
 @section('admin2')
-<div class="bg-gray-100 dark:bg-gray-900 p-4">
+<div class="bg-gray-100 dark:bg-slate-800 p-4">
   @if (session('sukses'))
     <div class="bg-green-500 text-white p-3 rounded">
       {{ session('sukses') }}
